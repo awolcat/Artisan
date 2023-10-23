@@ -6,6 +6,6 @@ import os
 
 class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'mysql://root:dell2023@localhost/app.db'
+        'mysql://root:''@localhost/app.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
