@@ -1,0 +1,2 @@
+FLASK_APP=artisan.py
+FLASK_DEBUG=1
