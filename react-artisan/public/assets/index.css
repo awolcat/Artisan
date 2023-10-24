@@ -3,12 +3,18 @@
     margin-bottom: 0;
 }
 
-.home > * {
-    margin-bottom: 20px;
+
+#root {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
 }
 
-.root {
+body {
+    min-height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
 /* Navbar Styles */
@@ -19,7 +25,9 @@
     height: 40px;
     align-items: center;
     font-weight: bold;
-    background-color: cornflowerblue;
+    background-color: #222E50;
+    border-bottom-style: ridge;
+    box-shadow: #222E50;
 }
 
 .navbar > a {
@@ -30,16 +38,46 @@
     height: 30px;
     text-decoration: none;
     text-align: center;
-    color: white
+    color: #edf7f6;
 }
 
 .currentLink,
 .navbar > a:hover {
-    opacity: 50%;
+    border-bottom: #fccb06 solid 2px;
 }
 
 .navbar > a:active  {
     opacity: 50%;
+}
+
+/*Home Page */
+
+ 
+.home > h2,
+.home > h3 {
+    color: #222E50;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+.home > p {
+    color: #222E50;
+    padding-top: 20px;
+    font-size: 60px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #fccb06;
+}
+
+.home {
+    height: 89vh;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    background-color: blue;
+    background-image: url("images/background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 /* Home Button Styles */
@@ -52,29 +90,58 @@
 
 .homebuttons > a {
     display: flex;
-    height: 40px;
-    width: 100px;
+    height: 50px;
+    width: 120px;
     align-items: center;
     text-decoration: none;
-    border: 0px none white;
+    justify-content: center;
+    border: 0px none #edf7f6;
     border-radius: 5px;
-    background-color: cornflowerblue;
-    color: white;
+    background-color: #222E50;
+    color: #edf7f6;
     font-weight: bold;
     cursor: pointer;
+    border: gold solid 2px;
 }
 
 .contractors {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px 0px;
+    justify-content: center;
+    gap: 20px 20px;
+    padding-bottom: 20px;
 }
 
 .contractor {
-    margin-right: 5px;
-    margin-left: 5px;
+    
 }
+
 .contractor > img {
     width: 300px;
     height: 200px;
+}
+
+/*Footer*/
+.footer {
+    width: 99%;
+    height: 20px;
+    position: absolute;
+    text-align: center;
+    color: white;
+    bottom: 0;
+    background-color: #222E50;
+    padding-left: 10px;
+}
+
+.jobs {
+    display: flex;
+    flex-direction: column;
+}
+
+.job {
+    border-bottom: #222E50 solid 2px;
+}
+
+.job img {
+    width: 150px;
 }
