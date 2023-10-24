@@ -14,3 +14,4 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 from flask_app import routes
+
