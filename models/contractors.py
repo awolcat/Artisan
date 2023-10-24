@@ -2,20 +2,26 @@
 """
 """
 from flask_app import db
+from models.base import Base
 
 
-class Contractor(db.Model):
+class Contractor(Base, db.Model):
     """This class defines a contractor
     """
-    contractor_id = db.Column(db.String(60), primary_key=True)
     first_name = db.Column(db.String(60), nullable=False)
     last_name = db.Column(db.String(60), nullable=False)
     email = db.Column(db.String(60), nullable=False)
     Address = db.Column(db.String(128))
-    phone_number = db.Column(Integer)
+    phone_number = db.Column(db.Integer)
     skills = db.Column(db.String(128))
-    
-    def __str__(self):
-        """String representation of the class
+    bookings = db.relationship(
+        'Booking', backref='contractors', lazy='dynamic')
+    services = db.relationship(
+        'Service', backref='contractors', lazy='dynamic')
+    portfolios = db.relationship(
+        'Portfolio', backref='contractors', lazy='dynamic')
+
+    def __init__(self, **kwargs):
+        """Initialises a contractor
         """
-        return "[{}]: {}".format(self.__class__.__name__, self.__dict__)
+        super().__init__(**kwargs)

@@ -2,16 +2,17 @@
 """
 """
 from flask_app import db
+from models.base import Base
 
 
-class UserReview(db.Model):
+class UserReview(Base, db.Model):
     """This class defines a user's reviews
     """
-    user_review_id = db.Column(db.String(60), primary_key=True)
     review = db.Column(db.String(128))
     rating = db.Column(db.Enum('1', '2', '3', '4', '5'))
+    booking_id = db.Column(db.String(60), db.ForeignKey('booking.id'))
 
-    def __str__(self):
-        """String representation of the class
+    def __init__(self, **kwargs):
+        """Initialises a userreview class
         """
-        return "[{}]: {}".format(self.__class__.__name__, self.__dict__)
+        super().__init__(**kwargs)

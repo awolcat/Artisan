@@ -2,19 +2,20 @@
 """This module defines a User class
 """
 from flask_app import db
+from models.base import Base
 
 
-class User(db.Model):
+class User(Base, db.Model):
     """This class defines a user
     """
-    id = db.Column(db.String(60), primary_key=True)
     first_name = db.Column(db.String(45), index=True)
     last_name = db.Column(db.String(45), index=True)
     email = db.Column(db.String(45), index=True, unique=True)
     phone_number = db.Column(db.Integer, unique=True)
     address = db.Column(db.String(128))
+    bookings = db.relationship('Booking', backref='users', lazy='dynamic')
 
-    def __str__(self):
-        """String representation of the class
+    def __init__(self, **kwargs):
+        """Initialises a user
         """
-        return "[{}]: {}".format(self.__class__.__name__, self.__dict__)
+        super().__init__(**kwargs)

@@ -2,21 +2,19 @@
 """
 """
 from flask_app import db
-from datetime import datetime
+from models.base import Base
 
 
-class Booking(db.Model):
+class Booking(Base, db.Model):
     """This class defines a user's booking
     """
-    booking_id = db.Column(db.String(60), primary_key=True)
-    created_at = db.Column(DateTime, default=datetime.utcnow(), nullable=True)
-    updated_at = db.Column(DateTime, default=datetime.utcnow(), nullable=True)
-    user_id = ""
-    contractor_id = ""
-    service_id = ""
+    user_id = db.Column(db.String(60), db.ForeignKey('user.id'))
+    contractor_id = db.Column(db.String(60), db.ForeignKey('contractor.id'))
+    service_id = db.Column(db.String(60), db.ForeignKey('service.id'))
+    user_reviews = db.relationship(
+        'UserReview', backref='bookings', lazy='dynamic')
 
-    def __str__(self):
-        """String representation of the class
+    def __init__(self, **kwargs):
+        """Initialises a booking
         """
-        return "[{}]: {}".format(self.__class__.__name__, self.__dict__)
-
+        super().__init__(**kwargs)
