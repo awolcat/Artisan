@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import uuid
-from flask_app import db, ma
+from flask_app import db
+from flask_app import ma
 from datetime import datetime
 
 
