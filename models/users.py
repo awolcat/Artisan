@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a User class
 """
-from flask_app import db
+from flask_app import db, ma
 from models.base import Base
 
 
@@ -19,3 +19,11 @@ class User(Base, db.Model):
         """Initialises a user
         """
         super().__init__(**kwargs)
+
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+	"""Generate User model schema
+	"""
+	class Meta:
+		model = User
+		include_fk = True

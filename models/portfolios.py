@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 """
-from flask_app import db
+from flask_app import db, ma
 from models.base import Base
 
 
@@ -15,3 +15,10 @@ class Portfolio(Base, db.Model):
         """Initialises a user                                                                                        
         """
         super().__init__(**kwargs)
+
+class PortfolioSchema(ma.SQLAlchemyAutoSchema):
+	"""Generate Portfolio model schema
+	"""
+	class Meta:
+		model = Portfolio
+		include_fk = True
