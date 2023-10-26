@@ -15,6 +15,6 @@ def get_contractors():
     """Returns a dictionary of contractors
     """
     all_contractors = Contractor.query.all()
-    contractors = contractors_schema.dump(all_contractors).data
+    contractors = contractors_schema.dump(all_contractors)
     return jsonify({"contractors": contractors})
 
