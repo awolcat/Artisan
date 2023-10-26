@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Flask application
 """
-from flask import Flask
+from flask import Flask, make_response, jsonify
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -16,10 +16,14 @@ ma = Marshmallow(app)
 migrate = Migrate(app, db)
 app.url_map.strict_slashes = False
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
-cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
-
 
 from flask_app.api.v1.views import api_views
 app.register_blueprint(api_views)
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
+@app.errorhandler(404)
+def not_found(e):
+    """
+    """
+    return make_response(jsonify({"error": "Not Found"}), 404)
