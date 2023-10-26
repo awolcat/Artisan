@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 """
-from flask_app import db, ma
+from flask_app import db
 from models.base import Base
 
 
@@ -18,9 +18,3 @@ class UserReview(Base, db.Model):
         super().__init__(**kwargs)
 
 
-class UserReviewSchema(ma.SQLAlchemyAutoSchema):
-	"""Generate UserReview model schema
-	"""
-	class Meta:
-		model = UserReview
-		include_fk = True

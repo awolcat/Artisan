@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 """
-from flask_app import db, ma
+from flask_app import db
 from models.base import Base
 
 
@@ -14,6 +14,7 @@ class Contractor(Base, db.Model):
     Address = db.Column(db.String(128))
     phone_number = db.Column(db.Integer)
     skills = db.Column(db.String(128))
+    occupation = db.Column(db.String(45))
     bookings = db.relationship(
         'Booking', backref='contractors', lazy='dynamic')
     services = db.relationship(
@@ -25,11 +26,3 @@ class Contractor(Base, db.Model):
         """Initialises a contractor
         """
         super().__init__(**kwargs)
-
-
-class ContractorSchema(ma.SQLAlchemyAutoSchema):
-	"""Generate Contractor model schema
-	"""
-	class Meta:
-		model = Contractor
-		include_fk = True
