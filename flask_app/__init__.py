@@ -16,8 +16,6 @@ ma = Marshmallow(app)
 migrate = Migrate(app, db)
 app.url_map.strict_slashes = False
 
-from flask_app.api.v1.views import app_views
-app.register_blueprint(app_views)
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
@@ -34,3 +32,9 @@ def add_all(objects_list):
     for obj in objects_list:
         db.session.add(obj)
     db.session.commit()
+
+
+from flask_app.seed import populate_db
+
+from flask_app.api.v1.views import app_views
+app.register_blueprint(app_views)
