@@ -8,7 +8,7 @@ from models.schemas import ContractorSchema
 from flask_restx import Resource, Namespace
 
 
-ns = Namespace("api")
+ns = Namespace("v1")
 contractor_schema = ContractorSchema()
 contractors_schema = ContractorSchema(many=True)
 
