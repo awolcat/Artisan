@@ -10,7 +10,7 @@ class Booking(Base, db.Model):
     """
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey(
-        'service.id'), nullable=False)
+        'service.id'))
     contractor_id = db.Column(db.Integer, db.ForeignKey(
         'contractor.id'), nullable=False)
     user_reviews = db.relationship('UserReview', uselist=False,
