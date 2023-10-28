@@ -2,7 +2,9 @@
 """Create a blueprint for API
 """
 from flask import Blueprint
+from flask_restx import Api
 
-api_views = Blueprint('api_views', __name__, url_prefix='/api/v1')
+app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
+api = Api(app_views, doc='/doc', version='1.0', title="Artisan RESTful API")
 
 from flask_app.api.v1.views.contractors import *

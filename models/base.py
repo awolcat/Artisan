@@ -8,7 +8,7 @@ class Base:
     """Superclass from which other model classes subclass.
     """
 
-    id = db.Column(db.String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -19,7 +19,7 @@ class Base:
             for key, value in kwargs.items():
                 if key != "__class__":
                     setattr(self, key, value)
-                    
+
             if key == "created_at" and isinstance(value, str):
                 self.created_at = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
             elif key == "updated_at" and isinstance(value, str):

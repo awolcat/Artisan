@@ -1,11 +1,3 @@
-from models.base import Base
-from models.users import User
-from models.bookings import Booking
-from models.user_reviews import UserReview
-from models.contractors import Contractor
-from models.portfolios import Portfolio
-from models.services import Service
-
 import logging
 from logging.config import fileConfig
 

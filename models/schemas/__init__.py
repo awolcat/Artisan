@@ -23,6 +23,7 @@ class BookingSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Booking
         include_fk = True
+        exclude = ('created_at', 'updated_at')
 
 
 class ContractorSchema(ma.SQLAlchemyAutoSchema):
@@ -31,6 +32,7 @@ class ContractorSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Contractor
         include_fk = True
+        exclude = ('created_at', 'updated_at')
 
 
 class PortfolioSchema(ma.SQLAlchemyAutoSchema):
@@ -39,6 +41,7 @@ class PortfolioSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Portfolio
         include_fk = True
+        exclude = ('created_at', 'updated_at')
 
 
 class ServiceSchema(ma.SQLAlchemyAutoSchema):
@@ -47,6 +50,7 @@ class ServiceSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Service
         include_fk = True
+        exclude = ('created_at', 'updated_at')
 
 
 class UserReviewSchema(ma.SQLAlchemyAutoSchema):
@@ -55,6 +59,7 @@ class UserReviewSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = UserReview
         include_fk = True
+        exclude = ('created_at', 'updated_at')
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
@@ -63,3 +68,4 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
         include_fk = True
+        exclude = ('created_at', 'updated_at')

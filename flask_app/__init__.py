@@ -15,10 +15,9 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 migrate = Migrate(app, db)
 app.url_map.strict_slashes = False
-#cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-from flask_app.api.v1.views import api_views
-app.register_blueprint(api_views)
+from flask_app.api.v1.views import app_views
+app.register_blueprint(app_views)
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
@@ -27,3 +26,11 @@ def not_found(e):
     """
     """
     return make_response(jsonify({"error": "Not Found"}), 404)
+
+
+def add_all(objects_list):
+    """
+    """
+    for obj in objects_list:
+        db.session.add(obj)
+    db.session.commit()

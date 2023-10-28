@@ -9,15 +9,12 @@ class Service(Base, db.Model):
     """This class defines a user's reviews
     """
     name = db.Column(db.String(45), nullable=False)
-    category = db.Column(db.String(45), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    contractor_id = db.Column(db.String(60), db.ForeignKey('contractor.id'))
-    bookings = db.relationship('Booking', uselist=False,
-                               backref='services')
+    category = db.Column(db.String(45))
+    price = db.Column(db.Integer)
+    bookings = db.relationship(
+        'Booking', backref='service', lazy='dynamic', cascade='delete, delete-orphan')
 
     def __init__(self, **kwargs):
         """Initialises a service
         """
         super().__init__(**kwargs)
-
-
