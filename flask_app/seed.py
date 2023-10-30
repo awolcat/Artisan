@@ -1,107 +1,107 @@
 #!/usr/bin/python3
 """
-function for data population
 """
+from flask_app import db
 from faker import Faker
-from faker.providers import BaseProvider
-import random
+from datetime import datetime
+from models.base import Base
+from models.users import User
+from models.bookings import Booking
+from models.contractors import Contractor
+from models.portfolios import Portfolio
+from models.services import Service
+from models.user_reviews import UserReview
+from models.contracts import Contract
+from models.service_offers import ServiceOffer
 
+
+fake = Faker()
 
 def populate_db():
-    """
-    """
-    from flask_app import db
-    from models.base import Base
-    from models.users import User
-    from models.bookings import Booking
-    from models.contractors import Contractor
-    from models.portfolios import Portfolio
-    from models.services import Service
-    from models.user_reviews import UserReview
-
-    class CustomProvider(BaseProvider):
-
-        def occupation(self):
-            return self.random_element(
-                elements=('Carpenter', 'Electrician', 'Plumber', 'Painter', 'Mechanic', 'Cleaner',
-                          'Technician'))
-
-        def skills(self):
-            return self.random_element(
-                elements=('cleaning', 'house wiring', 'bulb repairs', 'plumbing', 'inverter installation',
-                          'DSTV repair', 'phone engineer', 'Iron repair', 'Borehole Drilling',
-                          'House painting', 'Office murals'))
-
-        def custom_address(self):
-            street_address = fk.street_address()
-            city = fk.city()
-            state = fk.state()
-            zip_code = fk.zipcode()
-            country = fk.country()
-
-            address_parts = [street_address, city, state, zip_code, country]
-            formatted_address = ', '.join(
-                part for part in address_parts if part)
-            return formatted_address
-
-        def service(self):
-            return self.random_element(elements=('DSTV repair', 'phone engineer', 'Iron repair', 'Landscaping',
-                                                 'HVAC',
-                                                 'Appliance Repair', 'Computer Repair','errands', 'internet',
-                                                 'Baby sitting', 'Plumbing', 'Painting', 'Carpentry', 'Cleaning'))
-
-        def category(self):
-            return self.random_element(elements=('Electrical', 'Building & Contruction', 'Menial', 'Outdoor(eg Gardening)'))
-
-    fk = Faker()
-    fk.add_provider(CustomProvider)
-
-    all_obj = []
-    for _ in range(10):
+    # Create fake users
+    for _ in range(5):  # Creating 5 fake users
         user = User(
-            first_name=fk.first_name(),
-            last_name=fk.last_name(),
-            password=fk.password(length=5),
-            email=fk.email()
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            password=fake.password(),
+            email=fake.email(),
+            phone_number=fake.phone_number(),
+            address=fake.address()
         )
+        db.session.add(user)
 
-        contractor = Contractor(
-            first_name=fk.first_name(),
-            last_name=fk.last_name(),
-            email=fk.email(),
-            password=fk.password(length=10),
-            occupation=fk.occupation(),
-            skills=fk.skills(),
-            address=fk.custom_address()
-        )
-
-        portfolio = Portfolio(
-            description=fk.text(max_nb_chars=60),
-            contractor=contractor
-        )
-
+    # Create fake services
+    service_names = ["Plumbing", "Electrical", "Carpentry", "Painting", "Landscaping"]
+    for service_name in service_names:
         service = Service(
-            name=fk.service(),
-            category=fk.category(),
-            price=fk.random_number(digits=3) + fk.random_number(digits=3) / 1000,
-            contractors=[contractor]
+            name=service_name,
+            description=fake.text()
         )
+        db.session.add(service)
 
+    # Create fake contractors
+    for _ in range(3):  # Creating 3 fake contractors
+        contractor = Contractor(
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            email=fake.email(),
+            password=fake.password(),
+            address=fake.address(),
+            phone_number=fake.phone_number(),
+            skills=fake.random_element(elements=("Conduit-pipes repair", "Electrical Wiring", "Custom chairs", "Murals", "Gardening")),
+            occupation=fake.job(),
+        )
+        db.session.add(contractor)
+
+    # Create fake contracts
+    for _ in range(5):  # Creating 5 fake contracts
+        contract = Contract(
+            user_id=fake.random_element(User.query.all()).id,
+            service_id=fake.random_element(Service.query.all()).id,
+            description=fake.text(),
+            budget=fake.random_int(min=10000, max=500000) / 100,
+            start_date=fake.date_this_year().strftime('%Y-%m-%d'),
+            end_date=fake.date_this_year().strftime('%Y-%m-%d'),
+            status=fake.random_element(elements=("pending", "ongoing", "completed", "cancelled"))
+        )
+        db.session.add(contract)
+
+    # Create fake service offers
+    for _ in range(5):  # Creating 5 fake service offers
+        service_offer = ServiceOffer(
+            contractor_id=fake.random_element(Contractor.query.all()).id,
+            name=fake.random_element(elements=("Sink blockage repair ", "Full house Wiring", "Make office desk", "Exterior wall Murals", "Beautify your garden")),
+            description=fake.text(),
+            price=fake.random_int(min=10000, max=500000) / 100,
+            status=fake.random_element(elements=("available", "unavailable"))
+        )
+        db.session.add(service_offer)
+
+    # Create fake bookings
+    for _ in range(10):  # Creating 10 fake bookings
         booking = Booking(
-            user=user,
-            contractor=contractor,
-            service=service
+            user_id=fake.random_element(User.query.all()).id,
+            contractor_id=fake.random_element(Contractor.query.all()).id,
+            booking_date=fake.date_time_this_year(),
+            status=fake.random_element(elements=("pending", "confirmed", "completed")),
         )
+        # Randomly associate with a contract or service_offer
+        if fake.boolean(chance_of_getting_true=50):
+            booking.contract_id = fake.random_element(Contract.query.all()).id
+        else:
+            booking.service_offer_id = fake.random_element(ServiceOffer.query.all()).id
+        db.session.add(booking)
 
+    # Create fake user reviews
+    for _ in range(8):  # Creating 8 fake user reviews
         user_review = UserReview(
-            review=fk.text(max_nb_chars=45),
-            rating=random.randint(1, 5),
-            booking=booking,
-            user=user
+            review=fake.text(),
+            rating=fake.random_int(min=1, max=5),
+            booking_id=fake.random_element(Booking.query.all()).id
         )
+        db.session.add(user_review)
 
-        all_obj.extend([user, contractor, portfolio, service, booking, user_review])
+    # Commit the changes to the database
+    db.session.commit()
 
-    for obj in all_obj:
-        db.session.add(obj)
-        db.session.commit()
+    print("Fake records created successfully!")
