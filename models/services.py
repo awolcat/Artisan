@@ -6,13 +6,9 @@ from models.base import Base
 
 
 class Service(Base, db.Model):
-    """This class defines a user's reviews
-    """
+    """This class defines a service"""
     name = db.Column(db.String(45), nullable=False)
-    category = db.Column(db.String(45))
-    price = db.Column(db.Integer)
-    bookings = db.relationship(
-        'Booking', backref='service', lazy='dynamic', cascade='delete, delete-orphan')
+    description = db.Column(db.Text)
 
     def __init__(self, **kwargs):
         """Initialises a service

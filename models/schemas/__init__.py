@@ -6,7 +6,10 @@ from models.bookings import Booking
 from models.contractors import Contractor
 from models.portfolios import Portfolio
 from models.services import Service
+from models.contracts import Contract
 from models.user_reviews import UserReview
+from models.service_offers import ServiceOffer
+
 
 """
 class BaseSchema(ma.SQLAlchemyAutoSchema):
@@ -64,6 +67,22 @@ class UserReviewSchema(ma.SQLAlchemyAutoSchema):
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
     """Generate User model schema
+    """
+    class Meta:
+        model = User
+        include_fk = True
+        exclude = ('created_at', 'updated_at')
+
+class ContractSchema(ma.SQLAlchemyAutoSchema):
+    """Generate Contract model schema
+    """
+    class Meta:
+        model = User
+        include_fk = True
+        exclude = ('created_at', 'updated_at')
+
+class ServiceOfferSchema(ma.SQLAlchemyAutoSchema):
+    """Generate ServiceOffer model schema
     """
     class Meta:
         model = User

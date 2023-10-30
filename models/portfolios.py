@@ -10,8 +10,7 @@ class Portfolio(Base, db.Model):
     """
     description = db.Column(db.String(128))
     image_url = db.Column(db.String(128))
-    contractor_id = db.Column(db.Integer, db.ForeignKey(
-        'contractor.id'), nullable=False)
+    contractor_id = db.Column(db.Integer, db.ForeignKey('contractor.id'), nullable=False)
 
     def __init__(self, **kwargs):
         """Initialises a user                                                                                        
