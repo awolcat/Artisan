@@ -9,7 +9,8 @@ from models.contractors import Contractor
 from models.portfolios import Portfolio
 from models.services import Service
 from models.user_reviews import UserReview
-
+from models.contracts import Contract
+from models.service_offers import ServiceOffer
 
 
 @app.shell_context_processor
@@ -23,6 +24,8 @@ def make_shell_context():
             'Portfolio': Portfolio,
             'Service': Service,
             'UserReview': UserReview,
+            'Contract': Contract,
+            'ServiceOffer': ServiceOffer,
             'add_all': add_all,
             'populate_db': populate_db
             }
