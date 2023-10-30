@@ -3,20 +3,22 @@
 """
 from flask_app import db
 from datetime import datetime
+from models.base import Base
 
 
-class Booking(db.Model):
-    """This class defines a user's booking
-    """
-    booking_id = db.Column(db.String(60), primary_key=True)
-    created_at = db.Column(DateTime, default=datetime.utcnow(), nullable=True)
-    updated_at = db.Column(DateTime, default=datetime.utcnow(), nullable=True)
-    user_id = ""
-    contractor_id = ""
-    service_id = ""
+class Booking(Base, db.Model):
+    """This class defines a booking"""
+    booking_date = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String(60))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    contract_id = db.Column(db.Integer, db.ForeignKey('contract.id'), nullable=True)
+    service_offer_id = db.Column(db.Integer, db.ForeignKey('service_offer.id'), nullable=True)
+    contractor_id = db.Column(db.Integer, db.ForeignKey('contractor.id'), nullable=False)
+    user_reviews = db.relationship('UserReview', uselist=False, backref='booking', cascade='all, delete')
 
-    def __str__(self):
-        """String representation of the class
+    
+
+    def __init__(self, **kwargs):
+        """Initialises a booking
         """
-        return "[{}]: {}".format(self.__class__.__name__, self.__dict__)
-
+        super().__init__(**kwargs)

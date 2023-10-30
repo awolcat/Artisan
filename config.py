@@ -1,5 +1,5 @@
-#/usr/bin/python3
-"""COnfigures variables for SQLAlchemy
+# /usr/bin/python3
+"""Configures variables for SQLAlchemy
 """
 import os
 

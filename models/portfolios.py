@@ -2,16 +2,17 @@
 """
 """
 from flask_app import db
+from models.base import Base
 
 
-class portfolio(db.Model):
+class Portfolio(Base, db.Model):
     """This class defines a contractors portfolio
     """
-    portfolio_id = db.Column(db.String(60))
     description = db.Column(db.String(128))
-    contractor_id = ""
+    image_url = db.Column(db.String(128))
+    contractor_id = db.Column(db.Integer, db.ForeignKey('contractor.id'), nullable=False)
 
-    def __str__(self):
-        """String representation of the class
+    def __init__(self, **kwargs):
+        """Initialises a user                                                                                        
         """
-        return "[{}]: {}".format(self.__class__.__name__, self.__dict__)
+        super().__init__(**kwargs)

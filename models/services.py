@@ -2,18 +2,15 @@
 """
 """
 from flask_app import db
+from models.base import Base
 
 
-class Service(db.Model):
-    """This class defines a user's reviews
-    """
-    service__id = db.Column(db.String(60), primary_key=True)
+class Service(Base, db.Model):
+    """This class defines a service"""
     name = db.Column(db.String(45), nullable=False)
-    category = db.Column(db.String(45), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    contractor_id = ""
+    description = db.Column(db.Text)
 
-    def __str__(self):
-        """String representation of the class
+    def __init__(self, **kwargs):
+        """Initialises a service
         """
-        return "[{}]: {}".format(self.__class__.__name__, self.__dict__)
+        super().__init__(**kwargs)
