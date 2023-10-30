@@ -8,6 +8,8 @@ import About from './components/pages/about';
 import Landing from './components/pages/landing';
 import Contractors from './components/pages/contractors';
 import Jobs from './components/pages/jobs';
+import Profile from './components/pages/contractorProfile';
+import NotFound from './components/pages/notFound';
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/contractors' element={<Contractors />} />
+        <Route path='/contractors/:name' element={<Profile />}/>
+        <Route path='/*' element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>
