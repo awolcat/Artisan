@@ -97,7 +97,7 @@ def populate_db():
         user_review = UserReview(
             review=fake.text(),
             rating=fake.random_int(min=1, max=5),
-            booking_id=fake.random_element(Booking.query.all()).id
+            booking_id=Booking.query.get(_ + 1).id
         )
         db.session.add(user_review)
 
