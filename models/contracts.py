@@ -15,7 +15,7 @@ class Contract(Base, db.Model):
     end_date = db.Column(db.String(60), nullable=False)
     status = db.Column(db.String(50))
 
-    bookings = db.relationship('Booking', backref='contract', lazy='dynamic')
+    bookings = db.relationship('Booking', backref='contract', lazy='dynamic', cascade='all, delete-orphan')
     
     def __init__(self, **kwargs):
         """Initialises a contract

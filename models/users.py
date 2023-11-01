@@ -16,7 +16,7 @@ class User(Base, db.Model):
     address = db.Column(db.String(128))
 
     contracts = db.relationship('Contract', backref='user', lazy='dynamic', cascade='all, delete-orphan')
-    bookings = db.relationship('Booking', backref='user', lazy='dynamic')
+    bookings = db.relationship('Booking', backref='user', lazy='dynamic', cascade='all, delete-orphan')
     
 
     def __init__(self, **kwargs):

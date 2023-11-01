@@ -24,7 +24,7 @@ class Contractor(Base, db.Model):
     skills = db.Column(db.String(128))
     occupation = db.Column(db.String(45))
 
-    bookings = db.relationship('Booking', backref='contractor', lazy='dynamic')
+    bookings = db.relationship('Booking', backref='contractor', lazy='dynamic', cascade='all, delete-orphan')
     portfolio = db.relationship('Portfolio', backref='contractor', uselist=True, cascade='all, delete-orphan')
     services = db.relationship('Service', secondary=contractor_service, lazy='dynamic', backref='contractors')
     service_offers = db.relationship('ServiceOffer', backref='contractor', lazy='dynamic', cascade='all, delete-orphan')
