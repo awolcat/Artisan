@@ -8,9 +8,9 @@ from models.base import Base
 """table setup for many to many relationship between service and contractor models"""
 contractor_service = db.Table('contractor_service',
                               db.Column('service_id', db.Integer, db.ForeignKey(
-                                  'service.id', onupdate='CASCADE'), primary_key=True),
+                                  'service.id'), primary_key=True),
                               db.Column('contractor_id', db.Integer, db.ForeignKey(
-                                  'contractor.id', onupdate='CASCADE'), primary_key=True)
+                                  'contractor.id'), primary_key=True)
                               )
 
 class Contractor(Base, db.Model):
@@ -23,10 +23,11 @@ class Contractor(Base, db.Model):
     phone_number = db.Column(db.String(60))
     skills = db.Column(db.String(128))
     occupation = db.Column(db.String(45))
+
     bookings = db.relationship('Booking', backref='contractor', lazy='dynamic')
     portfolio = db.relationship('Portfolio', backref='contractor', uselist=True, cascade='all, delete-orphan')
     services = db.relationship('Service', secondary=contractor_service, lazy='dynamic', backref='contractors')
-    service_offerings = db.relationship('ServiceOffer', backref='contractor', lazy=True)
+    service_offers = db.relationship('ServiceOffer', backref='contractor', lazy='dynamic', cascade='all, delete-orphan')
 
 
     def __init__(self, **kwargs):
