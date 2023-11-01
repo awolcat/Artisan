@@ -62,7 +62,7 @@ def populate_db():
             budget=fake.random_int(min=10000, max=500000) / 100,
             start_date=fake.date_this_year().strftime('%Y-%m-%d'),
             end_date=fake.date_this_year().strftime('%Y-%m-%d'),
-            status=fake.random_element(elements=("pending", "ongoing", "completed", "cancelled"))
+            status=fake.random_element(elements=("open", "closed"))
         )
         db.session.add(contract)
 
@@ -83,7 +83,7 @@ def populate_db():
             user_id=fake.random_element(User.query.all()).id,
             contractor_id=fake.random_element(Contractor.query.all()).id,
             booking_date=fake.date_time_this_year(),
-            status=fake.random_element(elements=("pending", "confirmed", "completed")),
+            status=fake.random_element(elements=("pending", "confirmed", "cancelled", "completed")),
         )
         # Randomly associate with a contract or service_offer
         if fake.boolean(chance_of_getting_true=50):
