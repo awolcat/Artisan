@@ -46,7 +46,7 @@ def delete_contractor_bookings(mapper, connection, target):
 
 def disassociate_services(mapper, connection, target):
     """Disassociates services from a contractor before delete"""
-    contractor_services = target.services.all()
+    contractor_services = target.services
 
     for service in contractor_services:
         target.services.remove(service)
@@ -56,7 +56,7 @@ event.listen(Contractor, 'before_delete', disassociate_services)
 
 def disassociate_contractors(mapper, connection, target):
     """Disassociates contractors from a service before delete"""
-    service_contractors = target.contractors.all()
+    service_contractors = target.contractors
 
     for contractor in service_contractors:
         target.contractors.remove(contractor)
