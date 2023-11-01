@@ -4,16 +4,11 @@
 from flask_app.api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.contractors import Contractor
-from models.user_reviews import UserReview
-from models.bookings import Booking
-from models.users import User
 from models.schemas import ContractorSchema
-from flask_app import db
 
 
 contractor_schema = ContractorSchema()
 contractors_schema = ContractorSchema(many=True)
-
 
 @app_views.route('/contractors', methods=['GET'])
 def get_contractors():
@@ -22,6 +17,13 @@ def get_contractors():
     contractors = contractors_schema.dump(all_contractors)
     return jsonify({"contractors": contractors})
 
+@app_views.route('/contractors/<contractor_id>', methods=['GET'])
+def get_contractor(contractor_id):
+    """Gets a contractor by id"""
+    contractor = Contractor.query.get(contractor_id)
+    if not contractor:
+        abort(404)
+    return contractor_schema.jsonify(contractor)
 
 @app_views.route('/contractors', methods=['POST'])
 def post_contractor():
@@ -37,18 +39,12 @@ def post_contractor():
     contractor.save()
     return contractor_schema.jsonify(contractor)
 
-
-@app_views.route('/contractors/<contractor_id>', methods=['GET'])
-def get_contractor(contractor_id):
-    """Gets a contractor by id"""
-    contractor = Contractor.query.get(contractor_id)
-    return contractor_schema.jsonify(contractor)
-
-
 @app_views.route('/contractors/<contractor_id>', methods=['PUT'])
 def update_contractor(contractor_id):
     """Updates a contractor by id"""
     contractor = Contractor.query.get(contractor_id)
+    if not contractor:
+        abort(404)
     data = request.get_json()
     if not data:
         abort(400, description='Not a JSON')
@@ -60,32 +56,15 @@ def update_contractor(contractor_id):
     contractor.save()
     return contractor_schema.jsonify(contractor)
 
-
-@app_views.route('/contractors/<contractor_id>/reviews/<n>', methods=['GET'])
-def get_contractor_reviews_count(contractor_id, n):
-    """ """
+@app_views.route('/contractors/<contractor_id>', methods=['DELETE'])
+def delete_contractor(contractor_id):
+    """Deletes a contractor from the database"""
     contractor = Contractor.query.get(contractor_id)
-    reviews = db.session.query(Contractor.first_name.label('contractor'),\
-                               User.first_name.label('client'),\
-                               UserReview.review)\
-                       .join(Booking, Contractor.id == Booking.contractor_id)\
-                       .join(UserReview, Booking.id == UserReview.booking_id)\
-                       .join(User, User.id == Booking.user_id)\
-                       .filter(Contractor.id == contractor_id).all()
-    n = int(n)
-    if n < 0:
-        abort(400, description='Not a positive number')
-    if n > 0:
-        n_reviews = []
-        for review in range(n):
-            n_reviews.append(reviews[review])
-        return jsonify({"reviews_recieved_count": len(n_reviews)})
-    
-    return jsonify({"reviews_recieved_count": len(reviews)})
-
-@app_views.route('/contractors/<contractor_id>/reviews/<n>', methods=['POST'])
-def post_contractor_reviews(contractor_id, n):
-    """ """
-    pass
-
-#@app_views.route('', methods['GET'])
+    if not contractor:
+        abort(404)
+    try:
+        contractor.delete()
+    except Exception as e:
+        abort(400, description=str(e))
+    contractor.save()
+    return jsonify({})
