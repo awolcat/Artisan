@@ -10,9 +10,9 @@ from models.contracts import Contract
 from models.service_offers import ServiceOffer
 
 
-
+"""
 def mark_bookings_as_inactive(mapper, connection, target):
-    """Define a function to be called before a contract or service_offer is deleted"""
+#    Define a function to be called before a contract or service_offer is deleted
     if isinstance(target, Contract):
         if target.status == 'open':
             try:
@@ -20,21 +20,28 @@ def mark_bookings_as_inactive(mapper, connection, target):
             except Exception as e:
                 print(str(e))
                 db.session.rollback()
-        for booking in target.bookings:
+        for booking in target.bookings.all():
             booking.mark_as_inactive_user()
-
-    if isinstance(target, ServiceOffer):
+    elif isinstance(target, ServiceOffer):
         if target.status == 'available' :
             try:
                 raise Exception("Please make service offer unavailable first")
             except Exception as e:
                 print(str(e))
                 db.session.rollback()
-        for booking in target.bookings:
+        for booking in target.bookings.all():
             booking.mark_as_inactive_contractor()
 
 event.listen(ServiceOffer, 'before_delete', mark_bookings_as_inactive)
 event.listen(Contract, 'before_delete', mark_bookings_as_inactive)
+"""
+
+"""
+@event.listens_for(Contractor, 'before_delete')
+def delete_contractor_bookings(mapper, connection, target):
+    for booking in target.bookings.all():
+        booking.delete()
+        booking.save()"""
 
 
 def disassociate_services(mapper, connection, target):
@@ -56,25 +63,18 @@ def disassociate_contractors(mapper, connection, target):
 
 event.listen(Service, 'before_delete', disassociate_contractors)
 
-
+"""
 def before_flush(session, flush_context, instances):
-    """Checks if requirements to delete user or contractor are met"""
+#    Checks if requirements to delete user or contractor are met
     for obj in session.deleted:
         if isinstance(obj, Contractor):
-            for service_offer in obj.service_offers:
+            for service_offer in obj.service_offers.all():
                 if service_offer.status == 'available':
-                    try:
-                        raise Exception("Please make all service offers unavailable first")
-                    except Exception as e:
-                        print(str(e))
-                        db.session.rollback()
+                    raise Exception("Please make all service offers unavailable first")
         elif isinstance(obj, User):
-            for contract in obj.contracts:
+            for contract in obj.contracts.all():
                 if contract.status == 'open':
-                    try:
-                        raise Exception("Please close all open contracts first")
-                    except Exception as e:
-                        print(str(e))
-                        db.session.rollback()
+                    raise Exception("Please close all open contracts first")
 
 event.listen(db.session, 'before_flush', before_flush)
+"""
