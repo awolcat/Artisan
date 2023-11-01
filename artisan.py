@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 """
-#from flask_app import app, add_all, populate_db, ma, db
+from flask_app import app, add_all, populate_db, ma, db
 from flask_app import *
 from models.base import Base
 from models.users import User
