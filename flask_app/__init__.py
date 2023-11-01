@@ -26,6 +26,8 @@ def not_found(e):
     return make_response(jsonify({"error": "Not Found"}), 404)
 
 
+from flask_app.events import *
+
 def add_all(objects_list):
     """
     """
@@ -35,6 +37,5 @@ def add_all(objects_list):
 
 
 from flask_app.seed import populate_db
-
 from flask_app.api.v1.views import app_views
 app.register_blueprint(app_views)
