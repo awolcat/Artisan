@@ -11,7 +11,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 app.config.from_object(Config)
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, session_options={"autoflush": False})
 ma = Marshmallow(app)
 migrate = Migrate(app, db)
 app.url_map.strict_slashes = False
