@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 """
+from flask_app import db
 from flask_app.api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.contractors import Contractor
@@ -58,13 +59,20 @@ def update_contractor(contractor_id):
 
 @app_views.route('/contractors/<contractor_id>', methods=['DELETE'])
 def delete_contractor(contractor_id):
-    """Deletes a contractor from the database"""
+    """Deletes a contractor from the database
+       WARNING: All associated bookings will be deleted,
+       All associated offers will be deleted
+    """
     contractor = Contractor.query.get(contractor_id)
     if not contractor:
         abort(404)
-    try:
-        contractor.delete()
-    except Exception as e:
-        abort(400, description=str(e))
+
+    for booking in contractor.bookings.all():
+        booking.delete()
+        booking.save()
+    for offer in contractor.service_offers.all():
+        offer.delete()
+        offer.save()
+    contractor.delete()
     contractor.save()
     return jsonify({})
