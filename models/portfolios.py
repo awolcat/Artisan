@@ -8,7 +8,7 @@ from models.base import Base
 class Portfolio(Base, db.Model):
     """This class defines a contractors portfolio
     """
-    description = db.Column(db.String(128))
+    description = db.Column(db.String(128), nullable=False)
     image_url = db.Column(db.String(128))
     contractor_id = db.Column(db.Integer, db.ForeignKey('contractor.id'), nullable=False)
 
