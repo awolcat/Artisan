@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 96bcfa88ffd6
+Revision ID: 07c5bb49f352
 Revises: 
-Create Date: 2023-10-30 01:50:49.784774
+Create Date: 2023-10-31 17:40:45.374469
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '96bcfa88ffd6'
+revision = '07c5bb49f352'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -58,9 +58,9 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('service_id', sa.Integer(), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
-    sa.Column('budget', sa.Float(), nullable=True),
-    sa.Column('start_date', sa.String(length=60), nullable=True),
-    sa.Column('end_date', sa.String(length=60), nullable=True),
+    sa.Column('budget', sa.Float(), nullable=False),
+    sa.Column('start_date', sa.String(length=60), nullable=False),
+    sa.Column('end_date', sa.String(length=60), nullable=False),
     sa.Column('status', sa.String(length=50), nullable=True),
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -72,12 +72,12 @@ def upgrade():
     op.create_table('contractor_service',
     sa.Column('service_id', sa.Integer(), nullable=False),
     sa.Column('contractor_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['contractor_id'], ['contractor.id'], onupdate='CASCADE'),
-    sa.ForeignKeyConstraint(['service_id'], ['service.id'], onupdate='CASCADE'),
+    sa.ForeignKeyConstraint(['contractor_id'], ['contractor.id'], ),
+    sa.ForeignKeyConstraint(['service_id'], ['service.id'], ),
     sa.PrimaryKeyConstraint('service_id', 'contractor_id')
     )
     op.create_table('portfolio',
-    sa.Column('description', sa.String(length=128), nullable=True),
+    sa.Column('description', sa.String(length=128), nullable=False),
     sa.Column('image_url', sa.String(length=128), nullable=True),
     sa.Column('contractor_id', sa.Integer(), nullable=False),
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
@@ -102,8 +102,10 @@ def upgrade():
     sa.Column('status', sa.String(length=60), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('contract_id', sa.Integer(), nullable=True),
-    sa.Column('service_offer_id', sa.Integer(), nullable=True),
+    sa.Column('active_user', sa.Boolean(), nullable=True),
     sa.Column('contractor_id', sa.Integer(), nullable=False),
+    sa.Column('service_offer_id', sa.Integer(), nullable=True),
+    sa.Column('active_contractor', sa.Boolean(), nullable=True),
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
