@@ -15,7 +15,7 @@ class User(Base, db.Model):
     phone_number = db.Column(db.String(60), unique=True)
     address = db.Column(db.String(128))
 
-    contracts = db.relationship('Contract', backref='user', lazy='dynamic')
+    contracts = db.relationship('Contract', backref='user', lazy='dynamic', cascade='all, delete-orphan')
     bookings = db.relationship('Booking', backref='user', lazy='dynamic')
     
 
