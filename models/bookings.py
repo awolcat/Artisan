@@ -12,13 +12,25 @@ class Booking(Base, db.Model):
     status = db.Column(db.String(60))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     contract_id = db.Column(db.Integer, db.ForeignKey('contract.id'), nullable=True)
-    service_offer_id = db.Column(db.Integer, db.ForeignKey('service_offer.id'), nullable=True)
+    active_user = db.Column(db.Boolean, default=True)
     contractor_id = db.Column(db.Integer, db.ForeignKey('contractor.id'), nullable=False)
+    service_offer_id = db.Column(db.Integer, db.ForeignKey('service_offer.id'), nullable=True)
+    active_contractor = db.Column(db.Boolean, default=True)
     user_reviews = db.relationship('UserReview', uselist=False, backref='booking', cascade='all, delete')
-
-    
-
+     
     def __init__(self, **kwargs):
         """Initialises a booking
         """
         super().__init__(**kwargs)
+
+    def mark_as_inactive_user(self):
+        """
+        """
+        self.active_user = False
+        db.session.commit()
+
+    def mark_as_inactive_contractor(self):
+        """
+        """
+        self.active_contractor = False
+        db.session.commit()
