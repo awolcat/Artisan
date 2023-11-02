@@ -1,16 +1,6 @@
 import logging
 from logging.config import fileConfig
 
-from models.base import Base
-from models.users import User
-from models.bookings import Booking
-from models.contractors import Contractor
-from models.portfolios import Portfolio
-from models.services import Service
-from models.user_reviews import UserReview
-from models.contracts import Contract
-from models.service_offers import ServiceOffer
-
 from flask import current_app
 
 from alembic import context

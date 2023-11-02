@@ -16,7 +16,7 @@ class Booking(Base, db.Model):
     contractor_id = db.Column(db.Integer, db.ForeignKey('contractor.id'), nullable=False)
     service_offer_id = db.Column(db.Integer, db.ForeignKey('service_offer.id'), nullable=True)
     active_contractor = db.Column(db.Boolean, default=True)
-    user_reviews = db.relationship('UserReview', uselist=False, backref='booking', cascade='all, delete')
+    user_reviews = db.relationship('UserReview', backref='booking', cascade='all, delete')
      
     def __init__(self, **kwargs):
         """Initialises a booking

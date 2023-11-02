@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 """
-from flask_app import app, add_all, populate_db, ma, db
+#from flask_app import app, add_all, populate_db, ma, db
 from flask_app import *
 from models.base import Base
 from models.users import User
@@ -17,6 +17,7 @@ from models.service_offers import ServiceOffer
 
 @app.shell_context_processor
 def make_shell_context():
+    """
     return {'db': db,
             'ma': ma,
             'Base': Base,
@@ -34,4 +35,20 @@ def make_shell_context():
             'disassociate_services': disassociate_services,
             'disassociate_contractors': disassociate_contractors,
             'before_flush': before_flush,
+            }"""
+    return {'db': db,
+            'ma': ma,
+            'Base': Base,
+            'User': User,
+            'Booking': Booking,
+            'Contractor': Contractor,
+            'Portfolio': Portfolio,
+            'Service': Service,
+            'UserReview': UserReview,
+            'Contract': Contract,
+            'ServiceOffer': ServiceOffer,
+            'add_all': add_all,
+            'populate_db': populate_db,
+            'disassociate_services': disassociate_services,
+            'disassociate_contractors': disassociate_contractors,
             }

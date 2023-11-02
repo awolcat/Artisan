@@ -19,6 +19,14 @@ class BaseSchema(ma.SQLAlchemyAutoSchema):
         model = Base
         include_fk = True
 """
+class UserReviewSchema(ma.SQLAlchemyAutoSchema):
+    """Generate UserReview model schema
+    """
+    class Meta:
+        model = UserReview
+        include_fk = True
+        exclude = ('created_at', 'updated_at')
+
 
 class BookingSchema(ma.SQLAlchemyAutoSchema):
     """Generate Booking model schema
@@ -27,11 +35,31 @@ class BookingSchema(ma.SQLAlchemyAutoSchema):
         model = Booking
         include_fk = True
         exclude = ('created_at', 'updated_at')
+    user_reviews = ma.Nested(UserReviewSchema, many=True)
+
+
+class ServiceSchema(ma.SQLAlchemyAutoSchema):
+    """Generate Service model schema
+    """
+    class Meta:
+        model = Service
+        include_fk = True
+        exclude = ('created_at', 'updated_at')
+
+
+class ServiceOfferSchema(ma.SQLAlchemyAutoSchema):
+    """Generate ServiceOffer model schema
+    """
+    class Meta:
+        model = ServiceOffer
+        include_fk = True
+        exclude = ('created_at', 'updated_at')
 
 
 class ContractorSchema(ma.SQLAlchemyAutoSchema):
     """Generate Contractor model schema
     """
+    service_offers = ma.Nested(ServiceOfferSchema, many=True)
     class Meta:
         model = Contractor
         include_fk = True
@@ -47,24 +75,6 @@ class PortfolioSchema(ma.SQLAlchemyAutoSchema):
         exclude = ('created_at', 'updated_at')
 
 
-class ServiceSchema(ma.SQLAlchemyAutoSchema):
-    """Generate Service model schema
-    """
-    class Meta:
-        model = Service
-        include_fk = True
-        exclude = ('created_at', 'updated_at')
-
-
-class UserReviewSchema(ma.SQLAlchemyAutoSchema):
-    """Generate UserReview model schema
-    """
-    class Meta:
-        model = UserReview
-        include_fk = True
-        exclude = ('created_at', 'updated_at')
-
-
 class UserSchema(ma.SQLAlchemyAutoSchema):
     """Generate User model schema
     """
@@ -73,6 +83,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         include_fk = True
         exclude = ('created_at', 'updated_at')
 
+
 class ContractSchema(ma.SQLAlchemyAutoSchema):
     """Generate Contract model schema
     """
@@ -80,6 +91,7 @@ class ContractSchema(ma.SQLAlchemyAutoSchema):
         model = Contract
         include_fk = True
         exclude = ('created_at', 'updated_at')
+
 
 class ServiceOfferSchema(ma.SQLAlchemyAutoSchema):
     """Generate ServiceOffer model schema

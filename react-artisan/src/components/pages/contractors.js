@@ -5,7 +5,7 @@ export default function Contractors() {
     const [data, setData] = useState(null);
     
     async function fetchData() {
-        const response = await fetch('https://swapi.dev/api/people');
+        const response = await fetch('http://127.0.0.1:5000/api/v1/contractors');
         const data = await response.json();
         setData(data);
     };
@@ -13,13 +13,12 @@ export default function Contractors() {
     const rows = [];
 
     if (data) {
-        data.results.forEach((person, index) => {
-            rows.push(<div className="contractor" key={index}>
-                        <a href={'/contractors/' + person.birth_year}>
+        data.contractors.forEach((person) => {
+            rows.push(<div className="contractor" key={person.id}>
+                        <a href={'/contractors/' + person.id}>
                             <img alt="contractor" src="https://placehold.co/600x400/png" />
-                            <p>Name: {person.name}</p>
-                            <p>Born: {person.birth_year}</p>
-                            <p>Height: {person.height}</p>
+                            <p>Name: {person.first_name + ' ' + person.last_name}</p>
+                            <p>Skills: {person.skills}</p>
                         </a>
                     </div>);
         });

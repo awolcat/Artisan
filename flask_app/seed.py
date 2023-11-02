@@ -29,6 +29,7 @@ def populate_db():
             address=fake.address()
         )
         db.session.add(user)
+        db.session.commit()
 
     # Create fake services
     service_names = ["Plumbing", "Electrical", "Carpentry", "Painting", "Landscaping"]
@@ -38,6 +39,7 @@ def populate_db():
             description=fake.text()
         )
         db.session.add(service)
+        db.session.commit()
 
     # Create fake contractors
     for _ in range(3):  # Creating 3 fake contractors
@@ -52,6 +54,7 @@ def populate_db():
             occupation=fake.job(),
         )
         db.session.add(contractor)
+        db.session.commit()
 
     # Create fake contracts
     for _ in range(5):  # Creating 5 fake contracts
@@ -65,6 +68,7 @@ def populate_db():
             status=fake.random_element(elements=("open", "closed"))
         )
         db.session.add(contract)
+        db.session.commit()
 
     # Create fake service offers
     for _ in range(5):  # Creating 5 fake service offers
@@ -76,6 +80,7 @@ def populate_db():
             status=fake.random_element(elements=("available", "unavailable"))
         )
         db.session.add(service_offer)
+        db.session.commit()
 
     # Create fake bookings
     for _ in range(10):  # Creating 10 fake bookings
@@ -91,6 +96,7 @@ def populate_db():
         else:
             booking.service_offer_id = fake.random_element(ServiceOffer.query.all()).id
         db.session.add(booking)
+        db.session.commit()
 
     # Create fake user reviews
     for _ in range(8):  # Creating 8 fake user reviews
@@ -100,6 +106,7 @@ def populate_db():
             booking_id=Booking.query.get(_ + 1).id
         )
         db.session.add(user_review)
+        db.session.commit()
 
     # Commit the changes to the database
     db.session.commit()

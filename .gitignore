@@ -4,3 +4,4 @@ react-artisan/public/robots.txt
 flask_app/*~
 venv_artisan/*
 __pycache__/
+env/*
