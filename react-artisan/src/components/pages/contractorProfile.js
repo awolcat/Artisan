@@ -22,7 +22,7 @@ export default function Profile() {
                 <div className='service' key={service.id}>
                     <p key={service.id}>{service.name}</p>
                     <p key={service.id + 1}>{service.status}</p>
-                    <a href=''>Book</a>
+                    <a href={'/service/' + service.id + '/contract'}>Book</a>
                 </div>
             );
         });

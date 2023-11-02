@@ -9,6 +9,7 @@ import Landing from './components/pages/landing';
 import Contractors from './components/pages/contractors';
 import Jobs from './components/pages/jobs';
 import Profile from './components/pages/contractorProfile';
+import Contract from './components/pages/contract';
 import NotFound from './components/pages/notFound';
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/contractors' element={<Contractors />} />
         <Route path='/contractors/:id' element={<Profile />}/>
+        <Route path='/service/:serviceId/contract' element={<Contract />} />
         <Route path='/*' element={<NotFound />} />
       </Routes>
       <Footer />

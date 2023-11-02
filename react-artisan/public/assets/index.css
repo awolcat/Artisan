@@ -204,3 +204,8 @@ a.currentLink,
     font-weight: bold;
     padding: 10px 10px;
 }
+
+.contract-form {
+    height: 89vh;
+    padding-bottom: 20px;
+}
