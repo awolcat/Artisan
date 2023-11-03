@@ -17,7 +17,7 @@ class Contractor(Base, db.Model):
     """This class defines a contractor"""
     first_name = db.Column(db.String(60), nullable=False)
     last_name = db.Column(db.String(60), nullable=False)
-    email = db.Column(db.String(60), nullable=False)
+    email = db.Column(db.String(60), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     address = db.Column(db.String(128))
     phone_number = db.Column(db.String(60))
