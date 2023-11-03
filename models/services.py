@@ -12,8 +12,9 @@ class Service(Base, db.Model):
     """
     name = db.Column(db.String(45), nullable=False)
     description = db.Column(db.Text)
-    contracts = db.relationship('Contract', backref='service', lazy='dynamic', cascade='all, delete-orphan')
+    bookings = db.relationship('Booking', backref='service', lazy='dynamic', cascade='all, delete-orphan')
 
+    
     def __init__(self, **kwargs):
         """Initialises a service
         """
