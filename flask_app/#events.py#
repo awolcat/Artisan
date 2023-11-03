@@ -1,0 +1,53 @@
+#!/usr/bin/python3
+"""
+"""
+from flask_app import db
+from sqlalchemy import event
+from models.users import User
+from models.services import Service
+from models.bookings import Booking
+from models.contractors import Contractor
+from models.contracts import Contract
+from models.service_offers import ServiceOffer
+
+def mark_bookings_as_inactive(mapper, connection, target):
+    """Define a function to be called before a contract or service_offer is deleted"""
+    if isinstance(target, Contract):
+        if target.status == 'open':
+            raise Exception("Please close the contract first")
+        for booking in target.bookings:
+            booking.mark_as_inactive_user()
+
+    if isinstance(target, ServiceOffer):
+        if target.status == 'available' :
+            raise Exception("Please make service offer unavailable first")
+        for booking in target.bookings:
+            booking.mark_as_inactive_contractor()
+
+
+def disassociate_services(mapper, connection, target):
+    """Disassociates services from a contractor before delete"""
+    contractor_services = target.services.all()
+
+    for service in contractor_services:
+        target.services.remove(service)
+
+
+def disassociate_contractors(mapper, connection, target):
+    """Disassociates contractors from a service before delete"""
+    service_contractors = target.contractors.all()
+
+    for contractor in service_contractors:
+        target.contractors.remove(contractor)
+
+def before_flush(session, flush_context, instances):
+    """Checks if requirements to delete user or contractor are met"""
+    for obj in session.deleted:
+        if isinstance(obj, Contractor):
+            for service_offer in obj.service_offers:
+                if service_offer.status == 'available':
+                    raise Exception("Please make all service offers unavailable first")
+        elif isinstance(obj, User):
+            for contract in obj.contracts:
+                if contract.status == 'open':
+                    raise Exception("Please close all open contracts first")

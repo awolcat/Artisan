@@ -6,6 +6,7 @@ from flask_app.api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.contractors import Contractor
 from models.schemas import ContractorSchema
+from flask_jwt_extended import jwt_required
 
 
 contractor_schema = ContractorSchema()
@@ -19,6 +20,7 @@ def get_contractors():
     return jsonify({"contractors": contractors})
 
 @app_views.route('/contractors/<contractor_id>', methods=['GET'])
+@jwt_required()
 def get_contractor(contractor_id):
     """Gets a contractor by id"""
     contractor = Contractor.query.get(contractor_id)
