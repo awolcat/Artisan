@@ -61,7 +61,7 @@ class ContractorSchema(ma.SQLAlchemyAutoSchema):
     """Generate Contractor model schema
     """
     service_offers = ma.Nested(ServiceOfferSchema, many=True, exclude=('contractor_id',))
-    services = ma.Nested("ServiceSchema", many=True)
+    services = ma.Nested("ServiceSchema", many=True, exclude=('contractors',))
     class Meta:
         model = Contractor
         include_fk = True
