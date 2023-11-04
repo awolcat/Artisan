@@ -27,26 +27,17 @@ class UserReviewSchema(ma.SQLAlchemyAutoSchema):
         include_fk = True
         exclude = ('created_at', 'updated_at')
 
-
-class BookingSchema(ma.SQLAlchemyAutoSchema):
-    """Generate Booking model schema
-    """
-    class Meta:
-        model = Booking
-        include_fk = True
-        exclude = ('created_at', 'updated_at')
-    user_reviews = ma.Nested(UserReviewSchema, many=True)
-
-
+    
 class ServiceSchema(ma.SQLAlchemyAutoSchema):
     """Generate Service model schema
     """
+    contractors = ma.Nested("ContractorSchema", many=True, exclude=('services', 'service_offers',))
     class Meta:
         model = Service
         include_fk = True
         exclude = ('created_at', 'updated_at')
 
-
+    
 class ServiceOfferSchema(ma.SQLAlchemyAutoSchema):
     """Generate ServiceOffer model schema
     """
@@ -56,16 +47,27 @@ class ServiceOfferSchema(ma.SQLAlchemyAutoSchema):
         exclude = ('created_at', 'updated_at')
 
 
+class BookingSchema(ma.SQLAlchemyAutoSchema):
+    """Generate Booking model schema
+    """
+    class Meta:
+        model = Booking
+        include_fk = True
+        exclude = ('created_at', 'updated_at')
+    user_reviews = ma.Nested(UserReviewSchema, exclude=('booking_id',))
+
+
 class ContractorSchema(ma.SQLAlchemyAutoSchema):
     """Generate Contractor model schema
     """
-    service_offers = ma.Nested(ServiceOfferSchema, many=True)
+    service_offers = ma.Nested(ServiceOfferSchema, many=True, exclude=('contractor_id',))
+    services = ma.Nested("ServiceSchema", many=True, exclude=('contractors',))
     class Meta:
         model = Contractor
         include_fk = True
         exclude = ('created_at', 'updated_at')
 
-
+    
 class PortfolioSchema(ma.SQLAlchemyAutoSchema):
     """Generate Portfolio model schema
     """

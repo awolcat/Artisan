@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 """
+import random
 from flask_app import db
 from faker import Faker
 from datetime import datetime
@@ -19,7 +20,7 @@ fake = Faker()
 
 def populate_db():
     # Create fake users
-    for _ in range(5):  # Creating 5 fake users
+    for _ in range(7):  # Creating 5 fake users
         user = User(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
@@ -42,7 +43,7 @@ def populate_db():
         db.session.commit()
 
     # Create fake contractors
-    for _ in range(3):  # Creating 3 fake contractors
+    for _ in range(7):  # Creating 3 fake contractors
         contractor = Contractor(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
@@ -50,10 +51,13 @@ def populate_db():
             password=fake.password(),
             address=fake.address(),
             phone_number=fake.phone_number(),
-            skills=fake.random_element(elements=("Conduit-pipes repair", "Electrical Wiring", "Custom chairs", "Murals", "Gardening")),
-            occupation=fake.job(),
+            skills=fake.random_element(elements=("Conduit-pipes repair", "Electrical Wiring", "Custom chairs", "Murals", "Gardening", 'Mobile repairs')),
+            occupation=fake.random_element(elements=('Plumber', 'Landscaper', '3D Painter', 'Electrician', 'Carpenter', 'Dry Cleaner', 'Security Officer', 'Phone Technician')),
         )
         db.session.add(contractor)
+        db.session.commit()
+        contractor.services.append(random.choice(Service.query.all()))
+        contractor.services.append(random.choice(Service.query.all()))
         db.session.commit()
 
     # Create fake contracts
@@ -89,6 +93,7 @@ def populate_db():
             contractor_id=fake.random_element(Contractor.query.all()).id,
             booking_date=fake.date_time_this_year(),
             status=fake.random_element(elements=("pending", "confirmed", "cancelled", "completed")),
+            service_id=fake.random_element(Service.query.all()).id
         )
         # Randomly associate with a contract or service_offer
         if fake.boolean(chance_of_getting_true=50):
