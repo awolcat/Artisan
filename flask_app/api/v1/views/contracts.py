@@ -28,10 +28,6 @@ def get_contract(contract_id):
 @app_views.route('/contracts', methods=['POST'])
 def post_contract():
     """Creates a contract"""
-    print(request)
-    print('----------------------------------')
-    print(request.content_type)
-
     data = request.get_json()
     if not data:
         abort(400, description='Not a JSON')

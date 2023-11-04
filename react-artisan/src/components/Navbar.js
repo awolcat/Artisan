@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar(props) {
   const [current, setCurrent] = useState(null);
 
   function  handleClick(link) {
@@ -14,6 +14,8 @@ export default function Navbar() {
       className={current === 'landing' ? 'currentLink' : ''}>Home</Link>
       <Link to='/about' onClick={() => {handleClick('about')}}
       className={current === 'about' ? 'currentLink' : ''}>About</Link>
+      {!props.token ? <Link to='/login'>Log In</Link> : ""}
+      
     </div>
   );
 
