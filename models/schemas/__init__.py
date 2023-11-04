@@ -62,6 +62,7 @@ class ContractorSchema(ma.SQLAlchemyAutoSchema):
     """
     service_offers = ma.Nested(ServiceOfferSchema, many=True, exclude=('contractor_id',))
     services = ma.Nested("ServiceSchema", many=True, exclude=('contractors',))
+    porfolios = ma.Nested("PortfolioSchema")
     class Meta:
         model = Contractor
         include_fk = True
@@ -84,7 +85,8 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         model = User
         include_fk = True
         exclude = ('created_at', 'updated_at')
-
+    bookings = ma.Nested("BookingSchema", many=True)
+    contracts = ma.Nested("ContractSchema", many=True)
 
 class ContractSchema(ma.SQLAlchemyAutoSchema):
     """Generate Contract model schema

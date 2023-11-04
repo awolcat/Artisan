@@ -20,7 +20,6 @@ def get_contractors():
     return jsonify({"contractors": contractors})
 
 @app_views.route('/contractors/<contractor_id>', methods=['GET'])
-@jwt_required()
 def get_contractor(contractor_id):
     """Gets a contractor by id"""
     contractor = Contractor.query.get(contractor_id)

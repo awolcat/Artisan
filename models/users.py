@@ -23,3 +23,9 @@ class User(Base, db.Model):
         """Initialises a user
         """
         super().__init__(**kwargs)
+
+    def check_password(self, password):
+        """Checks if enetered password is correct"""
+        if self.password == password:
+            return True
+        return False
