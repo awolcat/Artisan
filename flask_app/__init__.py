@@ -44,15 +44,10 @@ def refresh_expiring_jwts(response):
     except (RuntimeError, KeyError):
         return response
 
-def add_all(objects_list):
-    """
-    """
-    for obj in objects_list:
-        db.session.add(obj)
-    db.session.commit()
 
 from flask_app.events import *    
 from flask_app.login import *
+from flask_app.logout import *
 from flask_app.seed import populate_db
 from flask_app.api.v1.views import app_views
 app.register_blueprint(app_views)
