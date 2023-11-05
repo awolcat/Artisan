@@ -17,11 +17,8 @@ import NotFound from './components/pages/notFound';
 
 function App() {
 
-  const [loginToken, setLoginToken] = useState(null);
+  const loginToken = localStorage.getItem('access-token');
 
-  const setGlobalToken = (usertoken) => {
-    setLoginToken(usertoken);
-  }
   return (
     <Router>
       <Navbar token={loginToken}/>
@@ -31,9 +28,9 @@ function App() {
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/contractors' element={<Contractors />} />
         <Route path='/contractors/:id' element={<Profile />}/>
-        <Route path='/service/:serviceId/contract/:contractor_id' element={loginToken ? <Contract token={loginToken} /> : <Login setGlobalToken={setGlobalToken} />} />
+        <Route path='/service/:serviceId/contract/:contractor_id' element={<Contract />} />
         <Route path='/*' element={<NotFound />} /> 
-        <Route path='/login' element={<Login setGlobalToken={setGlobalToken}/>} /> 
+        <Route path='/login' element={<Login />} /> 
       </Routes>
       <Footer />
     </Router>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 export default function Contract() {
     const { serviceId, contractor_id } = useParams();
@@ -33,7 +33,8 @@ export default function Contract() {
         async function submitContract() {
             const response = await fetch('http://127.0.0.1:5000/api/v1/contracts', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${localStorage.getItem('access-token')}`,},
                 body: JSON.stringify(formData),
             });
             const contractData = await response.json()
@@ -92,7 +93,9 @@ export default function Contract() {
     } else if (service && service.status === 'unavailable') {
         details.push(<p>This service is not currently available</p>);
     }
-
+    if (localStorage.getItem('access-token') === null) {
+        <Navigate replace to='/login' />
+    }
     return (
         <div className='contract-form'>
             { details }

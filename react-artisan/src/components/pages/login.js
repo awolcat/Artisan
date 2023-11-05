@@ -1,9 +1,6 @@
 import { useState } from "react";
-import Cookies from 'js-cookie';
 
-export default function Login(props) {
-    
-    const {setGlobalToken} = props;
+export default function Login() {
     
     const [formData, setFormData] = useState({
         email: '',
@@ -13,12 +10,6 @@ export default function Login(props) {
     const [identity, setIdentity] = useState(null);
     
     const [loginType, setLoginType] = useState(null);
-
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-      }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,9 +27,9 @@ export default function Login(props) {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData),  
             });
-            const result = await response.json()
-            
-            console.log(result)
+            const result = await response.json();
+            //setGlobalToken(result.access-token);
+            localStorage.setItem("access-token", result['access-token']);
         }
         catch (error) {
             console.log(error)
