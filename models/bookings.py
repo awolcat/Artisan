@@ -14,7 +14,7 @@ class Booking(Base, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     contract_id = db.Column(db.Integer, db.ForeignKey('contract.id'), nullable=True)
     contractor_id = db.Column(db.Integer, db.ForeignKey('contractor.id'), nullable=False)
-    service_offer_id = db.Column(db.Integer, db.ForeignKey('service_offer.id'), nullable=True)
+#    service_offer_id = db.Column(db.Integer, db.ForeignKey('service_offer.id'), nullable=True)
     user_reviews = db.relationship('UserReview', uselist=False, backref='booking', cascade='all, delete')
 #    active_contractor = db.Column(db.Boolean, default=True)
 #    active_user = db.Column(db.Boolean, default=True)

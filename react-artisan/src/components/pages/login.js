@@ -37,12 +37,8 @@ export default function Login(props) {
                 body: JSON.stringify(formData),  
             });
             const result = await response.json()
-            const token = getCookie('access_token');
-            setGlobalToken(token);
-            console.log("TOKEN:", token);
-            setIdentity(result);
-            console.log("Cookies ", Cookies.get('csrf_access_token'));
-            console.log(result.message)
+            
+            console.log(result)
         }
         catch (error) {
             console.log(error)

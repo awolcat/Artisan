@@ -30,9 +30,10 @@ def login_contractor():
     contractor = Contractor.query.filter_by(email=email).one_or_none()
     if not contractor or not contractor.check_password(password):
         return jsonify({"message": "Wrong username or password"}), 401
-    response = jsonify({"message": "login successful"})
+    #response = jsonify({"message": "login successful"})
     token = create_access_token(identity=contractor)
-    set_access_cookies(response, token)
+    #set_access_cookies(response, token)
+    response = jsonify({"access-token": token})
     return response
 
 
@@ -45,7 +46,8 @@ def login_user():
     user = User.query.filter_by(email=email).one_or_none()
     if not user or not user.check_password(password):
         return jsonify({"message": "Wrong username or password"}), 401
-    response = jsonify({"message": "login successful"})
+    #response = jsonify({"message": "login successful"})
     token = create_access_token(identity=user)
-    set_access_cookies(response, token)
+    #set_access_cookies(response, token)
+    response = jsonify({"access-token": token})
     return response

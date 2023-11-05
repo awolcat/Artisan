@@ -31,7 +31,7 @@ function App() {
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/contractors' element={<Contractors />} />
         <Route path='/contractors/:id' element={<Profile />}/>
-        <Route path='/service/:serviceId/contract/:contractor_id' element={loginToken ? <Contract /> : <Login setGlobalToken={setGlobalToken} />} />
+        <Route path='/service/:serviceId/contract/:contractor_id' element={loginToken ? <Contract token={loginToken} /> : <Login setGlobalToken={setGlobalToken} />} />
         <Route path='/*' element={<NotFound />} /> 
         <Route path='/login' element={<Login setGlobalToken={setGlobalToken}/>} /> 
       </Routes>
