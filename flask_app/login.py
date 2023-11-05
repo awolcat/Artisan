@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This module contains a function that sets up contractor authentication
 """
+from flask_cors import cross_origin
 from flask_app import app, jwt
 from flask import jsonify, abort, request
 from models.contractors import Contractor
@@ -21,6 +22,7 @@ def identity_lookup(user):
     return user.id
 
 @app.route('/login-contractor', methods=['POST'])
+@cross_origin()
 def login_contractor():
     """Contractorenticates contractors for login"""
     email = request.json.get("email", None)
@@ -35,6 +37,7 @@ def login_contractor():
 
 
 @app.route('/login-user', methods=['POST'])
+@cross_origin()
 def login_user():
     """Userenticates users for login"""
     email = request.json.get("email", None)

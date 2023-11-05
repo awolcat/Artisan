@@ -209,3 +209,11 @@ a.currentLink,
     height: 89vh;
     padding-bottom: 20px;
 }
+
+.service {
+    overflow-y: scroll;
+}
+
+.services {
+    overflow-y: scroll;
+}

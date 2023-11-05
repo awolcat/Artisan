@@ -24,9 +24,9 @@ function useToken() {
   }
 
   return {
-    setToken: saveToken,
-    token,
-    removeToken
+    'setToken': saveToken,
+    'token': token,
+    'removeToken': removeToken,
   }
 
 }

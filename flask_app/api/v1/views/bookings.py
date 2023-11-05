@@ -29,7 +29,6 @@ def get_booking(booking_id):
 def post_booking():
     """Creates a booking"""
     data = request.get_json()
-    print(data)
     if not data:
         abort(400, description='Not a JSON')
     required = ['user_id', 'contractor_id']

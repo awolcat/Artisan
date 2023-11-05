@@ -3,7 +3,7 @@ import {useState, useEffect, useCallback} from 'react';
 
 
 export default function Profile() {
-    const { id } = useParams();
+    const { id } = useParams(); // Get contractor_id from parameters
     const [data, setData] = useState(null);
 
     const fetchData = useCallback(
@@ -17,12 +17,12 @@ export default function Profile() {
     const services = [];
 
     if (data) {
-        data.service_offers.forEach((service) => {
+        data.services.forEach((service) => {
             services.push(
                 <div className='service' key={service.id}>
                     <p key={service.id}>{service.name}</p>
-                    <p key={service.id + 1}>{service.status}</p>
-                    <a href={'/service/' + service.id + '/contract'}>Book</a>
+                    
+                    <a href={'/service/' + service.id + '/contract/' + id }>Book</a>
                 </div>
             );
         });

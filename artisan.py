@@ -47,7 +47,6 @@ def make_shell_context():
             'UserReview': UserReview,
             'Contract': Contract,
             'ServiceOffer': ServiceOffer,
-            'add_all': add_all,
             'populate_db': populate_db,
             'disassociate_services': disassociate_services,
             'disassociate_contractors': disassociate_contractors,

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function Contract() {
-    const { serviceId } = useParams();
+    const { serviceId, contractor_id } = useParams();
     const [ service, setService] = useState(null);
     const users = [1, 2, 3]; //Replace with real user_id in state
     const [ formData, setFormData] = useState({
@@ -16,7 +16,7 @@ export default function Contract() {
                                         });
     //Function run after render to get data about the current service: User
     async function getService(serviceId) {
-        const response = await fetch('http://localhost:5000/api/v1/service_offers/' + serviceId);
+        const response = await fetch('http://localhost:5000/api/v1/services/' + serviceId);
         const data = await response.json();
         setService(data);
     }
@@ -45,11 +45,11 @@ export default function Contract() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
                         'user_id': contractData.user_id,
-                        'contract_id': contractData.contract_id,
-                        'contractor_id': service.contractor_id,
-                        'service_offer_id': service.id,
+                        'contract_id': contractData.id,
+                        'contractor_id': contractor_id,
+                        'service_id': service.id,
                         'status': 'pending',
-                        'booking_date': Date(),
+                        'booking_date': formData.start_date,
                         }),             
                     });
                 if (bookingResponse.status === 200) {
@@ -77,16 +77,13 @@ export default function Contract() {
         details.push(<p>Loading...</p>);
     }
     //const users = [1, 2, 3];
-    if (service && service.status === 'available') {
+    if (service) {
         details.push(
             <form onSubmit={handleSubmit}>
-                
                 <label htmlFor='description'>Description </label>
                 <input type='text' name='description' value={formData.description} onChange={handleChange}/>
                 <label htmlFor="start_date">Start Date </label>
                 <input type='datetime-local' name='start_date' value={formData.start_date} onChange={handleChange} required />
-                <label htmlFor='end_date'>End Date </label>
-                <input type='datetime-local' name='end_date' value={formData.end_date} onChange={handleChange} required />
                 <label htmlFor='budget'>Budget </label>
                 <input type='number' name='budget' value={formData.budget} onChange={handleChange} required/>
                 <input type='submit' value='Send Offer' />
