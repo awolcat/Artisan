@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Loading from '../Loading';
+import contractorProfile from './contractorProfile';
 
 export default function Contractors() {
     const [data, setData] = useState(null);
@@ -9,17 +11,18 @@ export default function Contractors() {
         const data = await response.json();
         setData(data);
     };
-    
+
     const rows = [];
+
 
     if (data) {
         data.contractors.forEach((person) => {
-            rows.push(<div className="contractor" key={person.id}>
-                        <a href={'/contractors/' + person.id}>
+            rows.push(<div className="contractor" key={person.id} >
+                        <Link to={'/contractors/' + person.id}>
                             <img alt="contractor" src="https://placehold.co/600x400/png" />
                             <p>Name: {person.first_name + ' ' + person.last_name}</p>
-                            <p>Skills: {person.skills}</p>
-                        </a>
+                            <p>Skills: {person.skills}</p>                         
+                        </Link>
                     </div>);
         });
     } else {
