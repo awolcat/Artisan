@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
-import contractorProfile from './contractorProfile';
 
 export default function Contractors() {
     const [data, setData] = useState(null);

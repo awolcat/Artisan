@@ -36,7 +36,7 @@ export default function Contract() {
             const response = await fetch('http://127.0.0.1:5000/api/v1/contracts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json',
-                          'Authorization': `Bearer ${token}`,},
+                          'Cookie': `access_token_cookie=${token}`,},
                 body: JSON.stringify(formData),
             });
             const contractData = await response.json()
@@ -46,7 +46,7 @@ export default function Contract() {
                 const bookingResponse = await fetch('http://127.0.0.1:5000/api/v1/bookings', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json',
-                              'Authorization': `Bearer ${token}`, },
+                              'Cookie': `access_token_cookie=${token}`, },
                     body: JSON.stringify({
                         'user_id': contractData.user_id,
                         'contract_id': contractData.id,

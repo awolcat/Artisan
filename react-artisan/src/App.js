@@ -7,6 +7,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import useToken from './components/useToken';
 import Logout from './components/Logout';
+import Register from './components/Register';
+import PrivateProfile from './components/pages/privateProfile';
 import About from './components/pages/about';
 import Landing from './components/pages/landing';
 import Contractors from './components/pages/contractors';
@@ -19,7 +21,7 @@ import NotFound from './components/pages/notFound';
 
 function App() {
 
-  const {token, setToken} = useToken();
+  const {token, setToken, identity, setIdentity} = useToken();
   console.log("APP ", token);
   
   return (
@@ -31,10 +33,12 @@ function App() {
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/contractors' element={<Contractors />} />
         <Route path='/contractors/:id' element={<Profile />}/>
-        <Route path='/service/:serviceId/contract/:contractor_id' element={token && token !== '' ? <Contract /> : <Login setToken={setToken}/>} />
-        <Route path='/*' element={<NotFound />} /> 
-        <Route path='/login' element={<Login setToken={setToken}/>} />
-        <Route path='/logout' element={<Logout setToken={setToken}/>} />
+        <Route path='/service/:serviceId/contract/:contractor_id' element={token && token !== '' ? <Contract /> : <Login setIdentity={setIdentity} token={token} setToken={setToken}/>} />
+        <Route path='/*' element={<NotFound />} />
+        <Route path='my_profile' element={<PrivateProfile identity={identity} /> } />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login setIdentity={setIdentity} token={token} setToken={setToken}/>} />
+        <Route path='/logout' element={<Logout setIdentity={setIdentity} setToken={setToken}/>} />
       </Routes>
       <Footer />
     </Router>

@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
+import Landing from "./pages/landing";
 
 export default function Logout(props) {
     const {setToken} = props;
-    const navigate = useNavigate();
     setToken(null);
-    navigate('/');
+    //const navigate = useNavigate();
+    //navigate('/');
+    return (<Landing />);
 }
