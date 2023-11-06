@@ -9,7 +9,7 @@ from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from datetime import datetime, timezone, timedelta
 from flask_jwt_extended import JWTManager, get_jwt, create_access_token
-from flask_jwt_extended import set_access_cookies, unset_jwt_cookies, get_jwt_identity
+from flask_jwt_extended import set_access_cookies, get_jwt_identity
 
 
 app = Flask(__name__)
@@ -29,10 +29,11 @@ def not_found(e):
     """
     return make_response(jsonify({"error": "Not Found"}), 404)
 
+
 @app.after_request
 def refresh_expiring_jwts(response):
-    """Refreshes JSON Web Token before expiry
-    """
+    """Refreshes JSON Web Token before expiry"""
+    
     try:
         expiry_timestamp = get_jwt()["exp"]
         now = datetime.now(timezone.utc)
