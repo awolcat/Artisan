@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useNavigate} from 'react-router-dom';
 
-export default function Login() {
+export default function Login(props) {
     
     const [formData, setFormData] = useState({
         email: '',
@@ -10,6 +11,10 @@ export default function Login() {
     const [identity, setIdentity] = useState(null);
     
     const [loginType, setLoginType] = useState(null);
+
+    const navigate = useNavigate();
+
+    const setToken = props.setToken;
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -28,8 +33,8 @@ export default function Login() {
                 body: JSON.stringify(formData),  
             });
             const result = await response.json();
-            //setGlobalToken(result.access-token);
-            localStorage.setItem("access-token", result['access-token']);
+            setToken(result['access-token']);
+            //localStorage.setItem('token', result['access-token']);
         }
         catch (error) {
             console.log(error)

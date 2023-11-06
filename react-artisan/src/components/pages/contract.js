@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import useToken from '../useToken';
 
 export default function Contract() {
     const { serviceId, contractor_id } = useParams();
     const [ service, setService] = useState(null);
+    const {token} = useToken();
     const users = [1, 2, 3]; //Replace with real user_id in state
     const [ formData, setFormData] = useState({
                                         service_id: serviceId,
@@ -34,7 +36,7 @@ export default function Contract() {
             const response = await fetch('http://127.0.0.1:5000/api/v1/contracts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json',
-                          'Authorization': `Bearer ${localStorage.getItem('access-token')}`,},
+                          'Authorization': `Bearer ${token}`,},
                 body: JSON.stringify(formData),
             });
             const contractData = await response.json()
@@ -43,7 +45,8 @@ export default function Contract() {
                 //In the background, create a booking that the contractor will be able to accept or reject
                 const bookingResponse = await fetch('http://127.0.0.1:5000/api/v1/bookings', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: {'Content-Type': 'application/json',
+                              'Authorization': `Bearer ${token}`, },
                     body: JSON.stringify({
                         'user_id': contractData.user_id,
                         'contract_id': contractData.id,
@@ -71,11 +74,11 @@ export default function Contract() {
         details.push( <>
                     <h2>Book {service.name}</h2>
                     <h3>Description</h3>
-                    <p>{service.description}</p>
+                    <p key='contract_service_description'>{service.description}</p>
                 </>
                 );
     } else {
-        details.push(<p>Loading...</p>);
+        details.push(<p key='contract_loading'>Loading...</p>);
     }
     //const users = [1, 2, 3];
     if (service) {
@@ -90,12 +93,7 @@ export default function Contract() {
                 <input type='submit' value='Send Offer' />
             </form>
         );
-    } else if (service && service.status === 'unavailable') {
-        details.push(<p>This service is not currently available</p>);
-    }
-    if (localStorage.getItem('access-token') === null) {
-        <Navigate replace to='/login' />
-    }
+    } 
     return (
         <div className='contract-form'>
             { details }
