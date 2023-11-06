@@ -22,7 +22,6 @@ app.url_map.strict_slashes = False
 
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
-
 @app.errorhandler(404)
 def not_found(e):
     """
@@ -33,7 +32,6 @@ def not_found(e):
 @app.after_request
 def refresh_expiring_jwts(response):
     """Refreshes JSON Web Token before expiry"""
-    
     try:
         expiry_timestamp = get_jwt()["exp"]
         now = datetime.now(timezone.utc)

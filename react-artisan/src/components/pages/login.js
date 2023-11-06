@@ -22,14 +22,15 @@ export default function Login(props) {
             alert('Please indicate your role by clicking "Contractor" or ""Client')
         }
         const url = loginType === 'client' ? 'http://127.0.0.1:5000/login-user' : 'http://127.0.0.1:5000/login-contractor'; 
-        
+        const idUrl = loginType === 'client' ? 'http://127.0.0.1:5000/current_user' : 'http://127.0.0.1:5000/current_contractor'
         // Get user identity
         async function getIdentity() {
             try {
-                const response = await fetch('http://127.0.0.1:5000/current_user', {
+                const response = await fetch(idUrl, {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json',
-                              'Cookie': `access_token_cookie=${token}`,},
+                              'Cookie': `access_token_cookie=${token}`,
+                               },
                 });
                 const result = await response.json();
                 if (response.ok) {
