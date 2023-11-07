@@ -59,7 +59,6 @@ def protected_user():
     user_id = get_jwt_identity()
     user = User.query.filter_by(id=user_id).first()
     response = jsonify(user_schema.dump(user))
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 @app.route("/current_contractor", methods=["GET"])

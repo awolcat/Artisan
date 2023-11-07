@@ -13,8 +13,9 @@ export default function Login(props) {
 
     const navigate = useNavigate();
 
-    const {token, setToken, setIdentity} = props;
+    const {setToken, setIdentity} = props;
 
+    
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -23,14 +24,13 @@ export default function Login(props) {
         }
         const url = loginType === 'client' ? 'http://127.0.0.1:5000/login-user' : 'http://127.0.0.1:5000/login-contractor'; 
         const idUrl = loginType === 'client' ? 'http://127.0.0.1:5000/current_user' : 'http://127.0.0.1:5000/current_contractor'
+        
         // Get user identity
-        async function getIdentity() {
-            try {
+    // 'X-CSRF-TOKEN': csrfToken
+    async function getIdentity() {
+        try {
                 const response = await fetch(idUrl, {
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json',
-                              'Cookie': `access_token_cookie=${token}`,
-                               },
+                    headers: {'Authorization': localStorage.getItem('token'),},
                 });
                 const result = await response.json();
                 if (response.ok) {
@@ -40,9 +40,10 @@ export default function Login(props) {
             catch (error) {
                 alert(error);
             }
-        }
-        // Post request function
-        async function login() {
+    }
+
+    // Post request function
+    async function login() {
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -51,7 +52,9 @@ export default function Login(props) {
             });
             const result = await response.json();
             if (response.ok) {
-                setToken(result['access-token']);
+                const tok = 'Bearer' + ' ' + result['access-token'];
+                localStorage.setItem('token', tok);
+                setToken(localStorage.getItem('token'))
                 getIdentity();
             }
         }
