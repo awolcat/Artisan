@@ -20,7 +20,8 @@ jwt = JWTManager(app)
 migrate = Migrate(app, db)
 app.url_map.strict_slashes = False
 
-cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"},
+                            "/current_user": {"origins": "*"}})
 
 @app.errorhandler(404)
 def not_found(e):

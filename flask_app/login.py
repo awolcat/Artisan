@@ -7,7 +7,7 @@ from flask import jsonify, abort, request
 from models.users import User
 from models.contractors import Contractor
 from models.schemas import UserSchema, ContractorSchema
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, set_access_cookies
 from flask_jwt_extended import create_access_token, get_jwt_identity
 
 
@@ -32,6 +32,7 @@ def login_contractor():
         return jsonify({"message": "Wrong username or password"}), 401
     token = create_access_token(identity=contractor)
     response = jsonify({"access-token": token})
+    set_access_cookies(response, token)
     return response
 
 
@@ -46,16 +47,20 @@ def login_user():
         return jsonify({"message": "Wrong username or password"}), 401
     token = create_access_token(identity=user)
     response = jsonify({"access-token": token})
+    #set_access_cookies(response, token)
     return response
 
 
 @app.route("/current_user", methods=["GET"])
+@cross_origin()
 @jwt_required()
 def protected_user():
     user_schema = UserSchema()
     user_id = get_jwt_identity()
     user = User.query.filter_by(id=user_id).first()
-    return jsonify(user_schema.dump(user))
+    response = jsonify(user_schema.dump(user))
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route("/current_contractor", methods=["GET"])
 @jwt_required()
