@@ -32,7 +32,7 @@ def login_contractor():
         return jsonify({"message": "Wrong username or password"}), 401
     token = create_access_token(identity=contractor)
     response = jsonify({"access-token": token})
-    set_access_cookies(response, token)
+#    set_access_cookies(response, token)
     return response
 
 
