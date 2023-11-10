@@ -2,7 +2,7 @@
 #!/usr/bin/python3
 """This module defines a User class
 """
-from flask_app import db
+from flask_app import db, bcrypt
 from models.base import Base
 
 
@@ -26,6 +26,7 @@ class User(Base, db.Model):
 
     def check_password(self, password):
         """Checks if enetered password is correct"""
-        if self.password == password:
+        check = bcrypt.check_password_hash(self.password, password)
+        if check:
             return True
         return False

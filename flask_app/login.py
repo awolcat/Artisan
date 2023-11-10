@@ -7,7 +7,7 @@ from flask import jsonify, abort, request
 from models.users import User
 from models.contractors import Contractor
 from models.schemas import UserSchema, ContractorSchema
-from flask_jwt_extended import jwt_required, set_access_cookies
+from flask_jwt_extended import jwt_required
 from flask_jwt_extended import create_access_token, get_jwt_identity
 
 
@@ -24,7 +24,7 @@ def identity_lookup(user):
 @app.route('/login-contractor', methods=['POST'])
 @cross_origin()
 def login_contractor():
-    """Contractorenticates contractors for login"""
+    """Authenticates contractors for login"""
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     contractor = Contractor.query.filter_by(email=email).one_or_none()
@@ -38,7 +38,7 @@ def login_contractor():
 @app.route('/login-user', methods=['POST'])
 @cross_origin()
 def login_user():
-    """Userenticates users for login"""
+    """Authenticates users for login"""
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     user = User.query.filter_by(email=email).one_or_none()
@@ -60,9 +60,11 @@ def protected_user():
     return response
 
 @app.route("/current_contractor", methods=["GET"])
+@cross_origin()
 @jwt_required()
 def protected_contractor():
     contractor_schema = ContractorSchema()
     contractor_id = get_jwt_identity()
     contractor = Contractor.query.filter_by(id=contractor_id).first()
-    return jsonify(contractor_schema.dump(contractor))
+    response = jsonify(contractor_schema.dump(contractor))
+    return response

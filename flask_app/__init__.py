@@ -6,6 +6,7 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
+from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from datetime import datetime, timezone, timedelta
 from flask_jwt_extended import JWTManager, get_jwt, create_access_token
@@ -16,6 +17,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app, session_options={"autoflush": False})
 ma = Marshmallow(app)
+bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 migrate = Migrate(app, db)
 app.url_map.strict_slashes = False
@@ -39,7 +41,10 @@ def refresh_expiring_jwts(response):
         target_timestamp = datetime.timestamp(now + timedelta(hours=10))
         if target_timestamp > expiry_timestamp:
             token = create_access_token(identity=get_jwt_identity())
-           # set_access_cookies(response, token)
+            data = response.get_json()
+            if type(data) is dict:
+                data["access-token"] = token
+                response.data = json.dumps(data)
         return response
     except (RuntimeError, KeyError):
         return response
