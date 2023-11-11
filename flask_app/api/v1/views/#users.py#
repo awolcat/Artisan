@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
 """
-from flask_app import bcrypt
 from flask_app.api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.users import User
@@ -51,9 +50,9 @@ def update_user(user_id):
     data = request.get_json()
     if not data:
         abort(400, description='Not a JSON')
+
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
     data['password'] = hashed_password
-
     overlook = ['id', 'created_at', 'updated_at']
     for k, v in data.items():
         if k not in overlook:
