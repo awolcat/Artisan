@@ -10,6 +10,7 @@ export default function Login(props) {
     });
     
     const [loginType, setLoginType] = useState(null);
+    const loggedIn = false;
 
     //const navigate = useNavigate();
 
@@ -45,6 +46,7 @@ export default function Login(props) {
             const result = await response.json();
             const tok = 'Bearer' + ' ' + result['access-token'];
             localStorage.setItem('token', tok);
+            loggedIn =  response.ok ? true : false;
             //getIdentity();
             //console.log("TEMP", temp);
             //setIdentity(getIdentity());
@@ -63,7 +65,9 @@ export default function Login(props) {
             alert('Please indicate your role by clicking "Contractor" or ""Client')
         }
         await login();
-        await getIdentity();
+        if (loggedIn) {
+            await getIdentity();
+        }
         
         //loginType === 'client' ? navigate('/contractors') : navigate('/jobs')
     }
