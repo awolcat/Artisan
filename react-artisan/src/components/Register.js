@@ -3,8 +3,6 @@ import { useState } from "react";
 
 export default function Register() {
 
-    const [registerType, setRegisterType] = useState(null);
-
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -15,14 +13,16 @@ export default function Register() {
         phone_number: '',
         password: '',
     })
-    
+
+    const [role, setRole] = useState("");
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (registerType === null) {
+        if (role === null) {
             alert('Please indicate your role by clicking "Contractor" or ""Client')
         }
-        const url = registerType === 'client' ? 'http://127.0.0.1:5000/api/v1/users' : 'http://127.0.0.1:5000/api/v1/contractors'; 
+        const url = role === 'client' ? 'http://127.0.0.1:5000/api/v1/users' : 'http://127.0.0.1:5000/api/v1/contractors'; 
         
         // Post request function
         async function registrar() {
@@ -34,16 +34,19 @@ export default function Register() {
             });
             if (response.ok) {
                 alert('Registration Successful');
+            } else {
+                alert('Something went wrong while trying to sign you up, please try again');
             }
             
         }
         catch (error) {
             console.log(error)
+            alert('Something went wrong while trying to sign you up, please try again');
         }
         
     }
     registrar();
-    if (registerType) {
+    if (role) {
     navigate('/login');
     }
 }
@@ -54,7 +57,7 @@ export default function Register() {
     }
 
     const handleClick = (type) => {
-        setRegisterType(type);
+        setRole(type);
     }
     
     return (

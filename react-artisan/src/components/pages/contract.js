@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import useToken from '../useToken';
 
-export default function Contract() {
+
+export default function Contract(props) {
     const { serviceId, contractor_id } = useParams();
     const [ service, setService] = useState(null);
-    const {token} = useToken();
-    const users = [1, 2, 3]; //Replace with real user_id in state
+    //const {token, identity} = useToken();
+    const {token, identity, setUser} = props;
+    const navigate = useNavigate();
+
+    
     const [ formData, setFormData] = useState({
                                         service_id: serviceId,
                                         status: 'open',
-                                        user_id: users[Math.floor(Math.random() * 2)],
+                                        user_id: identity.id,
                                         description: '',
                                         end_date: '',
                                         start_date: '',
@@ -22,6 +25,21 @@ export default function Contract() {
         const data = await response.json();
         setService(data);
     }
+    //Get Identity and update App state
+    async function getIdentity() {
+        const idUrl = 'http://127.0.0.1:5000/current_user';
+                const response = await fetch(idUrl, {
+                    headers: {'Authorization': localStorage.getItem('token'),},
+                });
+                const result = await response.json();
+                setUser({token: localStorage.getItem('token'), obj: result});
+                //return (result)
+                //console.log("CURRENT_USER", result);
+         /*   }
+            catch (error) {
+                alert('Something went wrong while logging you in. Try again');
+            }*/
+    }
 
     //handle change in form data
     const handleChange = (event) => {
@@ -29,7 +47,7 @@ export default function Contract() {
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         
         async function submitContract() {
@@ -41,7 +59,6 @@ export default function Contract() {
             });
             const contractData = await response.json()
             if (response.status === 200) {
-                console.log('contract sent');
                 //In the background, create a booking that the contractor will be able to accept or reject
                 const bookingResponse = await fetch('http://127.0.0.1:5000/api/v1/bookings', {
                     method: 'POST',
@@ -57,14 +74,17 @@ export default function Contract() {
                         }),             
                     });
                 if (bookingResponse.status === 200) {
+                    await getIdentity(); //Unique value to update App state
                     alert(`A request for: ${service.name} was sent ${formData.description}`);
+                    navigate('/my_profile');
                 } else {
                     alert('error');
                 }
             }
         }
 
-        submitContract();
+        await submitContract();
+        
     }
 
     useEffect(() => { getService(serviceId);}, [serviceId]); //Get service_offer data
@@ -80,7 +100,7 @@ export default function Contract() {
     } else {
         details.push(<p key='contract_loading'>Loading...</p>);
     }
-    //const users = [1, 2, 3];
+
     if (service) {
         details.push(
             <form onSubmit={handleSubmit}>

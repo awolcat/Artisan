@@ -31,7 +31,7 @@ export default function Contractors() {
     useEffect(() => { fetchData(); }, []);
 
     return (
-        <div className="contractors">
+        <div className="contractors" key='contractors'>
             {rows}
         </div>
     );
