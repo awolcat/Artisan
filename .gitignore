@@ -1,7 +1,7 @@
 react-artisan/node_modules/*
 react-artisan/node_modules/.bin/*
 react-artisan/public/robots.txt
+venv-artisan/*
 flask_app/*~
 __pycache__/
 env/*
-venv-artisan/
