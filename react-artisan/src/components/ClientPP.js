@@ -1,10 +1,101 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+
 export default function ClientPP(props) {
-    const {identity} = props;
+    const {identity, setUser} = props;
+    const [services, setServices] = useState(null);
+    const bookings = [];
+
+    async function fetchServices() {
+        const response = await fetch('http://127.0.0.1:5000/api/v1/services/');
+        const data = await response.json();
+        setServices(data);
+    }
+
+    useEffect(() => { fetchServices() }, []);
+
+    function getService(id) {
+        for (const service of services.services) {
+            if (service.id === id) {
+                return (service)
+            }
+        }
+    }
+
+     // Get user identity
+    // 'X-CSRF-TOKEN': csrfToken
+    async function getIdentity() {
+        const idUrl = 'http://127.0.0.1:5000/current_user';
+        
+                const response = await fetch(idUrl, {
+                    headers: {'Authorization': localStorage.getItem('token'),},
+                });
+                const result = await response.json();
+                setUser({token: localStorage.getItem('token'), obj: result});
+                //return (result)
+                //console.log("CURRENT_USER", result);
+         /*   }
+            catch (error) {
+                alert('Something went wrong while logging you in. Try again');
+            }*/
+    }
+
+
+    async function handleDelete(contract) {
+        try {
+            const url = 'http://127.0.0.1:5000/contracts/' + contract;
+            const response = await fetch(url, {
+                method: 'DELETE',
+        });
+        await getIdentity();
+        }
+        catch (error) {
+            alert('Could not delete');
+        }
+        
+    }
+    
+    if (services) {
+        identity.contracts.forEach((contract) => {
+            identity.bookings.forEach((booking) => {
+                if (contract.id === booking.contract_id) {
+                    const service = getService(booking.service_id);
+                    bookings.push(
+                        <tr>
+                            <td>{booking.booking_date.split('T')[0]}</td> 
+                            <td>{service.name}</td> 
+                            <td>{contract.budget}</td>
+                            <td><Link to={'/contractors/' + booking.contractor_id}>Contractor</Link></td> 
+                            <td>{booking.status}</td>
+                            <td><button onClick={() => {handleDelete(contract.id)}}>Delete</button></td>
+                        </tr>
+                    )
+                }
+            })
+        });
+    }
+    
+
 
     return (
-        <>
-            <h4><small>Client Name:</small> {identity.first_name + ' ' + identity.last_name}</h4>
-        </>
+        <div className='booking-details'>
+            <h2>Bookings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Booking Date</th>
+                        <th>Service</th>
+                        <th>Budget</th>
+                        <th></th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {bookings}
+                </tbody>
+            </table>
+        </div>
     );
 
     
