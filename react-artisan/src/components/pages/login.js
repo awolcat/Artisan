@@ -40,13 +40,17 @@ export default function Login(props) {
         try {
             const response = await fetch(url, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
                 body: JSON.stringify(formData),  
             });
             const result = await response.json();
             const tok = 'Bearer' + ' ' + result['access-token'];
             localStorage.setItem('token', tok);
             loggedIn =  response.ok ? true : false;
+            if (response.ok) {
+                loggedIn = true;
+                alert('Wrong username or password');
+            }
             //getIdentity();
             //console.log("TEMP", temp);
             //setIdentity(getIdentity());
