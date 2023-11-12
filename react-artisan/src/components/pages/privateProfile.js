@@ -5,8 +5,9 @@ export default function PrivateProfile(props) {
     const { identity, setUser } = props;
     const rows = [];
 
-    
-    const role = identity?.services || identity?.services.length === 0 ? 'contractor' : 'client' 
+    const service = identity?.services;
+    const role = service === undefined ? 'client' : 'contractor'
+    console.log(role);
 
     if (role === 'client') {
         rows.push(<ClientPP identity={identity} setUser={setUser}/>);
