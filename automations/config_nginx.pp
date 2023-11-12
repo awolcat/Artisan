@@ -4,14 +4,6 @@ package { 'nginx':
   ensure => installed,
 }
 
-service { 'nginx':
-  ensure     => running,
-  enable     => true,
-  hasstatus  => true,
-  hasrestart => true,
-  require    => Package['nginx'],
-}
-
 exec { 'checK_status':
   command => 'systemctl status nginx; curl -4 icanhazip.com',
   path    => '/usr/bin:/usr/sbin:/bin:/sbin',
@@ -59,7 +51,7 @@ file { '/etc/nginx/sites-available/myartisan.works':
         listen [::]:80 default_server;
 
         root /var/www/myartisan.works/html;
-        index index.html index.htm index.nginx-debian.html;
+        index index.html index.htm;
 
         server_name myartisan.works www.myartisan.works;
 
@@ -73,5 +65,25 @@ file { '/etc/nginx/sites-available/myartisan.works':
 file {'/etc/nginx/sites-enabled/myartisan.works':
   ensure  => link,
   target  => '/etc/nginx/sites-available/myartisan.works',
-  require => File['/etc/nginx/sites-available/myartisan.works']
+  require => File['/etc/nginx/sites-available/myartisan.works'],
+}
+
+file { '/etc/nginx/sites-enabled/default':
+  ensure => absent,
+  notify => Service['nginx'],
+}
+
+exec { 'test_nginx_configuration':
+  command => 'sudo nginx -t',
+  path    => '/usr/sbin:/usr/bin:/sbin:/bin',
+  logoutput => true,
+  notify  => Service['nginx'],
+}
+
+service { 'nginx':
+  ensure     => running,
+  enable     => true,
+  hasstatus  => true,
+  hasrestart => true,
+  require    => Package['nginx'],
 }
