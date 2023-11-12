@@ -22,7 +22,6 @@ def identity_lookup(user):
     return user.id
 
 @app.route('/login-contractor', methods=['POST'])
-@cross_origin()
 def login_contractor():
     """Authenticates contractors for login"""
     email = request.json.get("email", None)
@@ -36,7 +35,6 @@ def login_contractor():
 
 
 @app.route('/login-user', methods=['POST'])
-@cross_origin()
 def login_user():
     """Authenticates users for login"""
     email = request.json.get("email", None)
@@ -50,7 +48,6 @@ def login_user():
 
 
 @app.route("/current_user", methods=["GET"])
-@cross_origin()
 @jwt_required()
 def protected_user():
     user_schema = UserSchema()
@@ -60,7 +57,6 @@ def protected_user():
     return response
 
 @app.route("/current_contractor", methods=["GET"])
-@cross_origin()
 @jwt_required()
 def protected_contractor():
     contractor_schema = ContractorSchema()

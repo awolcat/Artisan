@@ -10,5 +10,5 @@ class Config(object):
         'mysql://root:artisan_db_pwd@localhost/artisan_db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = "ARTISAN_2023_SECRET_TOKEN"
-#    JWT_TOKEN_LOCATION = ["cookies"]
+    CORS_HEADERS = 'Content-Type'
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24)
