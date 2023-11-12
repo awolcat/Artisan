@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -25,7 +25,33 @@ function App() {
   const [user, setUser] = useState({token: null,
   obj: null,});
 
-  //const [user, setUser] = useState(null);
+  async function getIdentity() {
+    
+        try {
+          const role = localStorage.getItem('role');
+          let url = '';
+          if (role === 'client') {
+            url = 'http://127.0.0.1:5000/current_user';
+          } else if (role === 'contractor') {
+            url = 'http://127.0.0.1:5000/current_contractor';
+          } else {
+            throw EvalError
+          }
+          const response = await fetch(url, {
+              headers: {'Authorization': localStorage.getItem('token'),},
+          });
+          const result = await response.json();
+          setUser({token: localStorage.getItem('token'), obj: result});
+          //return (result)
+          //console.log("CURRENT_USER", result);
+          }
+        catch (error) {
+          setUser({token: null, obj: null});
+        }
+      }
+
+
+  useEffect(() => {getIdentity()}, []);
   
   console.log("APP ", user.token);
   console.log("APP ", user.obj);

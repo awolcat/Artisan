@@ -59,7 +59,7 @@ export default function ContractorPP(props) {
     }
     
     async function handleResponse(response, id) {
-        let obj = {status: ''};
+        let obj = {'status': ''};
         if (response === 'accept') {
             obj.status = 'accepted';
         } else {

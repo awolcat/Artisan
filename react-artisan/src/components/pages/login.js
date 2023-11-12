@@ -46,6 +46,7 @@ export default function Login(props) {
             const result = await response.json();
             const tok = 'Bearer' + ' ' + result['access-token'];
             localStorage.setItem('token', tok);
+            localStorage.setItem('role', loginType);
             loggedIn =  response.ok ? true : false;
             if (response.ok) {
                 loggedIn = true;
