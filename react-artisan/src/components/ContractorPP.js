@@ -66,7 +66,7 @@ export default function ContractorPP(props) {
             obj.status = 'rejected';  
         }
         try {
-            const url = 'http://127.0.0.1:5000/bookings/' + id;
+            const url = 'http://127.0.0.1:5000/api/v1/bookings/' + id;
             const response = await fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify(obj),

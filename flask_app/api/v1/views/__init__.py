@@ -2,6 +2,7 @@
 """Create a blueprint for API
 """
 from flask import Blueprint
+from flask_cors import CORS
 
 app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
 

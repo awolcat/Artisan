@@ -42,7 +42,6 @@ def post_booking():
     return booking_schema.jsonify(booking)
     
 @app_views.route('/bookings/<booking_id>', methods=['PUT'])
-@cross_origin()
 def update_booking(booking_id):
     """Updates a booking by id"""
     booking = Booking.query.get(booking_id)
