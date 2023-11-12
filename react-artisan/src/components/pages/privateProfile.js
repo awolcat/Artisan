@@ -4,10 +4,7 @@ import ClientPP from "../ClientPP";
 export default function PrivateProfile(props) {
     const { identity, setUser } = props;
     const rows = [];
-
-    const service = identity?.services;
-    const role = service === undefined ? 'client' : 'contractor'
-    console.log(role);
+    const role = localStorage.getItem('role');
 
     if (role === 'client') {
         rows.push(<ClientPP identity={identity} setUser={setUser}/>);

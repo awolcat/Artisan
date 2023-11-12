@@ -43,7 +43,7 @@ export default function ContractorPP(props) {
     // Get user identity
     // 'X-CSRF-TOKEN': csrfToken
     async function getIdentity() {
-        const idUrl = 'http://127.0.0.1:5000/current_user';
+        const idUrl = 'http://127.0.0.1:5000/current_contractor';
         
                 const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token'),},
@@ -58,17 +58,18 @@ export default function ContractorPP(props) {
             }*/
     }
     
-    async function handleResponse(response, id) {
+    async function handleResponse(answer, id) {
         let obj = {'status': ''};
-        if (response === 'accept') {
-            obj.status = 'accepted';
-        } else {
+        if (answer === 'confirm') {
+            obj.status = 'confirmed';
+        } else if (answer === 'reject') {
             obj.status = 'rejected';  
         }
         try {
-            const url = 'http://127.0.0.1:5000/bookings/' + id;
+            const url = 'http://127.0.0.1:5000/api/v1/bookings/' + id;
             const response = await fetch(url, {
                 method: 'PUT',
+                headers: {'Content-type': 'application/json; charset=UTF-8'},
                 body: JSON.stringify(obj),
             });
             await getIdentity();
@@ -85,7 +86,6 @@ export default function ContractorPP(props) {
         identity.bookings.forEach((booking) => {
             const contract = booking?.contract_id ? getContract(booking.contract_id) : {budget: 'invalid'};
             const service = getService(booking.service_id);
-            console.log("Contract", contract);
             bookings.push(
                 <tr>
                     <td>{booking.booking_date.split('T')[0]}</td>

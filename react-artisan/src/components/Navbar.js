@@ -8,7 +8,7 @@ export default function Navbar(props) {
   function  handleClick(link) {
     setCurrent(link);
   }
-  console.log("NAVBAR ", token)
+
   return (
     <div className='navbar'>
       <Link to='/' onClick={() => {handleClick('landing')}}

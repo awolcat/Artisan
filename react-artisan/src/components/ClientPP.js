@@ -47,6 +47,7 @@ export default function ClientPP(props) {
             const url = 'http://127.0.0.1:5000/contracts/' + contract;
             const response = await fetch(url, {
                 method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
         });
         await getIdentity();
         }

@@ -53,9 +53,6 @@ function App() {
 
   useEffect(() => {getIdentity()}, []);
   
-  console.log("APP ", user.token);
-  console.log("APP ", user.obj);
-  
   return (
     <Router>
       <Navbar token={user.token} />
