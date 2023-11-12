@@ -2,6 +2,7 @@
 """
 """
 from flask import abort, jsonify, request
+from flask_cors import cross_origin
 from flask_app.api.v1.views import app_views
 from models.bookings import Booking
 from models.schemas import BookingSchema
@@ -41,6 +42,7 @@ def post_booking():
     return booking_schema.jsonify(booking)
     
 @app_views.route('/bookings/<booking_id>', methods=['PUT'])
+@cross_origin()
 def update_booking(booking_id):
     """Updates a booking by id"""
     booking = Booking.query.get(booking_id)

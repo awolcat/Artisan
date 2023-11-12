@@ -60,6 +60,7 @@ class BookingSchema(ma.SQLAlchemyAutoSchema):
 class ContractorSchema(ma.SQLAlchemyAutoSchema):
     """Generate Contractor model schema
     """
+    bookings = ma.Nested(BookingSchema, many=True)
     service_offers = ma.Nested(ServiceOfferSchema, many=True, exclude=('contractor_id',))
     services = ma.Nested("ServiceSchema", many=True, exclude=('contractors',))
     porfolios = ma.Nested("PortfolioSchema")

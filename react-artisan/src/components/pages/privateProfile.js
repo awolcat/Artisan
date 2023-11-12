@@ -5,12 +5,13 @@ export default function PrivateProfile(props) {
     const { identity, setUser } = props;
     const rows = [];
 
-    const role = identity?.services ? 'contractor' : 'client' 
+    
+    const role = identity?.services || identity?.services.length === 0 ? 'contractor' : 'client' 
 
     if (role === 'client') {
         rows.push(<ClientPP identity={identity} setUser={setUser}/>);
     } else if (role === 'contractor') {
-        rows.push(<ContractorPP identity={identity}/>);
+        rows.push(<ContractorPP identity={identity} setUser={setUser}/>);
     }
 
     return (

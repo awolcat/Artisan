@@ -10,9 +10,9 @@ export default function Login(props) {
     });
     
     const [loginType, setLoginType] = useState(null);
-    const loggedIn = false;
+    let loggedIn = false;
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const {setUser} = props;
 
@@ -49,6 +49,7 @@ export default function Login(props) {
             loggedIn =  response.ok ? true : false;
             if (response.ok) {
                 loggedIn = true;
+            } else {
                 alert('Wrong username or password');
             }
             //getIdentity();
@@ -71,6 +72,7 @@ export default function Login(props) {
         await login();
         if (loggedIn) {
             await getIdentity();
+            navigate('/');
         }
         
         //loginType === 'client' ? navigate('/contractors') : navigate('/jobs')

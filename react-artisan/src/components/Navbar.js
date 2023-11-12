@@ -16,7 +16,9 @@ export default function Navbar(props) {
       <Link to='/about' onClick={() => {handleClick('about')}}
       className={current === 'about' ? 'currentLink' : ''}>About</Link>
       {token === null || !token || token === '' || token === undefined ? 
-      <Link to='/register' onClick={() => {handleClick('register')}} className={current === 'register' ? 'currentLink' : ''}>Register</Link> : 
+      <><Link to='/register' onClick={() => {handleClick('register')}} className={current === 'register' ? 'currentLink' : ''}>Register</Link> 
+      <Link to='/login' onClick={() => {handleClick('login')}} className={current === 'login' ? 'currentLink' : ''}>Log In</Link> 
+      </>:
       <Link to='/logout' >Log Out</Link>}
       {token === null || !token || token === '' || token === undefined ? '' : <Link to='my_profile' onClick={() => {handleClick('profile')}} className={current === 'profile' ? 'currentLink' : ''}>Profile</Link> }      
     </div>
