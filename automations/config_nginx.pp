@@ -70,6 +70,7 @@ file {'/etc/nginx/sites-enabled/myartisan.works':
   require => File['/etc/nginx/sites-available/myartisan.works'],
 }
 
+#delete default symlink
 file { '/etc/nginx/sites-enabled/default':
   ensure => absent,
   notify => Service['nginx'],
@@ -79,6 +80,12 @@ exec { 'test_nginx_configuration':
   command => 'nginx -t',
   path    => '/usr/sbin:/usr/bin:/sbin:/bin',
   logoutput => true,
+  notify  => Service['nginx'],
+}
+
+augeas { 'add_x_served_by':
+  context => '/files/etc/nginx/sites-available/myartisan.works',
+  changes => "ins directive after listen[. = '80 default_server'] postion(last())\nset directive 'add_header X-Served-By $hostname'",
   notify  => Service['nginx'],
 }
 
