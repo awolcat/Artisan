@@ -16,6 +16,7 @@ sudo sed -i '/bind \*:80/a \ \ mode http' /etc/haproxy/haproxy.cfg
 sudo sed -i '/mode http/a \ \ default_backend web_backend' /etc/haproxy/haproxy.cfg
 sudo sed -i '/default_backend web_backend/a backend web_backend' /etc/haproxy/haproxy.cfg
 sudo sed -i '/^backend web_backend$/a \ \ balance roundrobin' /etc/haproxy/haproxy.cfg
-sudo sed -i '/balance roundrobin/a \ \ server artisan-01 174.138.88.103 check' /etc/haproxy/haproxy.cfg
-sudo sed -i '/server artisan-01 174.138.88.103 check/a \ \ server artisan-02 174.138.88.222' /etc/haproxy/haproxy.cfg
+sudo sed -i '/balance roundrobin/a \ \ server artisan-01 174.138.88.103:80 check' /etc/haproxy/haproxy.cfg
+sudo sed -i '/server artisan-01 174.138.88.103:80 check/a \ \ server artisan-02 174.138.88.222:80' /etc/haproxy/haproxy.cfg
+haproxy -c -f /etc/haproxy/haproxy.cfg
 sudo systemctl restart haproxy.service
