@@ -51,8 +51,9 @@ file { '/etc/nginx/sites-available/myartisan.works':
   "server {
         listen 80 default_server;
         listen [::]:80 default_server;
-
-        root /var/www/myartisan.works/html;
+	add_header X-Served-By $hostname;
+        
+	root /var/www/myartisan.works/html;
         index index.html index.htm;
 
         server_name myartisan.works www.myartisan.works;
@@ -81,16 +82,6 @@ exec { 'test_nginx_configuration':
   path        => '/usr/sbin:/usr/bin:/sbin:/bin',
   logoutput   => true,
   notify      => Service['nginx'],
-}
-
-augeas { 'add_x_served_by':
-  context => '/files/etc/nginx/sites-available/myartisan.works',
-  changes => [
-    "ins directive after listen[. = '80 default_server'] postion(last())",
-    "set directive 'add_header X-Served-By $hostname'",
-  ],
-  onlyif  => "match listen[. = '80 default_server'] size > 0",
-  notify  => Service['nginx'],
 }
 
 service { 'nginx':
