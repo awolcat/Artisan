@@ -5,6 +5,8 @@ sudo apt-get install --no-install-recommends software-properties-common -y
 sudo add-apt-repository ppa:vbernat/haproxy-2.4 -y
 sudo apt-get install haproxy=2.4.\* -y
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
+
+sudo sed -i 's/ENABLED=.*/ENABLED=1/' /etc/default/haproxy
 sudo sed -i -e '\#errorfile 504 /etc/haproxy/errors/504.http# {
    a\
 \nfrontend http
