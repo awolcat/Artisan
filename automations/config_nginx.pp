@@ -1,32 +1,34 @@
 # configures nginx for artisan with puppet
 
+$user = $facts['user']
+
 package { 'nginx':
   ensure => installed,
 }
 
-exec { 'checK_status':
+exec { 'check_status':
   command => 'systemctl status nginx; curl -4 icanhazip.com',
   path    => '/usr/bin:/usr/sbin:/bin:/sbin',
   require => Service['nginx']
 }
 
 exec { 'create_artisan_folder':
-  command => 'sudo mkdir /var/www/myartisan.works/html',
+  command => 'mkdir -p /var/www/myartisan.works/html',
   path    => '/usr/bin:/usr/sbin:/bin:/sbin',
 }
 
 file { '/var/www/myartisan.works/html':
   ensure  => directory,
   recurse => true,
-  owner   => $::user,
-  group   => $::user,
+  owner   => $user,
+  group   => $user,
   require => Exec['create_artisan_folder'],
 }
 
 file { '/var/www':
   ensure  => directory,
   recurse => true,
-  mode    => 0755,
+  mode    => '0755',
 }
 
 file { '/var/www/myartisan.works/html/index.html':
@@ -74,7 +76,7 @@ file { '/etc/nginx/sites-enabled/default':
 }
 
 exec { 'test_nginx_configuration':
-  command => 'sudo nginx -t',
+  command => 'nginx -t',
   path    => '/usr/sbin:/usr/bin:/sbin:/bin',
   logoutput => true,
   notify  => Service['nginx'],
