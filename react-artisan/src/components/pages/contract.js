@@ -12,7 +12,7 @@ export default function Contract(props) {
     
     const [ formData, setFormData] = useState({
                                         service_id: serviceId,
-                                        status: 'open',
+                                        status: 'pending',
                                         user_id: identity.id,
                                         description: '',
                                         end_date: '',

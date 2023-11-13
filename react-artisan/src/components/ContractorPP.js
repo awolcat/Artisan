@@ -7,6 +7,34 @@ export default function ContractorPP(props) {
 
     const bookings = [];
     const myServices = [];
+    //form data to add a service as a contractor
+    const [ formData, setFormData] = useState({
+        name: '',
+        description: '',
+        });
+    
+    //handle change in form data
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    }
+
+    //submit form data
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        
+        async function submitContract() {
+            const response = await fetch('http://127.0.0.1:5000/api/v1/services', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({'contractor': identity,
+                                      'name': formData.name,
+                                      'description': formData.description}),
+            });
+        }
+        await submitContract();
+    }
+
 
     async function fetchServices() {
         const response = await fetch('http://127.0.0.1:5000/api/v1/services/');
@@ -58,7 +86,7 @@ export default function ContractorPP(props) {
             }*/
     }
     
-    async function handleResponse(answer, id) {
+    async function handleResponse(answer, contract, booking) {
         let obj = {'status': ''};
         if (answer === 'confirm') {
             obj.status = 'confirmed';
@@ -66,12 +94,20 @@ export default function ContractorPP(props) {
             obj.status = 'rejected';  
         }
         try {
-            const url = 'http://127.0.0.1:5000/api/v1/bookings/' + id;
+            const url = 'http://127.0.0.1:5000/api/v1/contracts/' + contract;
             const response = await fetch(url, {
                 method: 'PUT',
                 headers: {'Content-type': 'application/json; charset=UTF-8'},
                 body: JSON.stringify(obj),
             });
+            if (response.ok) {
+                const url = 'http://127.0.0.1:5000/api/v1/bookings/' + booking;
+                const res = await fetch(url, {
+                method: 'PUT',
+                headers: {'Content-type': 'application/json; charset=UTF-8'},
+                body: JSON.stringify(obj),
+            });
+            }
             await getIdentity();
             if (!response.ok) {
                 alert('Something went wrong. Try again later');
@@ -92,7 +128,7 @@ export default function ContractorPP(props) {
                     <td>{service.name}</td>
                     <td>{contract.budget}</td>
                     <td>{booking.status}</td>
-                    {booking.status === 'pending' ? <><td><button onClick={() => handleResponse('confirm', booking.id)}>Confirm</button> <button onClick={() => handleResponse('reject', booking.id)}>Reject</button></td></> : ''}
+                    {booking.status === 'pending' ? <><td><button onClick={() => handleResponse('confirm', contract.id, booking.id)}>Confirm</button> <button onClick={() => handleResponse('reject', contract.id, booking.id)}>Reject</button></td></> : ''}
                     {booking.status === 'confirmed' ? <td><button type="button" disabled>Confirmed &#x2713;</button></td> : ''}
                     {booking.status === 'rejected' ? <td><button type="button" disabled>Rejected </button></td> : ''}
                     {booking.status === 'completed' ? <td><button type="button" disabled>Completed &#x2713;</button></td> : ''} 
@@ -132,6 +168,20 @@ export default function ContractorPP(props) {
                     {bookings}
                 </tbody>
             </table>
+            <h2>Create An Offer</h2>
+            <form onSubmit={handleSubmit} className='contractor-add-service'>
+                <label htmlFor='name'>Service</label>
+                <select id="name" name="name" value={formData.name} onChange={handleChange}>
+                    <option value="Carpentry">Carpentry</option>
+                    <option value="Electrical Wiring">Electrical Wiring</option>
+                    <option value="Appliances Repair">Appliances Repair</option>
+                    <option value="Painting">Painting</option>
+                    <option value='Plumbing'>Plumbing</option>
+                </select>
+                <label htmlFor='description'>Description </label>
+                <input type='text' name='description' value={formData.description} onChange={handleChange}/>
+                <input type='submit' value='Add Service' />
+            </form>
         </div>
     );
 

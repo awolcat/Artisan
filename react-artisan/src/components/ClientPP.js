@@ -42,13 +42,22 @@ export default function ClientPP(props) {
     }
 
 
-    async function handleDelete(contract) {
+    async function handleComplete(contract, booking ) {
         try {
-            const url = 'http://127.0.0.1:5000/contracts/' + contract;
+            const url = 'http://127.0.0.1:5000/api/v1/contracts/' + contract;
             const response = await fetch(url, {
-                method: 'DELETE',
+                method: 'PUT',
+                body: JSON.stringify({'status': 'completed'}),
                 headers: {'Content-Type': 'application/json'},
         });
+        if (response.ok) {
+            const bkurl = 'http://127.0.0.1:5000/api/v1/bookings/' + booking;
+            const res = await fetch(bkurl, {
+                method: 'PUT',
+                body: JSON.stringify({'status': 'completed'}),
+                headers: {'Content-Type': 'application/json'}
+            });
+        }
         await getIdentity();
         }
         catch (error) {
@@ -69,7 +78,7 @@ export default function ClientPP(props) {
                             <td>{contract.budget}</td>
                             <td><Link to={'/contractors/' + booking.contractor_id}>Contractor</Link></td> 
                             <td>{booking.status}</td>
-                            <td><button onClick={() => {handleDelete(contract.id)}}>Delete</button></td>
+                            { booking.status === 'confirmed' | booking.status === 'accepted' ? <td><button onClick={() => {handleComplete(contract.id, booking.id)}}>Mark Complete</button></td> : '' }
                         </tr>
                     )
                 }
