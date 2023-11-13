@@ -32,12 +32,14 @@ def post_service():
     data = request.get_json()
     if not data:
         abort(400, description='Not a JSON')
-    required = ['name', 'description', 'contractors']
+    required = ['name', 'description', 'contractor']
     for field in required:
         if field not in data:
             abort(400, description=f"Missing {field}")
+    contractor = data.pop('contractor')
     service = Service(**data)
     service.new()
+    service.contractors.append(contractor)
     service.save()
     return service_schema.jsonify(service)
     
