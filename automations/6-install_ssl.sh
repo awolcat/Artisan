@@ -4,6 +4,7 @@
 if [ $# -ne 1 ]
 then
     echo "USAGE: install_ssl domain name (must have a valid A record to this server)"
+    exit
 fi
 
 sudo apt install certbot python3-certbot-nginx
