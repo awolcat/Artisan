@@ -77,15 +77,19 @@ file { '/etc/nginx/sites-enabled/default':
 }
 
 exec { 'test_nginx_configuration':
-  command => 'nginx -t',
-  path    => '/usr/sbin:/usr/bin:/sbin:/bin',
-  logoutput => true,
-  notify  => Service['nginx'],
+  command     => 'nginx -t',
+  path        => '/usr/sbin:/usr/bin:/sbin:/bin',
+  logoutput   => true,
+  notify      => Service['nginx'],
 }
 
 augeas { 'add_x_served_by':
   context => '/files/etc/nginx/sites-available/myartisan.works',
-  changes => "ins directive after listen[. = '80 default_server'] postion(last())\nset directive 'add_header X-Served-By $hostname'",
+  changes => [
+    "ins directive after listen[. = '80 default_server'] postion(last())",
+    "set directive 'add_header X-Served-By $hostname'",
+  ],
+  onlyif  => "match listen[. = '80 default_server'] size > 0",
   notify  => Service['nginx'],
 }
 
