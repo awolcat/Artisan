@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 """
+import json
 from flask import abort, jsonify, request
 from flask_app.api.v1.views import app_views
 from models.services import Service
@@ -31,7 +32,7 @@ def post_service():
     data = request.get_json()
     if not data:
         abort(400, description='Not a JSON')
-    required = ['user_id', 'contractor_id']
+    required = ['name', 'description', 'contractors']
     for field in required:
         if field not in data:
             abort(400, description=f"Missing {field}")
