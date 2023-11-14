@@ -60,7 +60,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Landing />} />
         <Route path='/about' element={<About />} />
-        <Route path='/jobs' element={<Jobs identity={user.obj}/>} />
+        <Route path='/jobs' element={<Jobs identity={user.obj} setUser={setUser}/>} />
         <Route path='/contractors' element={<Contractors />} />
         <Route path='/contractors/:id' element={<Profile identity={user}/>}/>
         <Route path='/service/:serviceId/contract/:contractor_id' element={user.token ? <Contract token={user.token} identity={user.obj} setUser={setUser}/> : <Login setUser={setUser} />} />

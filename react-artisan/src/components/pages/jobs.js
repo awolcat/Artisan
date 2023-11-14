@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function Jobs(props) {
     const [openContracts, setOpenContracts] = useState(null);
-    const {identity} = props;
+    const {identity, setUser} = props;
     const [services, setServices] = useState(null);
     
     async function getOpenContracts() {
@@ -45,10 +45,29 @@ export default function Jobs(props) {
             }
     }
 
+    // Get user identity
+    // 'X-CSRF-TOKEN': csrfToken
+    async function getIdentity() {
+        const idUrl = 'http://127.0.0.1:5000/current_contractor';
+        
+                const response = await fetch(idUrl, {
+                    headers: {'Authorization': localStorage.getItem('token'),},
+                });
+                const result = await response.json();
+                setUser({token: localStorage.getItem('token'), obj: result});
+                //return (result)
+                //console.log("CURRENT_USER", result);
+         /*   }
+            catch (error) {
+                alert('Something went wrong while logging you in. Try again');
+            }*/
+    }
+
     async function handleClick(contract) {
         alert(`You are about to claim a contract that starts ${contract.start_date}`);
         await bookJob(contract);
-        alert('Success!')
+        alert('Success!');
+        await getIdentity();
     }
     
     async function getServices() {
