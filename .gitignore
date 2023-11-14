@@ -6,3 +6,4 @@ flask_app/*~
 __pycache__/
 env/*
 automations/load_balancer/ssl_myartisan.works/
+config.py
