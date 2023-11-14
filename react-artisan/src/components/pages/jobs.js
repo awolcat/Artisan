@@ -57,9 +57,9 @@ export default function Jobs(props) {
         const data = await response.json()
         setServices(data)
     }
-/*
+
     useEffect(() => {getServices()}, []);
-*/
+
     function getService(id) {
         for (const service of services.services) {
             if (service.id === id) {
@@ -70,9 +70,9 @@ export default function Jobs(props) {
 
     const rows = [];
 
-    if (openContracts) {
+    if (openContracts && services) {
         openContracts.forEach((contract) => {
-            //const service = getService(contract.service_id)
+            const service = getService(contract.service_id)
             console.log("SERVICEID", contract.service_id)
             rows.push(
                 <div className="job" key={contract.id}>
@@ -80,6 +80,7 @@ export default function Jobs(props) {
                         <img alt="job description" src="https://placehold.co/600x400/png" />
                     </div>
                     <div className="job-details">
+                        <p>{service.name}</p>
                         <p>{contract.description}</p>
                         <p>{contract.budget}</p>
                         <p>{contract.status}</p>

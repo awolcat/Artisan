@@ -2,9 +2,10 @@ import {useParams, Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 
 
-export default function Profile() {
+export default function Profile(props) {
     const { id } = useParams(); // Get contractor_id from parameters
     const [data, setData] = useState(null); //data refers to contractor
+    const {identity} = props;
 
     //fetch contractor data
     async function fetchData() {
@@ -22,8 +23,9 @@ export default function Profile() {
             services.push(
                 <div className='service' key={service.id}>
                     <p key={service.id}>{service.name}</p>
+                    <p>{service.description}</p>
                     
-                    <Link to={'/service/' + service.id + '/contract/' + id }>Book</Link>
+                    {identity?.services ? <Link to={'/service/' + service.id + '/contract/' + id }>Book</Link> : ''}
                 </div>
             );
         });

@@ -119,7 +119,7 @@ export default function ContractorPP(props) {
         }
     }
 
-    if (contracts && services) {
+    if (contracts && services && identity?.bookings) {
         identity.bookings.forEach((booking) => {
             const contract = booking?.contract_id ? getContract(booking.contract_id) : {budget: 'invalid'};
             const service = getService(booking.service_id);
