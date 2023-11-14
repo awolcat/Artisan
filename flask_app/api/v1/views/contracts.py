@@ -31,7 +31,7 @@ def post_contract():
     data = request.get_json()
     if not data:
         abort(400, description='Not a JSON')
-    required = ['user_id', 'budget', 'start_date', 'end_date']
+    required = ['service_id', 'user_id', 'budget', 'start_date', 'end_date']
     for field in required:
         if field not in data:
             abort(400, description=f"Missing {field}")

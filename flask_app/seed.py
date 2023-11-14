@@ -24,7 +24,7 @@ def populate_db():
         user = User(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
-            password=bcrypt.generate_password_hash(fake.password()).decode('utf-8'),
+            password=fake.password(),
             email=fake.email(),
             phone_number=fake.phone_number(),
             address=fake.address()
@@ -48,7 +48,7 @@ def populate_db():
             first_name=fake.first_name(),
             last_name=fake.last_name(),
             email=fake.email(),
-            password=bcrypt.generate_password_hash(fake.password()).decode('utf-8'),
+            password=fake.password(),
             address=fake.address(),
             phone_number=fake.phone_number(),
             skills=fake.random_element(elements=("Conduit-pipes repair", "Electrical Wiring", "Custom chairs", "Murals", "Gardening", 'Mobile repairs')),

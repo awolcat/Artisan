@@ -4,8 +4,9 @@ import {useState, useEffect} from 'react';
 
 export default function Profile() {
     const { id } = useParams(); // Get contractor_id from parameters
-    const [data, setData] = useState(null);
+    const [data, setData] = useState(null); //data refers to contractor
 
+    //fetch contractor data
     async function fetchData() {
         const response = await fetch('http://127.0.0.1:5000/api/v1/contractors/' + id);
         const data = await response.json();
@@ -43,6 +44,8 @@ export default function Profile() {
     useEffect(() => { fetchData(); }, []);
 
     return (
-        <div className='profile'>{ rows }</div>
+        <div className='profile'>
+            { rows }
+        </div>
     );
 }
