@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
 """
-from flask_app import bcrypt
 from flask_app.api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.contractors import Contractor
@@ -36,8 +35,6 @@ def post_contractor():
     for field in ['first_name', 'last_name', 'email', 'password']:
         if field not in data:
             abort(400, description=f"Missing {field}")
-    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    data['password'] = hashed_password
     contractor = Contractor(**data)
     contractor.new()
     contractor.save()
@@ -52,9 +49,6 @@ def update_contractor(contractor_id):
     data = request.get_json()
     if not data:
         abort(400, description='Not a JSON')
-    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    data['password'] = hashed_password
-
     overlook = ['id', 'created_at', 'updated_at']
     for k, v in data.items():
         if k not in overlook:

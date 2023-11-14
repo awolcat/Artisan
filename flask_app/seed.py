@@ -24,7 +24,7 @@ def populate_db():
         user = User(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
-            password=bcrypt.generate_password_hash(fake.password()).decode('utf-8'),
+            password=fake.password(),
             email=fake.email(),
             phone_number=fake.phone_number(),
             address=fake.address()
@@ -48,7 +48,7 @@ def populate_db():
             first_name=fake.first_name(),
             last_name=fake.last_name(),
             email=fake.email(),
-            password=bcrypt.generate_password_hash(fake.password()).decode('utf-8'),
+            password=fake.password(),
             address=fake.address(),
             phone_number=fake.phone_number(),
             skills=fake.random_element(elements=("Conduit-pipes repair", "Electrical Wiring", "Custom chairs", "Murals", "Gardening", 'Mobile repairs')),
@@ -69,7 +69,7 @@ def populate_db():
             budget=fake.random_int(min=10000, max=500000) / 100,
             start_date=fake.date_this_year().strftime('%Y-%m-%d'),
             end_date=fake.date_this_year().strftime('%Y-%m-%d'),
-            status=fake.random_element(elements=("open", "closed"))
+            status=fake.random_element(elements=("open", "pending", "confirmed", "rejected", "completed"))
         )
         db.session.add(contract)
         db.session.commit()
@@ -92,7 +92,7 @@ def populate_db():
             user_id=fake.random_element(User.query.all()).id,
             contractor_id=fake.random_element(Contractor.query.all()).id,
             booking_date=fake.date_time_this_year(),
-            status=fake.random_element(elements=("pending", "confirmed", "cancelled", "completed")),
+            status=fake.random_element(elements=("pending", "confirmed", "completed")),
             service_id=fake.random_element(Service.query.all()).id
         )
         # Randomly associate with a contract or service_offer

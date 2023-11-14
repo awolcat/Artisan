@@ -19,6 +19,7 @@ class Contractor(Base, db.Model):
     last_name = db.Column(db.String(60), nullable=False)
     email = db.Column(db.String(60), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
+    hashed_password = db.Column(db.String(128), nullable=True)
     address = db.Column(db.String(128))
     phone_number = db.Column(db.String(60))
     skills = db.Column(db.String(128))
@@ -34,10 +35,10 @@ class Contractor(Base, db.Model):
         """Initialises a contractor
         """
         super().__init__(**kwargs)
-
+        self.hashed_password = bcrypt.generate_password_hash(kwargs.get('password')).decode('utf-8')
+        
     def check_password(self, password):
         """Checks if enetered password is correct"""
-        #check = bcrypt.check_password_hash(self.password, password)
-        if self.password == password:
-            return True
-        return False
+        check = bcrypt.check_password_hash(self.password, password)
+        return check
+
