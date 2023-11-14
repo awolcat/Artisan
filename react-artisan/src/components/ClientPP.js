@@ -61,7 +61,7 @@ export default function ClientPP(props) {
         await getIdentity();
         }
         catch (error) {
-            alert('Could not delete');
+            alert('Could not mark complete');
         }
         
     }

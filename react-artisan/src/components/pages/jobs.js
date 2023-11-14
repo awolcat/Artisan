@@ -21,7 +21,8 @@ export default function Jobs(props) {
     useEffect(() => {getOpenContracts();}, []);
 
     async function bookJob(contract) {
-        //Create a booking in relation to selected contract
+        const contract_url = 'http://127.0.0.1:5000/api/v1/contracts/' + contract.id;
+        //Create a booking in relation to selected contract. AKA claim a contract
         const bookingResponse = await fetch('http://127.0.0.1:5000/api/v1/bookings', {
             method: 'POST',
             headers: {'Content-Type': 'application/json',},
@@ -34,6 +35,14 @@ export default function Jobs(props) {
                 'booking_date': contract.start_date,
                 }),             
             });
+            if (bookingResponse.ok) {
+                //Booked contract status changes from open to confirmed so that it is now unavailable at /jobs
+                await fetch(contract_url, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({'status': 'confirmed'})
+                });
+            }
     }
 
     async function handleClick(contract) {

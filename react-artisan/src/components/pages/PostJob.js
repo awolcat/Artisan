@@ -7,7 +7,7 @@ export default function PostJob(props) {
         user_id: identity.id,
         description: '',
         budget: 0.00,
-        status: 'pending',
+        status: '',
         end_date: '',
         start_date: '',
         });
@@ -56,7 +56,7 @@ export default function PostJob(props) {
             user_id: identity.id,
             description: '',
             budget: 0.00,
-            status: 'pending',
+            status: '',
             end_date: '',
             start_date: '',
             });
