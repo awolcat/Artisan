@@ -1,7 +1,7 @@
-# This manifest install some basic packages on an ubuntu server
+# This manifest installs some basic packages on an ubuntu server
 
 exec { 'apt-update':
-  command => 'apt-get upgrade',
+  command => 'apt-get update',
   path    => '/usr/bin:/usr/sbin:/bin:/sbin',
 }
 
