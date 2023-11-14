@@ -39,6 +39,6 @@ class Contractor(Base, db.Model):
         
     def check_password(self, password):
         """Checks if enetered password is correct"""
-        check = bcrypt.check_password_hash(self.password, password)
+        check = bcrypt.check_password_hash(self.hashed_password, password)
         return check
 
