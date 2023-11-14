@@ -67,7 +67,7 @@ export default function PostJob(props) {
             <h2>Post a Job and Let Contractors find you</h2>
             <p>{formData.service_name}</p>
             <form onSubmit={handleSubmit}>
-                <select id="service_name" name="service_name" value={formData.service_name} onChange={handleChange}>
+                <select id="service_name" name="service_name" value={formData.service_name} onChange={handleChange} required>
                     <option value="Carpentry">Carpentry</option>
                     <option value="Electrical">Electrical</option>
                     <option value="Appliances Repair">Appliances Repair</option>
@@ -76,7 +76,7 @@ export default function PostJob(props) {
                     <option value='Landscaping'>Landscaping</option>
                 </select>
                 <label htmlFor='description'>Description </label>
-                <input type='text' name='description' value={formData.description} onChange={handleChange}/>
+                <input type='text' name='description' value={formData.description} onChange={handleChange} required/>
                 <label htmlFor="start_date">Start Date </label>
                 <input type='datetime-local' name='start_date' value={formData.start_date} onChange={handleChange} required />
                 <label htmlFor='budget'>Budget </label>

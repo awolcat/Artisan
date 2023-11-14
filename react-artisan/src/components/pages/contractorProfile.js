@@ -25,7 +25,7 @@ export default function Profile(props) {
                     <p key={service.id}>{service.name}</p>
                     <p>{service.description}</p>
                     
-                    {identity?.services ? <Link to={'/service/' + service.id + '/contract/' + id }>Book</Link> : ''}
+                    {localStorage.getItem('role') === 'client' ? <Link to={'/service/' + service.id + '/contract/' + id }>Book</Link> : ''}
                 </div>
             );
         });

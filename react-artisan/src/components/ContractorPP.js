@@ -172,7 +172,7 @@ export default function ContractorPP(props) {
             <h2>Register Service</h2>
             <form onSubmit={handleSubmit} className='contractor-add-service'>
                 <label htmlFor='name'>Service</label>
-                <select id="name" name="name" value={formData.name} onChange={handleChange}>
+                <select id="name" name="name" value={formData.name} onChange={handleChange} required>
                     <option value="Carpentry">Carpentry</option>
                     <option value="Electrical">Electrical</option>
                     <option value="Appliances Repair">Appliances Repair</option>
