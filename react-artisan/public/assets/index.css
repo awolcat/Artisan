@@ -157,18 +157,7 @@ a.currentLink,
 }
 
 /*Jobs*/
-.jobs {
-    display: flex;
-    flex-direction: column;
-}
 
-.job {
-    border-bottom: #222E50 solid 2px;
-}
-
-.job img {
-    width: 150px;
-}
 
 .about {
     height: 89vh;

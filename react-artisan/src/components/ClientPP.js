@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import PostJob from "./pages/PostJob";
 
 export default function ClientPP(props) {
     const {identity, setUser} = props;
@@ -105,6 +105,7 @@ export default function ClientPP(props) {
                     {bookings}
                 </tbody>
             </table>
+            {<PostJob services={services} identity={identity} setUser={setUser}/>}
         </div>
     );
 

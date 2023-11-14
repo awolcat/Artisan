@@ -16,6 +16,7 @@ import Contractors from './components/pages/contractors';
 import Jobs from './components/pages/jobs';
 import Profile from './components/pages/contractorProfile';
 import Contract from './components/pages/contract';
+//import postJob from './components/pages/postJob';
 import Login from './components/pages/login';
 import NotFound from './components/pages/notFound';
 
@@ -59,7 +60,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Landing />} />
         <Route path='/about' element={<About />} />
-        <Route path='/jobs' element={<Jobs />} />
+        <Route path='/jobs' element={<Jobs identity={user.obj}/>} />
         <Route path='/contractors' element={<Contractors />} />
         <Route path='/contractors/:id' element={<Profile />}/>
         <Route path='/service/:serviceId/contract/:contractor_id' element={user.token ? <Contract token={user.token} identity={user.obj} setUser={setUser}/> : <Login setUser={setUser} />} />

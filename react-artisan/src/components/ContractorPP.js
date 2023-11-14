@@ -33,6 +33,7 @@ export default function ContractorPP(props) {
             });
         }
         await submitContract();
+        await getIdentity();
     }
 
 
@@ -168,15 +169,16 @@ export default function ContractorPP(props) {
                     {bookings}
                 </tbody>
             </table>
-            <h2>Create An Offer</h2>
+            <h2>Register Service</h2>
             <form onSubmit={handleSubmit} className='contractor-add-service'>
                 <label htmlFor='name'>Service</label>
                 <select id="name" name="name" value={formData.name} onChange={handleChange}>
                     <option value="Carpentry">Carpentry</option>
-                    <option value="Electrical Wiring">Electrical Wiring</option>
+                    <option value="Electrical">Electrical</option>
                     <option value="Appliances Repair">Appliances Repair</option>
                     <option value="Painting">Painting</option>
                     <option value='Plumbing'>Plumbing</option>
+                    <option value='Plumbing'>Landscaping</option>
                 </select>
                 <label htmlFor='description'>Description </label>
                 <input type='text' name='description' value={formData.description} onChange={handleChange}/>

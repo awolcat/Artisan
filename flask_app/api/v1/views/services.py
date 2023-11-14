@@ -5,6 +5,7 @@ import json
 from flask import abort, jsonify, request
 from flask_app.api.v1.views import app_views
 from models.services import Service
+from models.contractors import Contractor
 from models.schemas import ServiceSchema
 
 
@@ -39,7 +40,9 @@ def post_service():
     contractor = data.pop('contractor')
     service = Service(**data)
     service.new()
-    service.contractors.append(contractor)
+    service.contractors.append(Contractor.query.get(contractor['id']))
+    #service.contractors.append(json.loads(contractor))
+    #service.contractors.append(contractor)
     service.save()
     return service_schema.jsonify(service)
     

@@ -53,8 +53,7 @@ export default function Contract(props) {
         async function submitContract() {
             const response = await fetch('http://127.0.0.1:5000/api/v1/contracts', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json',
-                          'Cookie': `access_token_cookie=${token}`,},
+                headers: {'Content-Type': 'application/json',},
                 body: JSON.stringify(formData),
             });
             const contractData = await response.json()
@@ -62,8 +61,7 @@ export default function Contract(props) {
                 //In the background, create a booking that the contractor will be able to accept or reject
                 const bookingResponse = await fetch('http://127.0.0.1:5000/api/v1/bookings', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json',
-                              'Cookie': `access_token_cookie=${token}`, },
+                    headers: {'Content-Type': 'application/json',},
                     body: JSON.stringify({
                         'user_id': contractData.user_id,
                         'contract_id': contractData.id,
