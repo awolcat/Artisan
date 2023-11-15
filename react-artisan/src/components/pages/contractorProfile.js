@@ -9,7 +9,7 @@ export default function Profile(props) {
 
     //fetch contractor data
     async function fetchData() {
-        const response = await fetch('http://127.0.0.1:80/api/v1/contractors/' + id);
+        const response = await fetch('http://127.0.0.1:5000/api/v1/contractors/' + id);
         const data = await response.json();
         setData(data);
 

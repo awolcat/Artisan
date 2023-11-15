@@ -23,7 +23,7 @@ export default function Register() {
         if (role === null) {
             alert('Please indicate your role by clicking "Contractor" or ""Client')
         }
-        const url = role === 'client' ? 'http://127.0.0.1:80/api/v1/users' : 'http://127.0.0.1:80/api/v1/contractors'; 
+        const url = role === 'client' ? 'http://127.0.0.1:5000/api/v1/users' : 'http://127.0.0.1:5000/api/v1/contractors'; 
         
         // Post request function
         async function registrar() {
