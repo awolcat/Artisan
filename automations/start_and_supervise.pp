@@ -9,7 +9,7 @@ file { 'supervisor_config':
        mode    => '0755',
        content =>
        "[program:artisan]
-command=/usr/bin/gunicorn --bind localhost:5000 -w 2 --log-level debug artisan:app
+command=/usr/bin/gunicorn --bind localhost:5001 -w 2 --log-level debug artisan:app
 directory=/home/habeebdindi/artisan
 user=habeebdindi
 autostart=true
