@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""
+"""This module contains the definition of various event handlers.
+   These even handlers handly what happens before, or after a specific
+   database operation. 
 """
 from flask_app import db
 from sqlalchemy import event

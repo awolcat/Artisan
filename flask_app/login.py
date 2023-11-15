@@ -50,6 +50,7 @@ def login_user():
 @app.route("/current_user", methods=["GET"])
 @jwt_required()
 def protected_user():
+    """This route returns the logged in user object"""
     user_schema = UserSchema()
     user_id = get_jwt_identity()
     user = User.query.filter_by(id=user_id).first()
@@ -59,6 +60,7 @@ def protected_user():
 @app.route("/current_contractor", methods=["GET"])
 @jwt_required()
 def protected_contractor():
+    """This route returns the logged in contractor object"""
     contractor_schema = ContractorSchema()
     contractor_id = get_jwt_identity()
     contractor = Contractor.query.filter_by(id=contractor_id).first()

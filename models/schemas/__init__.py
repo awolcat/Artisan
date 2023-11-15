@@ -1,4 +1,8 @@
 #!/user/bin/python3
+"""This module contains schema class definitions. These definitions are
+   necessary for marshmallow-sqlalchemy to function properly.
+   The schema defines what is returned by an object when queried.
+"""
 from flask_app import ma
 from models.base import Base
 from models.users import User
@@ -11,14 +15,7 @@ from models.user_reviews import UserReview
 from models.service_offers import ServiceOffer
 
 
-"""
-class BaseSchema(ma.SQLAlchemyAutoSchema):
-    Generate Base model schema
-    
-    class Meta:
-        model = Base
-        include_fk = True
-"""
+
 class UserReviewSchema(ma.SQLAlchemyAutoSchema):
     """Generate UserReview model schema
     """

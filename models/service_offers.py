@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""
+"""This modul contains a class definition.
 """
 from flask_app import db
 from models.base import Base

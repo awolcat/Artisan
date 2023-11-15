@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+""" This module contains a base clasee definition
+"""
 import uuid
 from flask_app import db
 from datetime import datetime
