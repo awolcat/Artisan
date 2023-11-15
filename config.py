@@ -7,7 +7,7 @@ from datetime import timedelta
 
 class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'mysql://root:artisan_db_pwd@localhost/artisan_db'
+        'mysql://artisan_db_dev:artisan_db_pwd@localhost/artisan_db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = "ARTISAN_2023_SECRET_TOKEN"
     CORS_HEADERS = 'Content-Type'
