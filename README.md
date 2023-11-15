@@ -1,7 +1,7 @@
 # Artisan
 
 <a href="http://myartisan.works">
-    <img src="https://imgur.com/V6Hl2ZE">
+    <img src="https://imgur.com/5tc25Do" alt="artisan" title="Artisan">
 </a>
 
 <!--
