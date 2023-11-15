@@ -22,6 +22,7 @@ command=/usr/bin/npm start
 directory=/home/habeebdindi/artisan/react-artisan,
 user=habeebdindi
 autostart=true
+autorestart=true
 stopasgroup=true
 killasgroup=true
 	",
