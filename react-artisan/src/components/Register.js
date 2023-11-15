@@ -16,6 +16,7 @@ export default function Register() {
 
     const [role, setRole] = useState("");
 
+    //Post new user or contractor
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -33,7 +34,7 @@ export default function Register() {
                 body: JSON.stringify(formData),  
             });
             if (response.ok) {
-                alert('Registration Successful');
+                alert(`${role} Registration Successful`);
             } else {
                 alert('Something went wrong while trying to sign you up, please try again');
             }
@@ -62,24 +63,30 @@ export default function Register() {
     
     return (
         <div className='landing'>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="first_name">First Name</label>
-                <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} required/>
-                <label htmlFor="last_name">Last Name</label>
-                <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} required/>
-                <label htmlFor="address">Physical Address</label>
-                <input type="text" name="address" value={formData.address} onChange={handleChange} required/>
-                <label htmlFor="email">email</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} required/>
-                <label htmlFor="phone_number">Phone Number</label>
-                <input type="tel" name="phone_number" value={formData.phone_number} onChange={handleChange} required/>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" value={formData.password} onChange={handleChange} required/>
-            
-                <input type="submit" value="Register" />
-            </form>
-            <button onClick={() => { handleClick('contractor') }}>Contractor</button>
-            <button onClick={() => { handleClick('client') }}>Client</button>
+            <div className='register-container'>
+                <div className="registration-form">
+                    <div className='register-role'>
+                        <button onClick={() => { handleClick('contractor') }}>Contractor</button>
+                        <button onClick={() => { handleClick('client') }}>Client</button>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="first_name">First Name</label>
+                        <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder='First Name' required/>
+                        <label htmlFor="last_name">Last Name</label>
+                        <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder='Last Name' required/>
+                        <label htmlFor="address">Physical Address</label>
+                        <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder='Address' required/>
+                        <label htmlFor="email">email</label>
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder='Email' required/>
+                        <label htmlFor="phone_number">Phone Number</label>
+                        <input type="tel" name="phone_number" value={formData.phone_number} onChange={handleChange} placeholder='+XXX XXX XXX XXX' required/>
+                        <label htmlFor="password">Password</label>
+                        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder='Password' required/>
+                    
+                        <input type="submit" value="Register" />
+                    </form>
+                </div>
+            </div>
         </div>
     );
     }

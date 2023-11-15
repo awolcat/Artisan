@@ -81,6 +81,8 @@ a.currentLink,
 }
 
 .landing {
+    display: flex;
+    flex-direction: column;
     height: 89vh;
     padding-left: 10px;
     padding-right: 10px;
