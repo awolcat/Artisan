@@ -12,7 +12,7 @@ exec { 'apt-upgrade':
 }
 
 package { ['python3', 'nginx', 'git', 'gunicorn', 'python3-pip', 'emacs', 'tmux', 'pkg-config',
-	'libmysqlclient-dev', 'mysql-server']:
+	'libmysqlclient-dev', 'mysql-server', 'postfix', 'supervisor']:
   ensure  => installed,
   require => Exec['apt-upgrade'],
 }
