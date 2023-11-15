@@ -1,10 +1,8 @@
 # Artisan
 
-# React
-
-## Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="http://myartisan.works">
+    <img src="https://imgur.com/V6Hl2ZE">
+</a>
 
 <!--
 
