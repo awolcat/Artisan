@@ -92,7 +92,6 @@ export default function Jobs(props) {
         catch (error) {
             alert(error);
         }
-        
     }
 
     useEffect(() => {getServices()}, []);

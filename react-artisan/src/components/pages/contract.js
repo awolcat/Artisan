@@ -21,7 +21,7 @@ export default function Contract(props) {
                                         });
     //Function run after render to get data about the current service: User
     async function getService(serviceId) {
-        const response = await fetch('http://localhost:5000/api/v1/services/' + serviceId);
+        const response = await fetch('http://' + window.location.hostname + ':80/api/v1/services/' + serviceId);
         const data = await response.json();
         setService(data);
     }
