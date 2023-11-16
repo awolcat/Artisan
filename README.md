@@ -193,4 +193,4 @@ mysql> exit;
 ## Related Projects
 * [AirBnB Clone](https://github.com/awolcat/AirBnB_clone_v4): a simple web app made in Python, Flask, and JQuery.
 
-* [higher level programming]([https://github.com/alx](https://github.com/habeebdindi/alx-higher_level_programming): a repository that largely demonstrate my python skills
+* [higher level programming](https://github.com/habeebdindi/alx-higher_level_programming): a repository that demonstrate a large set of python programs I have written.
