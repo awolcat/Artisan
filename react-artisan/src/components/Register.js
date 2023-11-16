@@ -23,7 +23,7 @@ export default function Register() {
         if (role === null) {
             alert('Please indicate your role by clicking "Contractor" or ""Client')
         }
-        const url = role === 'client' ? 'http://127.0.0.1:80/api/v1/users' : 'http://127.0.0.1:80/api/v1/contractors'; 
+        const url = role === 'client' ? 'https://' + window.location.hostname + ':80/api/v1/users' : 'https://' + window.location.hostname + ':80/api/v1/contractors'; 
         
         // Post request function
         async function registrar() {
@@ -66,16 +66,17 @@ export default function Register() {
             <div className='register-container'>
                 <div className="registration-form">
                     <div className='register-role'>
-                        <button onClick={() => { handleClick('contractor') }}>Contractor</button>
-                        <button onClick={() => { handleClick('client') }}>Client</button>
+                        <button className={role === 'contractor' ? 'selected' : ''} onClick={() => { handleClick('contractor') }}>Contractor</button>
+                        <p>&#8212; OR &#8212;</p>
+                        <button className={role === 'client' ? 'selected' : ''} onClick={() => { handleClick('client') }}>Client</button>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="first_name">First Name</label>
                         <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder='First Name' required/>
                         <label htmlFor="last_name">Last Name</label>
                         <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder='Last Name' required/>
-                        <label htmlFor="address">Physical Address</label>
-                        <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder='Address' required/>
+                        <label htmlFor="physical_address">Physical Address</label>
+                        <input type="text" name="physical_address" value={formData.address} onChange={handleChange} placeholder='Address' required/>
                         <label htmlFor="email">email</label>
                         <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder='Email' required/>
                         <label htmlFor="phone_number">Phone Number</label>

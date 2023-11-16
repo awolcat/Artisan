@@ -8,7 +8,7 @@ export default function ClientPP(props) {
     const bookings = [];
 
     async function fetchServices() {
-        const response = await fetch('http://127.0.0.1:80/api/v1/services/');
+        const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
         const data = await response.json();
         setServices(data);
     }
@@ -26,7 +26,7 @@ export default function ClientPP(props) {
      // Get user identity
     // 'X-CSRF-TOKEN': csrfToken
     async function getIdentity() {
-        const idUrl = 'http://127.0.0.1:80/current_user';
+        const idUrl = 'https://' + window.location.hostname + '/current_user';
         
                 const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token'),},
@@ -44,14 +44,14 @@ export default function ClientPP(props) {
 
     async function handleComplete(contract, booking ) {
         try {
-            const url = 'http://127.0.0.1:80/api/v1/contracts/' + contract;
+            const url = 'https://' + window.location.hostname + '/api/v1/contracts/' + contract;
             const response = await fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify({'status': 'completed'}),
                 headers: {'Content-Type': 'application/json'},
         });
         if (response.ok) {
-            const bkurl = 'http://127.0.0.1:80/api/v1/bookings/' + booking;
+            const bkurl = 'https://' + window.location.hostname + '/api/v1/bookings/' + booking;
             const res = await fetch(bkurl, {
                 method: 'PUT',
                 body: JSON.stringify({'status': 'completed'}),

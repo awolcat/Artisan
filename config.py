@@ -1,4 +1,4 @@
-# /usr/bin/python3
+#!/usr/bin/python3
 """This module configures variables for SQLAlchemy
 """
 import os
@@ -10,7 +10,7 @@ class Config(object):
        flask extensions.
     """
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'mysql://artisan_db_dev_replica:artisan_db_pwd_replica@localhost/artisan_db'
+        'mysql://artisan_db_dev:artisan_db_pwd@localhost/artisan_db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = "ARTISAN_2023_SECRET_TOKEN"
     CORS_HEADERS = 'Content-Type'

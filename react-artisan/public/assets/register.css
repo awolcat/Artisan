@@ -8,14 +8,39 @@
 .registration-form {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    
+    font-weight: bold;
+    max-width: 400px;
+    min-width: 400px;
+    border-radius: 5px;
+    border-style: groove;
+    border-color: #222E50;
+    padding: 20px 20px;
+    box-shadow: #222E50;  
+}
+
+.registration-form p {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.registration-form input[type=submit] {
+    min-width: 30%;
+    max-width: 30%;
+    position: relative;
+    left: 33%;
+    background-color: #222E50;
+    color: #edf7f6;
+    cursor: pointer;
+
 }
 
 .registration-form input {
-    width: 100%;
+    width: 95%;
     padding: 10px 10px;
     margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
 }
 
 .registration-form label {
@@ -27,5 +52,14 @@
 }
 
 .register-role button {
+    flex-basis: 0;
     flex-grow: 1;
+    color: antiquewhite;
+    background-color: #222E50;
+    cursor: pointer;
+}
+
+.register-role .selected {
+    background-color: #fccb06;
+    color: #222E50;
 }
