@@ -189,6 +189,10 @@ mysql> exit;
 * [MySQL](https://mysql.com) - Relational Database Management System
 * [Nginx](https://nginx.com) - Server used for deployment
 
+## LICENSE
+
+MIT LICENSE
+
 
 ## Related Projects
 * [AirBnB Clone](https://github.com/awolcat/AirBnB_clone_v4): a simple web app made in Python, Flask, and JQuery.
