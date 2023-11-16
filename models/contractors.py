@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""
+"""This module contains a class defiinition a class and a many to many relationship.
+   The many to many relationship is between the contractor class and service class.
 """
 from flask_app import db, bcrypt
 from models.base import Base

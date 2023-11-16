@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Flask application
+"""Flask application.
 """
 from flask import Flask, make_response, jsonify
 from config import Config
@@ -28,14 +28,16 @@ cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"},
 
 @app.errorhandler(404)
 def not_found(e):
-    """
+    """Custom handler for when a resource is not found on the server
     """
     return make_response(jsonify({"error": "Not Found"}), 404)
 
 
 @app.after_request
 def refresh_expiring_jwts(response):
-    """Refreshes JSON Web Token before expiry"""
+    """Refreshes JSON Web Token before expiry,
+       JWT are used for login authentication.
+    """
     try:
         expiry_timestamp = get_jwt()["exp"]
         now = datetime.now(timezone.utc)

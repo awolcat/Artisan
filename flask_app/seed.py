@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""
+"""This module contains a function that generates fake data and populates the 
+   database with it.
 """
 import random
 from flask_app import db, bcrypt

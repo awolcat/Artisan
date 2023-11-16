@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""
+"""This module constains a function that needed for flask shell.
+This modul is also the entry point for the flask app.
 """
 from flask_app import *
 from models.base import Base
@@ -16,7 +17,7 @@ from models.service_offers import ServiceOffer
 
 @app.shell_context_processor
 def make_shell_context():
-    """
+    """This function pre-imports all the needed modules in flask shell
     """
     return {'db': db,
             'ma': ma,
