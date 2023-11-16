@@ -98,45 +98,79 @@ mysql> exit;
     `DELETE`: Allow clients to delete their contracts by the contract ID.
 
 /api/v1/users
-GET: Retrieve a list of users. Requests can be filtered to match a criteria (eg location).
-POST: Allow users to create and submit their profiles with relevant information..
+
+    `GET`: Retrieve a list of users. Requests can be filtered to match a criteria (eg location).
+
+    `POST`: Allow users to create and submit their profiles with relevant information..
+
 /api/users/<id>
 
-GET: Retrieve the details of a specific user by their id.
-PUT: Allow users to update their profiles with relevant information..
-DELETE: Allows a user to delete his/her profile.
+
+    `GET`: Retrieve the details of a specific user by their id.
+
+    `PUT`: Allow users to update their profiles with relevant information..
+
+    `DELETE`: Allows a user to delete his/her profile.
+
 /api/v1/bookings
-GET: Retrieve a list of bookings. Requests can be filtered to match a criteria (eg based on a user or contractor).
-POST: Allow users or contractors to create a booking when a service or contract is accepted by either party.
+
+    `GET`: Retrieve a list of bookings. Requests can be filtered to match a criteria (eg based on a user or contractor).
+
+    `POST`: Allow users or contractors to create a booking when a service or contract is accepted by either party.
+
 /api/bookings/<id>
-GET: Retrieve the details of a specific booking by id.
-PUT: Allow users or contractors to update the status of a booking. 
-DELETE: Allows a user or a contractor to delete his/her booking.
+
+    `GET`: Retrieve the details of a specific booking by id.
+
+    `PUT`: Allow users or contractors to update the status of a booking. 
+
+    `DELETE`: Allows a user or a contractor to delete his/her booking.
+
 /api/services:
-GET: Retrieve a list of available services based on various filters like location and price.
-POST: Enable contractors (those taking on jobs) to post new services.
+
+    `GET`: Retrieve a list of available services based on various filters like location and price.
+
+    `POST`: Enable contractors (those taking on jobs) to post new services.
+
 
 /api/services/<id>
-GET: Fetch the details of a specific service by its unique identifier (e.g., service ID).
-PUT: Allow contractors to update the details of their existing service.
-DELETE: Allow contractors to delete their service offers by the service offer ID.
+
+    `GET`: Fetch the details of a specific service by its unique identifier (e.g., service ID).
+
+    `PUT`: Allow contractors to update the details of their existing service.
+
+    `DELETE`: Allow contractors to delete their service offers by the service offer ID.
+
 
 /api/service_offers
-GET: Retrieve a list of available service offers based on various filters like location and price.
-POST: Enable contractors (those taking on jobs) to post new offer listings with details such as job title, description, price, and timeline.
+
+    `GET`: Retrieve a list of available service offers based on various filters like location and price.
+
+    `POST`: Enable contractors (those taking on jobs) to post new offer listings with details such as job title, description, price, and timeline.
+
 
 /api/service_offers/<id>
-GET: Fetch the details of a specific service offer by its unique identifier (e.g., service offer ID).
-PUT: Allow contractors to update the details of their existing offer listings.
-DELETE: Allow contractors to delete their service offers by the service offer ID.
+
+    `GET`: Fetch the details of a specific service offer by its unique identifier (e.g., service offer ID).
+
+    `PUT`: Allow contractors to update the details of their existing offer listings.
+
+    `DELETE`: Allow contractors to delete their service offers by the service offer ID.
+
 
 /api/user_reviews
-GET: Retrieve a list of available user reviews based on contractors, contracts, etc.
-POST: Enable users to post new reviews on their bookings.
+
+    `GET`: Retrieve a list of available user reviews based on contractors, contracts, etc.
+
+    `POST`: Enable users to post new reviews on their bookings.
+
 /api/user_reviews/<id>
-GET: Fetch the details of a specific user review by its unique identifier (e.g., review ID).
-PUT: Allow users to update the details of their existing review.
-DELETE: Allow users to delete their user reviews by the user review ID.
+
+    `GET`: Fetch the details of a specific user review by its unique identifier (e.g., review ID).
+
+    `PUT`: Allow users to update the details of their existing review.
+
+    `DELETE`: Allow users to delete their user reviews by the user review ID.
 
 ## Technologies we used
 
