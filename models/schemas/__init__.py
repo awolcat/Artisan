@@ -94,7 +94,6 @@ class ContractSchema(ma.SQLAlchemyAutoSchema):
         include_fk = True
         exclude = ('created_at', 'updated_at')
 
-
 class ServiceOfferSchema(ma.SQLAlchemyAutoSchema):
     """Generate ServiceOffer model schema
     """

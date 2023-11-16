@@ -1,0 +1,71 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+
+.login-border {
+    max-width: 400px;
+    min-width: 400px;
+    border-radius: 5px;
+    border-style: groove;
+    border-color: #222E50;
+    padding: 20px 20px;
+    box-shadow: #222E50;
+}
+
+.login-role {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.login-role p {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.login-role button {
+    flex-basis: 0;
+    flex-grow: 1;
+    cursor: pointer;
+    flex-grow: 1;
+    color: antiquewhite;
+    background-color: #222E50;
+}
+
+.login-role p {
+    font-weight: bold;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-weight: bold;
+}
+
+.login form input {
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.login form input[type=submit] {
+    min-width: 30%;
+    max-width: 30%;
+    position: relative;
+    left: 33%;
+    background-color: #222E50;
+    color: #edf7f6;
+    cursor: pointer;
+}
+
+.login-role .selected {
+    background-color: #fccb06;
+    color: #222E50;
+}

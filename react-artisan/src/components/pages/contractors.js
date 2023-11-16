@@ -3,15 +3,23 @@ import { Link } from 'react-router-dom';
 import Loading from '../Loading';
 
 export default function Contractors() {
+    //Returns contractors page
     const [data, setData] = useState(null);
     
     async function fetchData() {
-        const response = await fetch('http://127.0.0.1:5000/api/v1/contractors');
-        const data = await response.json();
-        setData(data);
+        //Get registered contractors
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/v1/contractors');
+            const data = await response.json();
+            setData(data);
+        }
+        catch (error) {
+            alert(error);
+        }
     };
 
     function getAvgRating(person) {
+        //Calculate average contractor rating based on all available reviews
         let total = 0;
         let count = 0;
         person.bookings.forEach((booking) => {
@@ -32,8 +40,10 @@ export default function Contractors() {
         data.contractors.forEach((person) => {
             const rating = getAvgRating(person);
             rows.push(<div className="contractor" key={person.id} >
-                        <Link to={'/contractors/' + person.id}>
+                        <div className="contractor-img">
                             <img alt="contractor" src="https://placehold.co/600x400/png" />
+                        </div>
+                        <Link to={'/contractors/' + person.id}>
                             <p>Name: {person.first_name + ' ' + person.last_name}</p>
                             <p>Skills: {person.skills}</p>
                             <p>Rating: {rating}/5</p>                       
