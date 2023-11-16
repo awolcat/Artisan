@@ -97,14 +97,15 @@ mysql> exit;
 
     `DELETE`: Allow clients to delete their contracts by the contract ID.
 
-/api/v1/users
+### users
+
+* /api/v1/users
 
     `GET`: Retrieve a list of users. Requests can be filtered to match a criteria (eg location).
 
     `POST`: Allow users to create and submit their profiles with relevant information..
 
-/api/users/<id>
-
+* /api/users/<id>
 
     `GET`: Retrieve the details of a specific user by their id.
 
@@ -112,13 +113,15 @@ mysql> exit;
 
     `DELETE`: Allows a user to delete his/her profile.
 
-/api/v1/bookings
+### bookings
+
+* /api/v1/bookings
 
     `GET`: Retrieve a list of bookings. Requests can be filtered to match a criteria (eg based on a user or contractor).
 
     `POST`: Allow users or contractors to create a booking when a service or contract is accepted by either party.
 
-/api/bookings/<id>
+* /api/bookings/<id>
 
     `GET`: Retrieve the details of a specific booking by id.
 
@@ -126,14 +129,15 @@ mysql> exit;
 
     `DELETE`: Allows a user or a contractor to delete his/her booking.
 
-/api/services:
+### services
+
+* /api/services:
 
     `GET`: Retrieve a list of available services based on various filters like location and price.
 
     `POST`: Enable contractors (those taking on jobs) to post new services.
 
-
-/api/services/<id>
+* /api/services/<id>
 
     `GET`: Fetch the details of a specific service by its unique identifier (e.g., service ID).
 
@@ -141,15 +145,15 @@ mysql> exit;
 
     `DELETE`: Allow contractors to delete their service offers by the service offer ID.
 
+### service offers
 
-/api/service_offers
+* /api/service_offers
 
     `GET`: Retrieve a list of available service offers based on various filters like location and price.
 
     `POST`: Enable contractors (those taking on jobs) to post new offer listings with details such as job title, description, price, and timeline.
 
-
-/api/service_offers/<id>
+* /api/service_offers/<id>
 
     `GET`: Fetch the details of a specific service offer by its unique identifier (e.g., service offer ID).
 
@@ -157,14 +161,15 @@ mysql> exit;
 
     `DELETE`: Allow contractors to delete their service offers by the service offer ID.
 
+### user reviews
 
-/api/user_reviews
+* /api/user_reviews
 
     `GET`: Retrieve a list of available user reviews based on contractors, contracts, etc.
 
     `POST`: Enable users to post new reviews on their bookings.
 
-/api/user_reviews/<id>
+* /api/user_reviews/<id>
 
     `GET`: Fetch the details of a specific user review by its unique identifier (e.g., review ID).
 
@@ -183,3 +188,9 @@ mysql> exit;
 * [SQLAlchemy](https://www.sqlalchemy.org/) - Python SQL Toolkit and Object Relational Mapper
 * [MySQL](https://mysql.com) - Relational Database Management System
 * [Nginx](https://nginx.com) - Server used for deployment
+
+
+## Related Projects
+* [AirBnB Clone](https://github.com/awolcat/AirBnB_clone_v4): a simple web app made in Python, Flask, and JQuery.
+
+* [higher level programming]([https://github.com/alx](https://github.com/habeebdindi/alx-higher_level_programming): a repository that largely demonstrate my python skills
