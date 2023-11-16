@@ -3,7 +3,7 @@
 ![Screenshot from 2023-11-15 20-51-57](https://github.com/awolcat/Artisan/assets/76703071/5b3757b1-70d7-4759-8c64-fe3337405cc4)
 
 In Kenya, Africa, and many parts of the world, skilled tradespeople have few avenues to sell their services. On the other hand, clients have no definitive point of access to a wide variety of skilled trade services. The hiring process can also be cumbersome and inefficient - often involving multiple calls and negotiations.
-[Artisan](http://myartisan.works) is a web application that helps tradespeople and technical/menial workers find those in need of their services.
+[Artisan](http://myartisan.works) is a web application that helps tradespeople and technical workers find those in need of their services.
 
 
 ## What really happened?
