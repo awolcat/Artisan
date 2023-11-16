@@ -32,9 +32,9 @@ function App() {
           const role = localStorage.getItem('role');
           let url = '';
           if (role === 'client') {
-            url = 'http://' + window.location.hostname + '/current_user';
+            url = 'https://' + window.location.hostname + '/current_user';
           } else if (role === 'contractor') {
-            url = 'http://' + window.location.hostname + '/current_contractor';
+            url = 'https://' + window.location.hostname + '/current_contractor';
           } else {
             throw EvalError
           }

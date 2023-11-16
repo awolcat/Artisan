@@ -11,7 +11,7 @@ export default function Profile(props) {
     async function fetchData() {
         //fetch contractor data
         try {
-            const response = await fetch('http://' + window.location.hostname + '/api/v1/contractors/' + id);
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/contractors/' + id);
             const data = await response.json();
             setData(data);
         }
