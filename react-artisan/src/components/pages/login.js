@@ -16,26 +16,23 @@ export default function Login(props) {
 
     const {setUser} = props;
 
-     // Get user identity
-    // 'X-CSRF-TOKEN': csrfToken
     async function getIdentity() {
-        const idUrl = loginType === 'client' ? 'http://127.0.0.1:5000/current_user' : 'http://127.0.0.1:5000/current_contractor';
-        
-                const response = await fetch(idUrl, {
-                    headers: {'Authorization': localStorage.getItem('token'),},
+        // Get user identity from token
+        try {
+            const idUrl = loginType === 'client' ? 'http://127.0.0.1:5000/current_user' : 'http://127.0.0.1:5000/current_contractor';
+            const response = await fetch(idUrl, {
+                headers: {'Authorization': localStorage.getItem('token'),},
                 });
-                const result = await response.json();
-                setUser({token: localStorage.getItem('token'), obj: result});
-                //return (result)
-                //console.log("CURRENT_USER", result);
-         /*   }
-            catch (error) {
-                alert('Something went wrong while logging you in. Try again');
-            }*/
+            const result = await response.json();
+            setUser({token: localStorage.getItem('token'), obj: result});
+        }     
+        catch (error) {
+            alert('Something went wrong while logging you in. Try again');
+        }
     }
 
-    // Post request function
     async function login() {
+        //Request token for provided credentials
         const url = loginType === 'client' ? 'http://127.0.0.1:5000/login-user' : 'http://127.0.0.1:5000/login-contractor'; 
         try {
             const response = await fetch(url, {
@@ -53,31 +50,30 @@ export default function Login(props) {
             } else {
                 alert('Wrong username or password');
             }
-            //getIdentity();
-            //console.log("TEMP", temp);
-            //setIdentity(getIdentity());
         }
-        catch (error) {
-            //setIdentity(null);
-            //setToken(null);         
+        catch (error) {         
             alert('Something went wrong while logging you in. Try again');
         }
     }
 
     const handleSubmit = async (event) => {
+        //Submit login credentials and request authorized user identity
         event.preventDefault();
 
         if (loginType === null) {
             alert('Please indicate your role by clicking "Contractor" or ""Client')
+        } else {
+            await login();
+            if (loggedIn) {
+                await getIdentity();
+                navigate('/');
+            }
         }
-        await login();
-        if (loggedIn) {
-            await getIdentity();
-            navigate('/');
-        }
+    }
+        
         
         //loginType === 'client' ? navigate('/contractors') : navigate('/jobs')
-    }
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -90,15 +86,23 @@ export default function Login(props) {
 
     return (
         <div className='landing'>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">email</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} required/>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" value={formData.password} onChange={handleChange} required/>
-                <input type="submit" value="Log In" />
-            </form>
-            <button onClick={() => { handleClick('contractor') }}>Contractor</button>
-            <button onClick={() => { handleClick('client') }}>Client</button>       
+            <div className='login'>
+                <div className='login-border'>
+                        <div className='login-role'>
+                            <button className={loginType === 'contractor' ? 'selected' : ''} onClick={() => { handleClick('contractor') }}>Contractor</button>
+                            <p>&#8212; OR &#8212;</p>
+                            <button className={loginType === 'client' ? 'selected' : ''} onClick={() => { handleClick('client') }}>Client</button>  
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <label htmlFor="email">email</label>
+                            <input type="email" name="email" value={formData.email} onChange={handleChange} required/>
+                            <label htmlFor="password">Password</label>
+                            <input type="password" name="password" value={formData.password} onChange={handleChange} required/>
+                            <input type="submit" value="Log In" />
+                        </form>
+                    </div>
+            </div>
+         
         </div>
     )
 } 

@@ -1,0 +1,58 @@
+.profile-container {
+    display: flex;
+    padding: 20px 20px;
+    height: 89vh;
+    overflow: scroll;
+}
+
+.profile {
+    min-width: 340px;
+}
+
+.profile-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding-bottom: 40px;
+}
+
+.profile-heading p {
+   font-size: x-large;
+   padding-left: 20px;
+}
+
+.profile-heading .profile-img {
+    width: 150px;
+    
+}
+
+.profile-img img {
+    width: 100%;
+    border-radius: 75px;
+}
+
+.profile .services {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 340px;
+}
+
+.service {
+    border-style: solid;
+    padding: 10px 10px;
+    border-radius: 10px;
+    flex-direction: column;     
+}
+
+.service .heading {
+    font-size: large;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.service a {
+    display: flex;
+    justify-content: end;
+    text-decoration: none;
+}
