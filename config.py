@@ -4,7 +4,7 @@
 import os
 from datetime import timedelta
 
-
+# test gitignore
 class Config(object):
     """This class configures the flask app variables needed for some 
        flask extensions.
