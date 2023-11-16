@@ -73,7 +73,7 @@ mysql> exit;
 
     `POST`: Allow contractors to create and submit their profiles with relevant information, including skills, experience, and contact details.
 
-* /api/contractors/&lt;id&gt;
+* /api/v1/contractors/&lt;id&gt;
 
     `GET`: Retrieve the details of a specific contractor by their id.
 
@@ -83,13 +83,13 @@ mysql> exit;
 
 ### contracts
 
-* /api/contracts
+* /api/v1/contracts
 
     `GET`: Retrieve a list of available contracts or jobs based on various filters like location, job type, and budget.
 
     `POST`: Enable clients (those offering jobs) to post new job listings with details such as job title, description, required skills, budget, and timeline.
 
-* /api/contracts/&lt;id&gt;
+* /api/v1/contracts/&lt;id&gt;
 
     `GET`: Fetch the details of a specific contract by its unique identifier (e.g., contract ID).
 
@@ -105,7 +105,7 @@ mysql> exit;
 
     `POST`: Allow users to create and submit their profiles with relevant information..
 
-* /api/users/<id>
+* /api/v1/users/&lt;id&gt;
 
     `GET`: Retrieve the details of a specific user by their id.
 
@@ -121,7 +121,7 @@ mysql> exit;
 
     `POST`: Allow users or contractors to create a booking when a service or contract is accepted by either party.
 
-* /api/bookings/<id>
+* /api/v1/bookings/&lt;id&gt;
 
     `GET`: Retrieve the details of a specific booking by id.
 
@@ -131,13 +131,13 @@ mysql> exit;
 
 ### services
 
-* /api/services:
+* /api/v1/services:
 
     `GET`: Retrieve a list of available services based on various filters like location and price.
 
     `POST`: Enable contractors (those taking on jobs) to post new services.
 
-* /api/services/<id>
+* /api/v1/services/&lt;id&gt;
 
     `GET`: Fetch the details of a specific service by its unique identifier (e.g., service ID).
 
@@ -147,13 +147,13 @@ mysql> exit;
 
 ### service offers
 
-* /api/service_offers
+* /api/v1/service_offers
 
     `GET`: Retrieve a list of available service offers based on various filters like location and price.
 
     `POST`: Enable contractors (those taking on jobs) to post new offer listings with details such as job title, description, price, and timeline.
 
-* /api/service_offers/<id>
+* /api/v1/service_offers/&lt;id&gt;
 
     `GET`: Fetch the details of a specific service offer by its unique identifier (e.g., service offer ID).
 
@@ -163,13 +163,13 @@ mysql> exit;
 
 ### user reviews
 
-* /api/user_reviews
+* /api/v1/user_reviews
 
     `GET`: Retrieve a list of available user reviews based on contractors, contracts, etc.
 
     `POST`: Enable users to post new reviews on their bookings.
 
-* /api/user_reviews/<id>
+* /api/v1/user_reviews/&lt;id&gt;
 
     `GET`: Fetch the details of a specific user review by its unique identifier (e.g., review ID).
 
