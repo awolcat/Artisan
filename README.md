@@ -177,6 +177,11 @@ mysql> exit;
 
     `DELETE`: Allow users to delete their user reviews by the user review ID.
 
+## What's Next?
+
+A lot actually, there are so many more feautures we'd like to add to this project, like payment integration, other forms of authentication and so on. 
+As it stands there are also a lot of areas that need fixing in production, for example nginx is blocking some internal API calls from the react-app. Feel free to make a pull request if you find anything amiss in the nginx configuration file. We'll keep on iterating and releasing new features as time goes on.
+
 ## Technologies we used
 
 * [Bash](https://en.wikipedia.org/wiki/Shell_script) - Automation and Configration Management
