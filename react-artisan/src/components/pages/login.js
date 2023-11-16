@@ -19,7 +19,7 @@ export default function Login(props) {
     async function getIdentity() {
         // Get user identity from token
         try {
-            const idUrl = loginType === 'client' ? 'http://127.0.0.1:5000/current_user' : 'http://127.0.0.1:5000/current_contractor';
+            const idUrl = loginType === 'client' ? 'http://127.0.0.1/current_user' : 'http://127.0.0.1/current_contractor';
             const response = await fetch(idUrl, {
                 headers: {'Authorization': localStorage.getItem('token'),},
                 });
@@ -33,7 +33,7 @@ export default function Login(props) {
 
     async function login() {
         //Request token for provided credentials
-        const url = loginType === 'client' ? 'http://127.0.0.1:5000/login-user' : 'http://127.0.0.1:5000/login-contractor'; 
+        const url = loginType === 'client' ? 'http://127.0.0.1/login-user' : 'http://127.0.0.1/login-contractor'; 
         try {
             const response = await fetch(url, {
                 method: 'POST',

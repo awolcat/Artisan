@@ -9,7 +9,7 @@ export default function Contractors() {
     async function fetchData() {
         //Get registered contractors
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/v1/contractors');
+            const response = await fetch('http://127.0.0.1/api/v1/contractors');
             const data = await response.json();
             setData(data);
         }

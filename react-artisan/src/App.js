@@ -32,9 +32,9 @@ function App() {
           const role = localStorage.getItem('role');
           let url = '';
           if (role === 'client') {
-            url = 'http://127.0.0.1:5000/current_user';
+            url = 'http://127.0.0.1/current_user';
           } else if (role === 'contractor') {
-            url = 'http://127.0.0.1:5000/current_contractor';
+            url = 'http://127.0.0.1/current_contractor';
           } else {
             throw EvalError
           }
