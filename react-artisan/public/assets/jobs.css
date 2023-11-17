@@ -33,6 +33,16 @@
     padding-bottom: 10px;
 }
 
+.job-details .heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.job-details .heading p, .job-details .heading h3 {
+    padding-bottom: 0px;
+}
+
 .job-details .budget-book {
     display: flex;
     padding-bottom: 0px;

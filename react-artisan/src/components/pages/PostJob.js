@@ -1,7 +1,7 @@
 import { useState } from "react";
 export default function PostJob(props) {
     //Post a contract that will be available to any contractor on first come first served basis
-    const {services, identity} = props;
+    const {services, identity, handleClick} = props;
     const [ formData, setFormData] = useState({
         service_name: '',
         user_id: identity.id,
@@ -33,7 +33,8 @@ export default function PostJob(props) {
         event.preventDefault();
         const service_id = await getServiceId(formData.service_name);
         async function submitContract() {
-            //Contract with status open indicates it is available to be claimed
+            try {
+                //Contract with status open indicates it is available to be claimed
             const response = await fetch('http://127.0.0.1:5000/api/v1/contracts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -47,6 +48,11 @@ export default function PostJob(props) {
                         'start_date': formData.start_date,
                     }),
                 });
+            }
+            catch (error) {
+                alert(error);
+            }
+            
         }
         await submitContract();
         //await getIdentity();
@@ -63,10 +69,13 @@ export default function PostJob(props) {
     }
 
     return (
-        <div>
-            <h2>Post a Job and Let Contractors find you</h2>
-            <p>{formData.service_name}</p>
+        <div className="post-job-form-inner">
+            <div className='post-job-header'>
+                <h2>Post a Job, Let Contractors find You</h2>
+                <button onClick={() => {handleClick('not-an-id')}}>&#128473;</button>
+            </div>
             <form onSubmit={handleSubmit}>
+            <label htmlFor='service_name'>Select a service that best describes your project </label>
                 <select id="service_name" name="service_name" value={formData.service_name} onChange={handleChange} required>
                     <option value="Carpentry">Carpentry</option>
                     <option value="Electrical">Electrical</option>
@@ -75,11 +84,11 @@ export default function PostJob(props) {
                     <option value='Plumbing'>Plumbing</option>
                     <option value='Landscaping'>Landscaping</option>
                 </select>
-                <label htmlFor='description'>Description </label>
-                <input type='text' name='description' value={formData.description} onChange={handleChange} required/>
-                <label htmlFor="start_date">Start Date </label>
+                <label htmlFor='description'>Write a brief description of the project </label>
+                <textarea name='description' rows="10" cols="10" wrap="hard" value={formData.description} onChange={handleChange} required></textarea>
+                <label htmlFor="start_date">When would you like work to begin </label>
                 <input type='datetime-local' name='start_date' value={formData.start_date} onChange={handleChange} required />
-                <label htmlFor='budget'>Budget </label>
+                <label htmlFor='budget'>What is your budget for the contractor? </label>
                 <input type='number' name='budget' value={formData.budget} onChange={handleChange} required/>
                 <input type='submit' value='Send Offer' />
         </form>

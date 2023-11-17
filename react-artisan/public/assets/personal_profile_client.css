@@ -1,0 +1,192 @@
+
+.client-private-profile {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    height: 100%;
+    z-index: 1;
+}
+
+.client-private-profile h2 {
+    margin-bottom: 20px;
+    background-color: #222E50;
+    color: #edf7f6;
+}
+
+.personal-details {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.details-block {
+    display: flex;
+    align-items: center;
+    height: 45px;
+}
+
+.profile-details * {
+}
+
+.profile-details .label {
+    width: 60px;
+    min-width: 60px;
+}
+
+.profile-details .profile-detail {
+    display: flex;
+    border-style: solid;
+    height: 70%;
+    border-radius: 5px;
+    align-items: center;
+    padding: 0px 5px;
+    overflow: hidden;
+    flex-wrap: nowrap;
+}
+
+.client-private-profile .personal-details .profile-img {
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.personal-details .profile-img img {
+    width: 100%;
+    height: 100%;
+}
+
+.project-history {
+    margin-bottom: 20px;
+}
+
+.project-history table {
+    min-width: 290px;
+    width: 100%;
+}
+
+.project-history table th {
+    text-align: left;
+}
+
+.post-job-form {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    left: 100%;
+    right: 0;
+    background-color: #222E50;
+    overflow: hidden;
+    width: 0;
+    height: 89vh;
+    transition: .8s ease;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+    
+  }
+
+  #post-job-form {
+    width: 100%;
+    left: 0;
+    z-index: 99999;
+    padding-bottom: 20px;
+  }
+
+  .post-job-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .post-job-header button {
+    height: 50%;
+    background-color: #222E50;
+    color: #edf7f6;
+    border-style: none;
+    font-weight: bold;
+    font-size: larger;
+  }
+
+  .post-job-form form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-job-form-inner {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border-style: solid;
+    border-color: #fccb06;
+    border-radius: 5px;
+    padding: 10px 10px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+    z-index: 9999;
+  }
+
+  .post-job-form-inner form input, .post-job-form-inner form select {
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.post-job-form-inner form input[type=submit] {
+    min-width: 30%;
+    max-width: 30%;
+    position: relative;
+    left: 33%;
+    background-color: #222E50;
+    color: #edf7f6;
+    cursor: pointer;
+}
+
+.post-job-form-inner form label {
+    font-weight: bold;
+    font-size: 17px;
+    color: #edf7f6;
+}
+
+.post-job-form-inner form textarea {
+    padding: 10px 10px;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.open-form button {
+    padding: 5px 50px;
+    padding-left: 2px;
+    border-style: none;
+    background-color: #222E50;
+    color: #edf7f6;
+    font-weight: bold;
+    font-size: x-large;
+    cursor: pointer;
+}
+
+.open-form button:hover {
+    background-color: #fccb06;
+}
+
+/*.post-job-form-inner form input[name=description] {
+    text-align: left;
+    height: 250px;
+    vertical-align: text-top;
+    overflow-wrap: wrap;
+}*/

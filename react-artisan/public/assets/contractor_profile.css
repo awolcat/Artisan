@@ -39,6 +39,7 @@
 }
 
 .service {
+    display: flex;
     border-style: solid;
     padding: 10px 10px;
     border-radius: 10px;
@@ -51,8 +52,26 @@
     padding-bottom: 10px;
 }
 
+.service p {
+    padding-bottom: 10px;
+}
+
 .service a {
-    display: flex;
-    justify-content: end;
+    cursor: pointer;
+    min-width: 30px;
+    max-width: 80px;
     text-decoration: none;
+    line-height: 30px;
+    padding: 0px 10px;
+    text-align: center;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #fccb06;
+    font-weight: bold;
+    color: black;
+    transition-duration: 300ms;
+}
+
+.service a:hover {
+    background-color: #fccb06;
 }

@@ -137,6 +137,7 @@ a.currentLink,
     color: white;
     bottom: 0;
     background-color: #222E50;
+    z-index: 99999;
 }
 
 /*Jobs*/
@@ -182,13 +183,6 @@ a.currentLink,
     padding-bottom: 20px;
 }
 
-.service {
-    overflow-y: scroll;
-}
-
-.services {
-    overflow-y: scroll;
-}
 
 .private-profile {
     height: 89vh;

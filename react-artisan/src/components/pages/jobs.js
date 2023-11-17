@@ -115,7 +115,10 @@ export default function Jobs(props) {
                         <img alt="job description" src="https://placehold.co/600x400/png" />
                     </div>
                     <div className="job-details">
-                        <h3 className='heading'>{service.name}</h3>
+                        <div className='heading'>
+                            <h3>{service.name}</h3>
+                            <p>{contract.start_date.split('T')[0] + ' ' + contract.start_date.split('T')[1]}</p>
+                        </div>
                         <p className='description'>{contract.description}</p>
                         <div className="budget-book">
                             <p className='budget'>{contract.budget}</p>
