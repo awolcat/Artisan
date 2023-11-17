@@ -48,7 +48,7 @@ export default function ClientPP(props) {
 
     async function handleComplete(contract, booking ) {
         try {
-            const url = 'http://127.0.0.1:5000/api/v1/contracts/' + contract;
+            const url = 'https://' + window.location.hostname + '/api/v1/contracts/' + contract;
             const response = await fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify({'status': 'completed'}),
