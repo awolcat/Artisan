@@ -1,0 +1,56 @@
+.client-private-profile .services .service {
+    margin-bottom: 20px;
+}
+
+.contractor-add-service {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.padding {
+    padding-bottom: 50px;
+}
+
+table {
+    padding-bottom: 10px;
+    
+}
+
+tr {
+    border-bottom: 1px solid #fccb06;
+}
+
+table th {
+    text-align: left;
+}
+
+.contractor-add-service input, .contractor-add-service select {
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.contractor-add-service textarea {
+    padding: 10px 10px;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.contractor-add-service label {
+    font-weight: bold;
+}
+
+.contractor-add-service input[type=submit] {
+    min-width: 30%;
+    max-width: 30%;
+    position: relative;
+    left: 33%;
+    background-color: #222E50;
+    color: #edf7f6;
+    cursor: pointer;
+}

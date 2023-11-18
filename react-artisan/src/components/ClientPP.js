@@ -104,7 +104,7 @@ export default function ClientPP(props) {
             <h2>Personal Profile</h2>
             <div className="personal-details">
                 <div className="profile-img">
-                    <img alt='contractor' src='https://placehold.co/600x400/png' />
+                    <img alt='client' src='https://placehold.co/600x400/png' />
                 </div>
                 <div className="profile-details">
                     <div className="details-block"><div className="label">Name</div> <div className="profile-detail">{identity.first_name + ' ' + identity.last_name}</div></div>

@@ -1,3 +1,7 @@
+.private-profile {
+    
+    
+}
 
 .client-private-profile {
     display: flex;
@@ -8,6 +12,8 @@
     position: relative;
     height: 100%;
     z-index: 1;
+    overflow-y: scroll;
+    padding-bottom: 20px;
 }
 
 .client-private-profile h2 {
@@ -117,6 +123,7 @@
     border-style: none;
     font-weight: bold;
     font-size: larger;
+    cursor: pointer;
   }
 
   .post-job-form form {
