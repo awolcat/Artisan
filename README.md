@@ -60,7 +60,7 @@ mysql> exit;
 ![Screenshot from 2023-11-18 19-40-29](https://github.com/awolcat/Artisan/assets/76703071/75178dc9-890b-4bee-ab0b-73a069e93629)
 ![Screenshot from 2023-11-18 19-40-55](https://github.com/awolcat/Artisan/assets/76703071/efa44ed6-10a7-4d33-a892-bb00aa1cc4d1)
 
-6. Checkout the [site](http://myartisan.works) for more features artisan has to offer.
+6. Check out the [site](http://myartisan.works) for more features artisan has to offer.
 
 ## API
 
