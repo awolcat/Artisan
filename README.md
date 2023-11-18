@@ -13,7 +13,7 @@ As an engineer, Albert has always taken pride in his ability to handle minor rep
 ## Our Team
 
 * **Habeeb Dindi** [@habeebulla_h](https://x.com/habeebulla_h) - Legend says he has been trying to exit vim since 1998. [Linkedin](https://www.linkedin.com/in/habeeb-dindi-703b03129/)
-* **Albert Irura** [@](https://x.com/) - Great Software Engineer who brought about the design and the development of the beautiful interface you see when you visit [myartisan.works](http://myartisan.works). [Linkedin](https://linkedin.com)
+* **Albert Irura** [@](https://x.com/awol_cat) - Great Software Engineer who brought about the design and the development of the beautiful interface you see when you visit [myartisan.works](http://myartisan.works). [Linkedin](https://linkedin.com/in/albertmathenge)
 
 ## Installation 
 
@@ -50,19 +50,17 @@ mysql> exit;
 1. Visit [myartisan.works](http://myartisan.works) and make a selection</br></br>
 ![Screenshot from 2023-11-15 20-51-57](https://github.com/awolcat/Artisan/assets/76703071/5b3757b1-70d7-4759-8c64-fe3337405cc4)
 
-
 2. You can see a list contractors and the services they offer</br></br>
-![Screenshot from 2023-11-15 21-12-05](https://github.com/awolcat/Artisan/assets/76703071/52a68b55-9469-4027-8b8f-12d9a1613e9d)
+![Screenshot from 2023-11-18 19-39-25](https://github.com/awolcat/Artisan/assets/76703071/d53d2e31-13e1-41fc-8296-7a6ddb4e31c3)
 
-
-3. Book your desired contractor for his service</br></br>
-![Screenshot from 2023-11-16 01-46-19](https://github.com/awolcat/Artisan/assets/76703071/ea6ab2d8-8f24-4b46-9609-1cca896612d1)
-
+3. Book your desired contractor for their service</br></br>
+![Screenshot from 2023-11-18 19-43-47](https://github.com/awolcat/Artisan/assets/76703071/cfbfab9e-a65e-434c-afba-f7df7bef2fe6)
 
 4. Clients can also make custom job postings</br></br>
-![Screenshot from 2023-11-16 01-23-22](https://github.com/awolcat/Artisan/assets/76703071/44fd6c2a-46e3-4b70-8576-71ec01053c45)
+![Screenshot from 2023-11-18 19-40-29](https://github.com/awolcat/Artisan/assets/76703071/75178dc9-890b-4bee-ab0b-73a069e93629)
+![Screenshot from 2023-11-18 19-40-55](https://github.com/awolcat/Artisan/assets/76703071/efa44ed6-10a7-4d33-a892-bb00aa1cc4d1)
 
-5. Checkout the [site](http://myartisan.works) for more features artisan has to offer.
+6. Checkout the [site](http://myartisan.works) for more features artisan has to offer.
 
 ## API
 

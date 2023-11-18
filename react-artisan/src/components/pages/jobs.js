@@ -10,7 +10,7 @@ export default function Jobs(props) {
     async function getOpenContracts() {
         //Get contracts marked as open
         try {
-            const url = 'https://' + window.location.hostname + '/api/v1/contracts'
+            const url = 'https://' + window.location.hostname + '/api/v1/contracts';
             const response = await fetch(url);
             const data = await response.json();
             const open = [];
@@ -114,7 +114,10 @@ export default function Jobs(props) {
                         <img alt="job description" src="https://placehold.co/600x400/png" />
                     </div>
                     <div className="job-details">
-                        <h3 className='heading'>{service.name}</h3>
+                        <div className='heading'>
+                            <h3>{service.name}</h3>
+                            <p>{contract.start_date.split('T')[0]}</p>
+                        </div>
                         <p className='description'>{contract.description}</p>
                         <div className="budget-book">
                             <p className='budget'>{contract.budget}</p>
