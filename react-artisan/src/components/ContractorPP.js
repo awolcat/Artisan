@@ -25,7 +25,7 @@ export default function ContractorPP(props) {
         
         async function submitContract() {
             try {
-                await fetch('http://127.0.0.1:5000/api/v1/services', {
+                await fetch('https://' + window.location.hostname + '/api/v1/services', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({'contractor': identity,
@@ -46,7 +46,7 @@ export default function ContractorPP(props) {
 
     async function fetchServices() {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/v1/services/');
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
             const data = await response.json();
             setServices(data);
         }
@@ -68,7 +68,7 @@ export default function ContractorPP(props) {
 
     async function fetchContracts() {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/v1/contracts/');
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/contracts/');
             const data = await response.json();
             setContracts(data);
         }
@@ -91,7 +91,7 @@ export default function ContractorPP(props) {
     async function getIdentity() {
         // Get user identity
         try {
-            const idUrl = 'http://127.0.0.1:5000/current_contractor';
+            const idUrl = 'https://' + window.location.hostname + '/current_contractor';
             const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token'),},
                 });
@@ -111,14 +111,14 @@ export default function ContractorPP(props) {
             obj.status = 'rejected';  
         }
         try {
-            const url = 'http://127.0.0.1:5000/api/v1/contracts/' + contract;
+            const url = 'https://' + window.location.hostname + '/api/v1/contracts/' + contract;
             const response = await fetch(url, {
                 method: 'PUT',
                 headers: {'Content-type': 'application/json; charset=UTF-8'},
                 body: JSON.stringify(obj),
             });
             if (response.ok) {
-                const url = 'http://127.0.0.1:5000/api/v1/bookings/' + booking;
+                const url = 'https://' + window.location.hostname + '/api/v1/bookings/' + booking;
                 await fetch(url, {
                     method: 'PUT',
                     headers: {'Content-type': 'application/json; charset=UTF-8'},

@@ -11,7 +11,7 @@ export default function ClientPP(props) {
 
     async function fetchServices() {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/v1/services/');
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
             const data = await response.json();
             setServices(data);
         }
@@ -34,7 +34,7 @@ export default function ClientPP(props) {
     async function getIdentity() {
         // Get user identity
         try {
-            const idUrl = 'http://127.0.0.1:5000/current_user';
+            const idUrl = 'https://' + window.location.hostname + '/current_user';
             const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token')},
                 });
@@ -55,7 +55,7 @@ export default function ClientPP(props) {
                 headers: {'Content-Type': 'application/json'},
             });
             if (response.ok) {
-                const bkurl = 'http://127.0.0.1:5000/api/v1/bookings/' + booking;
+                const bkurl = 'https://' + window.location.hostname + '/api/v1/bookings/' + booking;
                 await fetch(bkurl, {
                     method: 'PUT',
                     body: JSON.stringify({'status': 'completed'}),

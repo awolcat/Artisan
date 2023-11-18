@@ -23,7 +23,7 @@ export default function Contract(props) {
     //Function run after render to get data about the current service: User
     async function getService(serviceId) {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/v1/services/' + serviceId);
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/services/' + serviceId);
             const data = await response.json();
             setService(data);
         }
@@ -35,7 +35,7 @@ export default function Contract(props) {
 
     async function getContractor(contractor_id) {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/v1/contractors/' + contractor_id);
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/contractors/' + contractor_id);
             const data = await response.json();
             setContractor(data);
         }
@@ -47,7 +47,7 @@ export default function Contract(props) {
     async function getIdentity() {
         //Get Identity and update App state
         try {
-            const idUrl = 'http://127.0.0.1:5000/current_user';
+            const idUrl = 'https://' + window.location.hostname + '/current_user';
             const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token'),},
                 });
@@ -69,7 +69,7 @@ export default function Contract(props) {
         event.preventDefault();
         
         async function submitContract() {
-            const response = await fetch('http://127.0.0.1:5000/api/v1/contracts', {
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/contracts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json',},
                 body: JSON.stringify(formData),
@@ -77,7 +77,7 @@ export default function Contract(props) {
             const contractData = await response.json()
             if (response.status === 200) {
                 //In the background, create a booking that the contractor will be able to accept or reject
-                const bookingResponse = await fetch('http://127.0.0.1:5000/api/v1/bookings', {
+                const bookingResponse = await fetch('https://' + window.location.hostname + '/api/v1/bookings', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json',},
                     body: JSON.stringify({

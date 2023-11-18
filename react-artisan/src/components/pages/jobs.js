@@ -10,7 +10,7 @@ export default function Jobs(props) {
     async function getOpenContracts() {
         //Get contracts marked as open
         try {
-            const url = 'http://127.0.0.1:5000/api/v1/contracts'
+            const url = 'https://' + window.location.hostname + '/api/v1/contracts';
             const response = await fetch(url);
             const data = await response.json();
             const open = [];
@@ -31,8 +31,8 @@ export default function Jobs(props) {
     async function bookJob(contract) {
         try {
             //Create a booking in relation to selected contract. AKA claim a contract
-            const contract_url = 'http://127.0.0.1:5000/api/v1/contracts/' + contract.id;
-            const bookingResponse = await fetch('http://127.0.0.1:5000/api/v1/bookings', {
+            const contract_url = 'https://' + window.location.hostname + '/api/v1/contracts/' + contract.id;
+            const bookingResponse = await fetch('https://' + window.location.hostname + '/api/v1/bookings', {
             method: 'POST',
             headers: {'Content-Type': 'application/json',},
             body: JSON.stringify({
@@ -62,7 +62,7 @@ export default function Jobs(props) {
     async function getIdentity() {
         // Get user identity
         try {
-            const idUrl = 'http://127.0.0.1:5000/current_contractor';
+            const idUrl = 'https://' + window.location.hostname + '/current_contractor';
             const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token'),},
                 });
@@ -84,7 +84,7 @@ export default function Jobs(props) {
     
     async function getServices() {
         try {
-            const url = 'http://127.0.0.1:5000/api/v1/services/';
+            const url = 'https://' + window.location.hostname + '/api/v1/services/';
             const response = await fetch(url);
             const data = await response.json();
             setServices(data);
