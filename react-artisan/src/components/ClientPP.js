@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PostJob from "./pages/PostJob";
+import Loading from "./Loading";
 
 export default function ClientPP(props) {
     const {identity, setUser} = props;
     const [services, setServices] = useState(null);
+    const [divId, setDivId] = useState(null);
     const bookings = [];
 
     async function fetchServices() {
-        const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
-        const data = await response.json();
-        setServices(data);
+
+        try {
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
+            const data = await response.json();
+            setServices(data);
+        }
+        catch (error) {
+            alert(error);
+        }
     }
 
     useEffect(() => { fetchServices() }, []);
@@ -23,24 +31,21 @@ export default function ClientPP(props) {
         }
     }
 
-     // Get user identity
-    // 'X-CSRF-TOKEN': csrfToken
     async function getIdentity() {
-        const idUrl = 'https://' + window.location.hostname + '/current_user';
-        
-                const response = await fetch(idUrl, {
-                    headers: {'Authorization': localStorage.getItem('token'),},
-                });
-                const result = await response.json();
-                setUser({token: localStorage.getItem('token'), obj: result});
-                //return (result)
-                //console.log("CURRENT_USER", result);
-         /*   }
-            catch (error) {
-                alert('Something went wrong while logging you in. Try again');
-            }*/
-    }
 
+        // Get user identity
+        try {
+            const idUrl = 'https://' + window.location.hostname + '/current_user';
+            const response = await fetch(idUrl, {
+                    headers: {'Authorization': localStorage.getItem('token')},
+                });
+            const result = await response.json();
+            setUser({token: localStorage.getItem('token'), obj: result});
+        }
+        catch (error) {
+            alert('Something went wrong while logging you in. Try again');
+        }
+    }
 
     async function handleComplete(contract, booking ) {
         try {
@@ -49,30 +54,36 @@ export default function ClientPP(props) {
                 method: 'PUT',
                 body: JSON.stringify({'status': 'completed'}),
                 headers: {'Content-Type': 'application/json'},
-        });
-        if (response.ok) {
-            const bkurl = 'https://' + window.location.hostname + '/api/v1/bookings/' + booking;
-            const res = await fetch(bkurl, {
-                method: 'PUT',
-                body: JSON.stringify({'status': 'completed'}),
-                headers: {'Content-Type': 'application/json'}
             });
-        }
-        await getIdentity();
+            if (response.ok) {
+                const bkurl = 'https://' + window.location.hostname + '/api/v1/bookings/' + booking;
+                await fetch(bkurl, {
+                    method: 'PUT',
+                    body: JSON.stringify({'status': 'completed'}),
+                    headers: {'Content-Type': 'application/json'}
+                });
+            }
+            await getIdentity();
         }
         catch (error) {
-            alert('Could not mark complete');
+            alert(error);
         }
         
     }
+
+    function handleClick(id) {
+        setDivId(id);
+    }
     
     if (services) {
+        let count = 0;
         identity.contracts.forEach((contract) => {
-            identity.bookings.forEach((booking) => {
+            identity.bookings.forEach((booking, index) => {
                 if (contract.id === booking.contract_id) {
+                    count++;
                     const service = getService(booking.service_id);
                     bookings.push(
-                        <tr>
+                        <tr key={index}>
                             <td>{booking.booking_date.split('T')[0]}</td> 
                             <td>{service.name}</td> 
                             <td>{contract.budget}</td>
@@ -84,28 +95,50 @@ export default function ClientPP(props) {
                 }
             })
         });
+        if (count < 1) {
+            bookings.push(<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>)
+        }
+    } else {
+        bookings.push(<Loading />);
     }
-    
-
 
     return (
-        <div className='booking-details'>
-            <h2>Bookings</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Booking Date</th>
-                        <th>Service</th>
-                        <th>Budget</th>
-                        <th></th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {bookings}
-                </tbody>
-            </table>
-            {<PostJob services={services} identity={identity} setUser={setUser}/>}
+        <div className='client-private-profile'>
+            <h2>Personal Profile</h2>
+            <div className="personal-details">
+                <div className="profile-img">
+                    <img alt='client' src='https://placehold.co/600x400/png' />
+                </div>
+                <div className="profile-details">
+                    <div className="details-block"><div className="label">Name</div> <div className="profile-detail">{identity.first_name + ' ' + identity.last_name}</div></div>
+                    <div className="details-block"><div className="label">Email</div> <div className="profile-detail">{identity.email}</div></div>
+                    <div className="details-block"><div className="label">Address</div> <div className="profile-detail">{identity.address}</div></div>
+                </div>
+            </div>
+            <div className='project-history'>
+                <h2>Project History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking Date</th>
+                            <th>Service</th>
+                            <th>Budget</th>
+                            <th>Contractor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {bookings}
+                    </tbody>
+                </table>
+            </div>
+            <div className="open-form">
+                <button onClick={() => {handleClick('post-job-form')}}>Publish a Job</button>
+            </div>
+            <div className='post-job-form' id={divId}>
+                {<PostJob services={services} identity={identity} setUser={setUser} handleClick={handleClick}/>}
+            </div>
+            
         </div>
     );
 

@@ -24,23 +24,37 @@ export default function ContractorPP(props) {
         event.preventDefault();
         
         async function submitContract() {
-            const response = await fetch('https://' + window.location.hostname + '/api/v1/services', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({'contractor': identity,
+            try {
+                await fetch('https://' + window.location.hostname + '/api/v1/services', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({'contractor': identity,
                                       'name': formData.name,
                                       'description': formData.description}),
             });
+            }
+            catch (error) {
+                alert(error);
+            }
+            
         }
         await submitContract();
+        setFormData({name: '', description: ''});
         await getIdentity();
     }
 
 
     async function fetchServices() {
-        const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
-        const data = await response.json();
-        setServices(data);
+
+        try {
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
+            const data = await response.json();
+            setServices(data);
+        }
+        catch (error) {
+            alert(error);
+        }
+
     }
 
     useEffect(() => { fetchServices() }, []);
@@ -54,9 +68,15 @@ export default function ContractorPP(props) {
     }
 
     async function fetchContracts() {
-        const response = await fetch('https://' + window.location.hostname + '/api/v1/contracts/');
-        const data = await response.json();
-        setContracts(data);
+        try {
+            const response = await fetch('https://' + window.location.hostname + '/api/v1/contracts/');
+            const data = await response.json();
+            setContracts(data);
+        }
+        catch (error) {
+            alert(error);
+        }
+
     }
 
     useEffect(() => { fetchContracts() }, []);
@@ -69,22 +89,20 @@ export default function ContractorPP(props) {
         }
     }
 
-    // Get user identity
-    // 'X-CSRF-TOKEN': csrfToken
+    
     async function getIdentity() {
-        const idUrl = 'https://' + window.location.hostname + '/current_contractor';
-        
-                const response = await fetch(idUrl, {
+        // Get user identity
+        try {
+            const idUrl = 'https://' + window.location.hostname + '/current_contractor';
+            const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token'),},
                 });
-                const result = await response.json();
-                setUser({token: localStorage.getItem('token'), obj: result});
-                //return (result)
-                //console.log("CURRENT_USER", result);
-         /*   }
-            catch (error) {
+            const result = await response.json();
+            setUser({token: localStorage.getItem('token'), obj: result});
+        }      
+        catch (error) {
                 alert('Something went wrong while logging you in. Try again');
-            }*/
+            }
     }
     
     async function handleResponse(answer, contract, booking) {
@@ -103,11 +121,11 @@ export default function ContractorPP(props) {
             });
             if (response.ok) {
                 const url = 'https://' + window.location.hostname + '/api/v1/bookings/' + booking;
-                const res = await fetch(url, {
-                method: 'PUT',
-                headers: {'Content-type': 'application/json; charset=UTF-8'},
-                body: JSON.stringify(obj),
-            });
+                await fetch(url, {
+                    method: 'PUT',
+                    headers: {'Content-type': 'application/json; charset=UTF-8'},
+                    body: JSON.stringify(obj),
+                });
             }
             await getIdentity();
             if (!response.ok) {
@@ -129,7 +147,7 @@ export default function ContractorPP(props) {
                     <td>{service.name}</td>
                     <td>{contract.budget}</td>
                     <td>{booking.status}</td>
-                    {booking.status === 'pending' ? <><td><button onClick={() => handleResponse('confirm', contract.id, booking.id)}>Confirm</button> <button onClick={() => handleResponse('reject', contract.id, booking.id)}>Reject</button></td></> : ''}
+                    {booking.status === 'pending' ? <><td><button onClick={() => {handleResponse('confirm', contract.id, booking.id)}}>Confirm</button> <button onClick={() => {handleResponse('reject', contract.id, booking.id)}}>Reject</button></td></> : ''}
                     {booking.status === 'confirmed' ? <td><button type="button" disabled>Confirmed &#x2713;</button></td> : ''}
                     {booking.status === 'rejected' ? <td><button type="button" disabled>Rejected </button></td> : ''}
                     {booking.status === 'completed' ? <td><button type="button" disabled>Completed &#x2713;</button></td> : ''} 
@@ -139,7 +157,7 @@ export default function ContractorPP(props) {
 
         identity.services.forEach((service) => {
             myServices.push(
-                <section>
+                <section className='service'>
                     <h3>{service.name}</h3>
                     <p>{service.description}</p>
                 </section>
@@ -148,9 +166,19 @@ export default function ContractorPP(props) {
     }
 
     return (
-        <div>
-            <h4>{identity.first_name + ' ' + identity.last_name}</h4>
-            <div>
+        <div className='client-private-profile'>
+            <h2>Personal Profile</h2>
+            <div className="personal-details">
+                <div className="profile-img">
+                    <img alt='contractor' src='https://placehold.co/600x400/png' />
+                </div>
+                <div className="profile-details">
+                    <div className="details-block"><div className="label">Name</div> <div className="profile-detail">{identity.first_name + ' ' + identity.last_name}</div></div>
+                    <div className="details-block"><div className="label">Email</div> <div className="profile-detail">{identity.email}</div></div>
+                    <div className="details-block"><div className="label">Address</div> <div className="profile-detail">{identity.address}</div></div>
+                </div>
+            </div>
+            <div className='services'>
                 <h2>Services</h2>
                 {myServices}
             </div>
@@ -181,9 +209,12 @@ export default function ContractorPP(props) {
                     <option value='Plumbing'>Landscaping</option>
                 </select>
                 <label htmlFor='description'>Description </label>
-                <input type='text' name='description' value={formData.description} onChange={handleChange}/>
+                <textarea name='description' rows="10" cols="10" wrap="hard" value={formData.description} onChange={handleChange} required></textarea>
                 <input type='submit' value='Add Service' />
             </form>
+            <div className='padding'>
+
+            </div>
         </div>
     );
 

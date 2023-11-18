@@ -59,6 +59,8 @@ export default function Profile(props) {
     return (
         <div className='profile-container'>
             { rows }
+            <div className='padding'>
+            </div>
         </div>
     );
 }
