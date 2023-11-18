@@ -56,7 +56,7 @@ export default function ClientPP(props) {
             });
             if (response.ok) {
                 const bkurl = 'http://127.0.0.1:5000/api/v1/bookings/' + booking;
-                const res = await fetch(bkurl, {
+                await fetch(bkurl, {
                     method: 'PUT',
                     body: JSON.stringify({'status': 'completed'}),
                     headers: {'Content-Type': 'application/json'}
@@ -75,7 +75,7 @@ export default function ClientPP(props) {
     }
     
     if (services) {
-        const count = 0;
+        let count = 0;
         identity.contracts.forEach((contract) => {
             identity.bookings.forEach((booking, index) => {
                 if (contract.id === booking.contract_id) {
@@ -97,6 +97,8 @@ export default function ClientPP(props) {
         if (count < 1) {
             bookings.push(<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>)
         }
+    } else {
+        bookings.push(<Loading />);
     }
 
     return (

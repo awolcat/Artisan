@@ -25,10 +25,10 @@ export default function ContractorPP(props) {
         
         async function submitContract() {
             try {
-                const response = await fetch('http://127.0.0.1:5000/api/v1/services', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({'contractor': identity,
+                await fetch('http://127.0.0.1:5000/api/v1/services', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({'contractor': identity,
                                       'name': formData.name,
                                       'description': formData.description}),
             });
@@ -119,11 +119,11 @@ export default function ContractorPP(props) {
             });
             if (response.ok) {
                 const url = 'http://127.0.0.1:5000/api/v1/bookings/' + booking;
-                const res = await fetch(url, {
-                method: 'PUT',
-                headers: {'Content-type': 'application/json; charset=UTF-8'},
-                body: JSON.stringify(obj),
-            });
+                await fetch(url, {
+                    method: 'PUT',
+                    headers: {'Content-type': 'application/json; charset=UTF-8'},
+                    body: JSON.stringify(obj),
+                });
             }
             await getIdentity();
             if (!response.ok) {
@@ -145,7 +145,7 @@ export default function ContractorPP(props) {
                     <td>{service.name}</td>
                     <td>{contract.budget}</td>
                     <td>{booking.status}</td>
-                    {booking.status === 'pending' ? <><td><button onClick={() => handleResponse('confirm', contract.id, booking.id)}>Confirm</button> <button onClick={() => handleResponse('reject', contract.id, booking.id)}>Reject</button></td></> : ''}
+                    {booking.status === 'pending' ? <><td><button onClick={() => {handleResponse('confirm', contract.id, booking.id)}}>Confirm</button> <button onClick={() => {handleResponse('reject', contract.id, booking.id)}}>Reject</button></td></> : ''}
                     {booking.status === 'confirmed' ? <td><button type="button" disabled>Confirmed &#x2713;</button></td> : ''}
                     {booking.status === 'rejected' ? <td><button type="button" disabled>Rejected </button></td> : ''}
                     {booking.status === 'completed' ? <td><button type="button" disabled>Completed &#x2713;</button></td> : ''} 
