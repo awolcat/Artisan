@@ -34,7 +34,7 @@ export default function PostJob(props) {
         const service_id = await getServiceId(formData.service_name);
         async function submitContract() {
             try {
-                //Contract with status open indicates it is available to be claimed
+            //Contract with status open indicates it is available to be claimed
             const response = await fetch('https://' + window.location.hostname + '/api/v1/contracts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},

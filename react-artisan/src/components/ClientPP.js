@@ -10,6 +10,7 @@ export default function ClientPP(props) {
     const bookings = [];
 
     async function fetchServices() {
+
         try {
             const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
             const data = await response.json();
@@ -18,7 +19,6 @@ export default function ClientPP(props) {
         catch (error) {
             alert(error);
         }
-        
     }
 
     useEffect(() => { fetchServices() }, []);
@@ -32,6 +32,7 @@ export default function ClientPP(props) {
     }
 
     async function getIdentity() {
+
         // Get user identity
         try {
             const idUrl = 'https://' + window.location.hostname + '/current_user';

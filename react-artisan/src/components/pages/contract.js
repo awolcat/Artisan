@@ -42,6 +42,7 @@ export default function Contract(props) {
         catch (error) {
             alert(error);
         }
+
     }
     
     async function getIdentity() {

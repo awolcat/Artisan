@@ -45,6 +45,7 @@ export default function ContractorPP(props) {
 
 
     async function fetchServices() {
+
         try {
             const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
             const data = await response.json();
@@ -53,7 +54,7 @@ export default function ContractorPP(props) {
         catch (error) {
             alert(error);
         }
-        
+
     }
 
     useEffect(() => { fetchServices() }, []);
@@ -75,6 +76,7 @@ export default function ContractorPP(props) {
         catch (error) {
             alert(error);
         }
+
     }
 
     useEffect(() => { fetchContracts() }, []);
