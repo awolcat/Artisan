@@ -72,15 +72,15 @@ export default function Register() {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="first_name">First Name</label>
-                        <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder='First Name' required/>
+                        <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder='First Name' minlength='3' maxlength='13' required/>
                         <label htmlFor="last_name">Last Name</label>
-                        <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder='Last Name' required/>
-                        <label htmlFor="physical_address">Physical Address</label>
-                        <input type="text" name="physical_address" value={formData.address} onChange={handleChange} placeholder='Address' required/>
+                        <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder='Last Name' minlength='3' maxlength='13' required/>
+                        <label htmlFor="address">Physical Address</label>
+                        <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder="address" minlength="8" maxlength="20" required/>
                         <label htmlFor="email">email</label>
                         <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder='Email' required/>
                         <label htmlFor="phone_number">Phone Number</label>
-                        <input type="tel" name="phone_number" value={formData.phone_number} onChange={handleChange} placeholder='+XXX XXX XXX XXX' required/>
+                        <input type="tel" name="phone_number" value={formData.phone_number} onChange={handleChange} placeholder='+XXX XXX XXX XXX' minlength="10" maxlength="13" required/>
                         <label htmlFor="password">Password</label>
                         <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder='Password' required/>
                     
