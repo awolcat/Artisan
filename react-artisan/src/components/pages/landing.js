@@ -63,9 +63,7 @@ export default function Landing(props) {
                 <p>About Us</p>
                 <div className='about-section'>
                     <div>
-                        <div className='img-contain'>
-                            <img src='../assets/images/albert.jpg' alt='Albert Irura' />
-                        </div>
+
                         <div className='about-me'>
                             <p>Albert Irura</p>
                             <small>Built the React App</small>
@@ -77,9 +75,7 @@ export default function Landing(props) {
                         </div>
                     </div>
                     <div>
-                        <div className='img-contain'>
-                            <img src='../assets/images/habeebdindi.jpeg' alt='Habeeb Dindi' />
-                        </div>
+
                         <div className='about-me'>
                             <p>Habeeb Dindi</p>
                             <small>Built the Flask App</small>
