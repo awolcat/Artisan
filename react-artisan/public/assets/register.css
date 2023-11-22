@@ -9,13 +9,18 @@
     display: flex;
     flex-direction: column;
     font-weight: bold;
-    max-width: 400px;
-    min-width: 400px;
+    width: 400px;
     border-radius: 5px;
     border-style: groove;
     border-color: #222E50;
     padding: 20px 20px;
     box-shadow: #222E50;  
+}
+
+@media screen and (max-width: 500px) {
+    .registration-form {
+        width: 80%;
+    }
 }
 
 .registration-form p {
