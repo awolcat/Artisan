@@ -17,7 +17,7 @@ export default function Login(props) {
     const {setUser} = props;
 
     async function getIdentity() {
-        // Get user identity from token
+        // Get user identity from token 
         try {
             const idUrl = loginType === 'client' ? 'https://' + window.location.hostname + '/current_user' : 'https://' + window.location.hostname + '/current_contractor';
             const response = await fetch(idUrl, {
@@ -91,9 +91,13 @@ export default function Login(props) {
                         <div className='login-role'>
                             <button className={loginType === 'contractor' ? 'selected' : ''} onClick={() => { handleClick('contractor') }}>Contractor</button>
                             <p>&#8212; OR &#8212;</p>
-                            <button className={loginType === 'client' ? 'selected' : ''} onClick={() => { handleClick('client') }}>Client</button>  
-                        </div>
+                            <button className={loginType === 'client' ? 'selected' : ''} onClick={() => { handleClick('client') }}>Client</button> 
+                            
+                        </div>  
                         <form onSubmit={handleSubmit}>
+                            <small>Hint: Login as a Visitor!</small>
+                            <small>email: guestclient01@example.com OR guestcontractor01@example.com</small>
+                            <small>password: 12345six</small>
                             <label htmlFor="email">email</label>
                             <input type="email" name="email" value={formData.email} onChange={handleChange} required/>
                             <label htmlFor="password">Password</label>

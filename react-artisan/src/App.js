@@ -35,16 +35,12 @@ function App() {
             url = 'https://' + window.location.hostname + '/current_user';
           } else if (role === 'contractor') {
             url = 'https://' + window.location.hostname + '/current_contractor';
-          } else {
-            throw EvalError
-          }
+          } 
           const response = await fetch(url, {
               headers: {'Authorization': localStorage.getItem('token'),},
           });
           const result = await response.json();
           setUser({token: localStorage.getItem('token'), obj: result});
-          //return (result)
-          //console.log("CURRENT_USER", result);
           }
         catch (error) {
           setUser({token: null, obj: null});
@@ -56,7 +52,7 @@ function App() {
   
   return (
     <Router>
-      <Navbar token={user.token} />
+      <Navbar identity={user.obj} />
       <Routes>
         <Route exact path='/' element={<Landing />} />
         <Route path='/about' element={<About />} />
