@@ -13,7 +13,7 @@ As an engineer, Albert has always taken pride in his ability to handle minor rep
 ## Our Team
 
 * **Habeeb Dindi** [@habeebulla_h](https://x.com/habeebulla_h) - Legend says he has been trying to exit vim since 1998. [Linkedin](https://www.linkedin.com/in/habeeb-dindi-703b03129/)
-* **Albert Irura** [@](https://x.com/awol_cat) - Great Software Engineer who brought about the design and the development of the beautiful interface you see when you visit [myartisan.works](http://myartisan.works). [Linkedin](https://linkedin.com/in/albertmathenge)
+* **Albert Irura** [@awol_cat](https://x.com/awol_cat) - Great Software Engineer who brought about the design and the development of the beautiful interface you see when you visit [myartisan.works](http://myartisan.works). [Linkedin](https://linkedin.com/in/albertmathenge)
 
 ## Installation 
 
