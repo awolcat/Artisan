@@ -4,7 +4,7 @@
 from flask import Blueprint
 from flask_cors import CORS
 
-app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
+app_views = Blueprint('app_views', __name__)
 
 from flask_app.api.v1.views.contractors import *
 from flask_app.api.v1.views.service_offers import *

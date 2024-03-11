@@ -52,10 +52,9 @@ def refresh_expiring_jwts(response):
     except (RuntimeError, KeyError):
         return response
 
-
+from flask_app.api.v1.views import app_views as api_bp
+app.reqister_blueprint(api_bp, url_prefix='/api/v1')
 from flask_app.events import *    
 from flask_app.login import *
 from flask_app.logout import *
 from flask_app.seed import populate_db
-from flask_app.api.v1.views import app_views
-app.register_blueprint(app_views)
