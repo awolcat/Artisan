@@ -53,7 +53,7 @@ def refresh_expiring_jwts(response):
         return response
 
 from flask_app.api.v1.views import app_views as api_bp
-app.reqister_blueprint(api_bp, url_prefix='/api/v1')
+app.register_blueprint(api_bp, url_prefix='/api/v1')
 from flask_app.events import *    
 from flask_app.login import *
 from flask_app.logout import *
