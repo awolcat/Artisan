@@ -128,7 +128,7 @@ export default function Jobs(props) {
             )
         })
     } else {
-        rows.push(<Loading />)
+        rows.push("No open contracts available at the moment:(")
     }
     console.log(rows);
     return (
