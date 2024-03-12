@@ -26,7 +26,23 @@ export default function Jobs(props) {
         }
     }
 
-    useEffect(() => {getOpenContracts();}, []);
+    async function getServices() {
+        try {
+            const url = process.env.REACT_APP_API_BASE_URL + '/api/v1/services/';
+            const response = await fetch(url);
+            const data = await response.json();
+            setServices(data);
+        }
+        catch (error) {
+            alert(error);
+        }
+    }
+
+    useEffect(() => {
+        getServices()
+    }, []);
+
+   useEffect(() => {getOpenContracts();}, []);
 
     async function bookJob(contract) {
         try {
@@ -82,19 +98,7 @@ export default function Jobs(props) {
         await getIdentity();
     }
     
-    async function getServices() {
-        try {
-            const url = process.env.REACT_APP_API_BASE_URL + '/api/v1/services/';
-            const response = await fetch(url);
-            const data = await response.json();
-            setServices(data);
-        }
-        catch (error) {
-            alert(error);
-        }
-    }
-
-    useEffect(() => {getServices()}, []);
+    
 
     function getService(id) {
         for (const service of services.services) {
@@ -127,14 +131,12 @@ export default function Jobs(props) {
                 </div>
             )
         })
-    } else {
-        console.log('No open or sth') ;
-        rows.push(<Loading />)
-    }
+    } 
+
 
     return (
         <div className="jobs">
-            {rows ? rows : <p>No open contracts available at the moment.</p>}
+            {rows.length > 0 ? rows : <p>No open contracts available at the moment.</p>}
         </div>
     );
 }
