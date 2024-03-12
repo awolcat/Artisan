@@ -1,0 +1,156 @@
+* {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    min-width: 340px;
+    margin: 0;
+    padding: 0;
+   
+}
+
+a {
+    cursor: pointer;
+}
+
+.loading {
+    height: 89vh;
+    align-content: center;
+    align-items: center;
+}
+
+/* Navbar Styles */
+
+.navbar {
+    display: inline-flex;
+    width: 100%;
+    height: 50px;
+    min-width: 340px;
+    align-items: center;
+    font-weight: bold;
+    background-color: #222E50;
+    border-bottom-style: ridge;
+    box-shadow: #222E50;
+}
+
+.navbar > a {
+    display: flex;
+    align-items: center;
+    margin-right:10px;
+    margin-left: 10px;
+    height: 30px;
+    font-size: larger;
+    text-decoration: none;
+    text-align: center;
+    color: #edf7f6;
+    transition-duration: 250ms;
+}
+
+a.currentLink,
+.navbar > a:hover {
+    border-bottom: #fccb06 solid 2px;
+    color: #fccb06;
+}
+
+
+/*Footer*/
+.footer {
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    text-align: center;
+    color: white;
+    bottom: 0;
+    background-color: #222E50;
+    z-index: 99999;
+}
+
+
+.about {
+    height: 89vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+    justify-content: center;
+    align-items: center;
+    min-width: 80%;
+}
+
+.about div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 500px;
+    border-style: solid;
+    font-size: large;
+    padding: 10px 10px;
+    border-color: #222E50;
+}
+
+@media screen and (max-width: 550px) {
+    .about div {
+        width: 70%;
+    }
+}
+
+.about div h1 {
+    padding-bottom: 10px;
+}
+
+.about div p span {
+    font-weight: bold;
+    color: #222E50;
+}
+
+/*Not Found*/
+#not-found {
+    height: 89vh;
+    padding-bottom: 20px;
+    margin: auto;
+    background-color: #fccb06;
+}
+
+#not-found > .content {
+    position: absolute;
+    top: 30%;
+    text-align: center;
+    width: 100%;
+    height: 50%;
+}
+
+#not-found > .content > p {
+    font-weight: bold;
+    font-size: 30px;
+    color: #edf7f6;
+}
+
+#not-found > .content > a {
+    text-decoration: none;
+    border: #222E50 solid 2px;
+    color: #edf7f6;
+    font-weight: bold;
+    padding: 10px 10px;
+}
+
+.contract-form {
+    height: 89vh;
+    padding-bottom: 20px;
+}
+
+
+.private-profile {
+    height: 89vh;
+    padding-bottom: 20px;
+}

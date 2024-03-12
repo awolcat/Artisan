@@ -1,0 +1,88 @@
+.jobs {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    height: 89vh;
+    overflow: scroll;
+}
+
+.job {
+    border-bottom: #222E50 solid 2px;
+    display: flex;
+    padding: 0px 20px;
+}
+
+.job-img {
+    display: flex;
+    align-items: center;
+    width: 150px;
+}
+
+.job-img img {
+    width: 150px;
+    object-fit: contain;
+}
+
+.job-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 10px 20px;
+}
+
+.job-details * {
+    padding-bottom: 10px;
+}
+
+.job-details p {
+    overflow: hidden;
+}
+
+.job-details .heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.job-details .heading p, .job-details .heading h3 {
+    padding-bottom: 0px;
+}
+
+.job-details .budget-book {
+    display: flex;
+    padding-bottom: 0px;
+    justify-content: space-between;
+    max-width: 322px;
+}
+
+.job-details .budget {
+    background-color: black;
+    font-weight: bold;
+    color: white;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.budget-book button {
+    display: flex;
+    padding: 2px 2px;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    min-width: fit-content;
+    background-color: #222E50;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+    border-style: hidden;
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+.budget-book button:hover {
+    background-color: #fccb06;
+}
+
+

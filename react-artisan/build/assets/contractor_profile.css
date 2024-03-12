@@ -1,0 +1,79 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+    height: 100%;
+    overflow: scroll;
+}
+
+.profile {
+    min-width: 340px;
+}
+
+.profile-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding-bottom: 40px;
+}
+
+.profile-heading p {
+   font-size: x-large;
+   padding-left: 20px;
+}
+
+.profile-heading .profile-img {
+    width: 150px;
+    
+}
+
+.profile-img img {
+    width: 100%;
+    border-radius: 75px;
+}
+
+.profile .services {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 50px;
+    min-width: 340px;
+}
+
+.service {
+    display: flex;
+    border-style: solid;
+    padding: 10px 10px;
+    border-radius: 10px;
+    flex-direction: column;     
+}
+
+.service .heading {
+    font-size: large;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.service p {
+    padding-bottom: 10px;
+}
+
+.service a {
+    cursor: pointer;
+    min-width: 30px;
+    max-width: 80px;
+    text-decoration: none;
+    line-height: 30px;
+    padding: 0px 10px;
+    text-align: center;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #fccb06;
+    font-weight: bold;
+    color: black;
+    transition-duration: 300ms;
+}
+
+.service a:hover {
+    background-color: #fccb06;
+}

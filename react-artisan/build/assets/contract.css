@@ -1,0 +1,51 @@
+.contract-form {
+    padding: 20px 20px;
+    overflow: scroll;
+}
+
+.contract-form h2 {
+    background-color: #222E50;
+    color: #edf7f6;
+    margin-top: 10px;
+}
+
+.contract-form h3 {
+    color: grey;
+    padding-top: 10px;
+}
+
+.contract-form form {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contract-form form input, .contract-form form select {
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.contract-form textarea {
+    padding: 10px 10px;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.contract-form form label {
+    font-weight: bold;
+}
+
+.contract-form input[type=submit] {
+    min-width: 30%;
+    max-width: 30%;
+    position: relative;
+    left: 33%;
+    background-color: #222E50;
+    color: #edf7f6;
+    cursor: pointer;
+}
