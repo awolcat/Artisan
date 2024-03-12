@@ -23,7 +23,7 @@ export default function Register() {
         if (role === null) {
             alert('Please indicate your role by clicking "Contractor" or ""Client')
         }
-        const url = role === 'client' ? 'https://' + window.location.hostname + '/api/v1/users' : 'https://' + window.location.hostname + '/api/v1/contractors'; 
+        const url = role === 'client' ? process.env.REACT_APP_API_BASE_URL + '/api/v1/users' : process.env.REACT_APP_API_BASE_URL + '/api/v1/contractors'; 
         
         // Post request function
         async function registrar() {

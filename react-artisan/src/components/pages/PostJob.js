@@ -35,7 +35,7 @@ export default function PostJob(props) {
         async function submitContract() {
             try {
             //Contract with status open indicates it is available to be claimed
-            const response = await fetch('https://' + window.location.hostname + '/api/v1/contracts', {
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/v1/contracts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({

@@ -2,11 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
 import { useState, useEffect } from "react";
-// import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-//import useuser from './components/useuser';
-//import useRole from './components/useRole'; 
 import Logout from './components/Logout';
 import Register from './components/Register';
 import PrivateProfile from './components/pages/privateProfile';
@@ -16,7 +13,6 @@ import Contractors from './components/pages/contractors';
 import Jobs from './components/pages/jobs';
 import Profile from './components/pages/contractorProfile';
 import Contract from './components/pages/contract';
-//import postJob from './components/pages/postJob';
 import Login from './components/pages/login';
 import NotFound from './components/pages/notFound';
 
@@ -32,9 +28,9 @@ function App() {
           const role = localStorage.getItem('role');
           let url = '';
           if (role === 'client') {
-            url = 'https://' + window.location.hostname + '/current_user';
+            url = process.env.REACT_APP_API_BASE_URL + '/current_user';
           } else if (role === 'contractor') {
-            url = 'https://' + window.location.hostname + '/current_contractor';
+            url = process.env.REACT_APP_API_BASE_URL + '/current_contractor';
           } 
           const response = await fetch(url, {
               headers: {'Authorization': localStorage.getItem('token'),},

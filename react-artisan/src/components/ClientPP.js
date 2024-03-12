@@ -12,7 +12,7 @@ export default function ClientPP(props) {
     async function fetchServices() {
 
         try {
-            const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/v1/services/');
             const data = await response.json();
             setServices(data);
         }
@@ -35,7 +35,7 @@ export default function ClientPP(props) {
 
         // Get user identity
         try {
-            const idUrl = 'https://' + window.location.hostname + '/current_user';
+            const idUrl = process.env.REACT_APP_API_BASE_URL + '/current_user';
             const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token')},
                 });
@@ -49,14 +49,14 @@ export default function ClientPP(props) {
 
     async function handleComplete(contract, booking ) {
         try {
-            const url = 'https://' + window.location.hostname + '/api/v1/contracts/' + contract;
+            const url = process.env.REACT_APP_API_BASE_URL + '/api/v1/contracts/' + contract;
             const response = await fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify({'status': 'completed'}),
                 headers: {'Content-Type': 'application/json'},
             });
             if (response.ok) {
-                const bkurl = 'https://' + window.location.hostname + '/api/v1/bookings/' + booking;
+                const bkurl = process.env.REACT_APP_API_BASE_URL + '/api/v1/bookings/' + booking;
                 await fetch(bkurl, {
                     method: 'PUT',
                     body: JSON.stringify({'status': 'completed'}),

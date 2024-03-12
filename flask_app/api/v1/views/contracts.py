@@ -15,7 +15,7 @@ def get_contracts():
     """Returns a list of all contracts"""
     all_contracts = Contract.query.all()
     contracts = contracts_schema.dump(all_contracts)
-    return jsonify(contracts)
+    return jsonify({"contracts": contracts})
 
 @app_views.route('/contracts/<contract_id>', methods=['GET'])
 def get_contract(contract_id):

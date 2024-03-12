@@ -25,7 +25,7 @@ export default function ContractorPP(props) {
         
         async function submitContract() {
             try {
-                await fetch('https://' + window.location.hostname + '/api/v1/services', {
+                await fetch(process.env.REACT_APP_API_BASE_URL + '/api/v1/services', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({'contractor': identity,
@@ -47,7 +47,7 @@ export default function ContractorPP(props) {
     async function fetchServices() {
 
         try {
-            const response = await fetch('https://' + window.location.hostname + '/api/v1/services/');
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/v1/services/');
             const data = await response.json();
             setServices(data);
         }
@@ -69,7 +69,7 @@ export default function ContractorPP(props) {
 
     async function fetchContracts() {
         try {
-            const response = await fetch('https://' + window.location.hostname + '/api/v1/contracts/');
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/v1/contracts/');
             const data = await response.json();
             setContracts(data);
         }
@@ -93,7 +93,7 @@ export default function ContractorPP(props) {
     async function getIdentity() {
         // Get user identity
         try {
-            const idUrl = 'https://' + window.location.hostname + '/current_contractor';
+            const idUrl = process.env.REACT_APP_API_BASE_URL + '/current_contractor';
             const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token'),},
                 });
@@ -113,14 +113,14 @@ export default function ContractorPP(props) {
             obj.status = 'rejected';  
         }
         try {
-            const url = 'https://' + window.location.hostname + '/api/v1/contracts/' + contract;
+            const url = process.env.REACT_APP_API_BASE_URL + '/api/v1/contracts/' + contract;
             const response = await fetch(url, {
                 method: 'PUT',
                 headers: {'Content-type': 'application/json; charset=UTF-8'},
                 body: JSON.stringify(obj),
             });
             if (response.ok) {
-                const url = 'https://' + window.location.hostname + '/api/v1/bookings/' + booking;
+                const url = process.env.REACT_APP_API_BASE_URL + '/api/v1/bookings/' + booking;
                 await fetch(url, {
                     method: 'PUT',
                     headers: {'Content-type': 'application/json; charset=UTF-8'},

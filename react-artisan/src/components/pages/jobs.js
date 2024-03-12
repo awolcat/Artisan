@@ -10,11 +10,11 @@ export default function Jobs(props) {
     async function getOpenContracts() {
         //Get contracts marked as open
         try {
-            const url = 'https://www.myartisan.works/api/v1/contracts';
+            const url = process.env.REACT_APP_API_BASE_URL + '/api/v1/contracts';
             const response = await fetch(url);
             const data = await response.json();
             const open = [];
-            await data.forEach((contract) => {
+            await data.contracts.forEach((contract) => {
                 if (contract.status === 'open') {
                     open.push(contract);
                 }
@@ -31,8 +31,8 @@ export default function Jobs(props) {
     async function bookJob(contract) {
         try {
             //Create a booking in relation to selected contract. AKA claim a contract
-            const contract_url = 'https://www.myartisan.works/api/v1/contracts/' + contract.id;
-            const bookingResponse = await fetch('https://www.myartisan.works/api/v1/bookings', {
+            const contract_url = process.env.REACT_APP_API_BASE_URL + '/api/v1/contracts/' + contract.id;
+            const bookingResponse = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/v1/bookings', {
             method: 'POST',
             headers: {'Content-Type': 'application/json',},
             body: JSON.stringify({
@@ -62,7 +62,7 @@ export default function Jobs(props) {
     async function getIdentity() {
         // Get user identity
         try {
-            const idUrl = 'https://www.myartisan.works/current_contractor';
+            const idUrl = process.env.REACT_APP_API_BASE_URL + '/current_contractor';
             const response = await fetch(idUrl, {
                     headers: {'Authorization': localStorage.getItem('token'),},
                 });
@@ -84,7 +84,7 @@ export default function Jobs(props) {
     
     async function getServices() {
         try {
-            const url = 'https://www.myartisan.works/api/v1/services/';
+            const url = process.env.REACT_APP_API_BASE_URL + '/api/v1/services/';
             const response = await fetch(url);
             const data = await response.json();
             setServices(data);
@@ -130,7 +130,7 @@ export default function Jobs(props) {
     } else {
         rows.push(<Loading />)
     }
-
+    console.log(rows);
     return (
         <div className="jobs">
             {rows}
