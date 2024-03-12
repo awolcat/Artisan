@@ -128,13 +128,13 @@ export default function Jobs(props) {
             )
         })
     } else {
-        rows.push(<p>No open contracts available at the moment:(</p>)
+        console.log('No open or sth') ;
+        rows.push(<Loading />)
     }
-    console.log(`Rows ${rows}`);
-    console.log(`Open ${openContracts}`);
+
     return (
         <div className="jobs">
-            {rows}
+            {rows ? rows : <p>No open contracts available at the moment.</p>}
         </div>
     );
 }
